@@ -91,7 +91,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         PanelPrincipal.add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, 71, 54));
         btnMenu.getAccessibleContext().setAccessibleName("btnMenu");
 
-        lblTitulo.setText("Titulo");
+        lblTitulo.setText("Titulo Mostrado");
         PanelPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
 
         PanelMenu.setBackground(new java.awt.Color(0, 87, 139));
