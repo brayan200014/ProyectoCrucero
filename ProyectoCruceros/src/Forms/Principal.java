@@ -30,7 +30,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     public Principal() {
         initComponents();
         this.setLocationRelativeTo(null);
-        lblTitulo.setText("Viajes Disponibles");
+        lblTitulo.setText("VIAJES DISPONIBLES");
         PanelPrincipal1.add(viajesDis);
         PanelPrincipal1.validate();
         btnCliente.addActionListener(this);
@@ -91,19 +91,22 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         PanelPrincipal.add(btnMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 0, 71, 54));
         btnMenu.getAccessibleContext().setAccessibleName("btnMenu");
 
-        lblTitulo.setText("Titulo Mostrado");
-        PanelPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 20, -1, -1));
+        lblTitulo.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        lblTitulo.setText("TITULO MOSTRADO");
+        PanelPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
 
         PanelMenu.setBackground(new java.awt.Color(0, 87, 139));
         PanelMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         btnCliente.setBackground(new java.awt.Color(160, 200, 246));
+        btnCliente.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnCliente.setText("Cliente");
         btnCliente.setContentAreaFilled(false);
         btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCliente.setOpaque(true);
 
         btnUsuarios.setBackground(new java.awt.Color(160, 200, 246));
+        btnUsuarios.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnUsuarios.setText("Usuarios");
         btnUsuarios.setBorder(null);
         btnUsuarios.setBorderPainted(false);
@@ -111,6 +114,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnUsuarios.setOpaque(true);
 
         btnEmpleados.setBackground(new java.awt.Color(160, 200, 246));
+        btnEmpleados.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnEmpleados.setText("Empleados");
         btnEmpleados.setBorder(null);
         btnEmpleados.setBorderPainted(false);
@@ -118,6 +122,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnEmpleados.setOpaque(true);
 
         btnBuques.setBackground(new java.awt.Color(160, 200, 246));
+        btnBuques.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnBuques.setText("Buques");
         btnBuques.setBorder(null);
         btnBuques.setBorderPainted(false);
@@ -125,6 +130,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnBuques.setOpaque(true);
 
         btnCamarotes.setBackground(new java.awt.Color(160, 200, 246));
+        btnCamarotes.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnCamarotes.setText("Camarotes");
         btnCamarotes.setBorder(null);
         btnCamarotes.setBorderPainted(false);
@@ -137,6 +143,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         });
 
         btnViajes.setBackground(new java.awt.Color(160, 200, 246));
+        btnViajes.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnViajes.setText("Viajes");
         btnViajes.setBorder(null);
         btnViajes.setBorderPainted(false);
@@ -144,6 +151,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnViajes.setOpaque(true);
 
         btnDisponiblesViajes.setBackground(new java.awt.Color(160, 200, 246));
+        btnDisponiblesViajes.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnDisponiblesViajes.setText("Viajes Disponibles");
         btnDisponiblesViajes.setBorder(null);
         btnDisponiblesViajes.setBorderPainted(false);
@@ -151,6 +159,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnDisponiblesViajes.setOpaque(true);
 
         btnVentas.setBackground(new java.awt.Color(160, 200, 246));
+        btnVentas.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnVentas.setText("Ventas");
         btnVentas.setBorder(null);
         btnVentas.setBorderPainted(false);
@@ -158,6 +167,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnVentas.setOpaque(true);
 
         btnDestinos.setBackground(new java.awt.Color(160, 200, 246));
+        btnDestinos.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
         btnDestinos.setText("Destinos");
         btnDestinos.setBorder(null);
         btnDestinos.setBorderPainted(false);
@@ -208,18 +218,18 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                 .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
-        PanelPrincipal.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-188, 0, -1, 520));
+        PanelPrincipal.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-188, 0, -1, 620));
 
         PanelPrincipal1.setLayout(new javax.swing.BoxLayout(PanelPrincipal1, javax.swing.BoxLayout.LINE_AXIS));
-        PanelPrincipal.add(PanelPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 50, 720, 460));
+        PanelPrincipal.add(PanelPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 50, 930, 460));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/WhatsApp_Image_2021-03-17_at_23.17 1 (4).png"))); // NOI18N
-        PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 0, 60, 50));
+        PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 60, 50));
 
-        getContentPane().add(PanelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 720, 520));
+        getContentPane().add(PanelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 620));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -309,7 +319,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         
         if(evt.equals(btnCliente))
         {
-            lblTitulo.setText("Clientes");
+            lblTitulo.setText("CLIENTES");
             cliente.setVisible(true);
             user.setVisible(false);
             viajesDis.setVisible(false);
@@ -327,7 +337,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
         else if(evt.equals(btnUsuarios))
         {
-            lblTitulo.setText("Usuarios");
+            lblTitulo.setText("USUARIOS");
             cliente.setVisible(false);
             user.setVisible(true);
             viajesDis.setVisible(false);
@@ -345,7 +355,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
         else if(evt.equals(btnDisponiblesViajes))
         {
-            lblTitulo.setText("Viajes Disponibles");
+            lblTitulo.setText("VIAJES DISPONIBLES");
             cliente.setVisible(false);
             user.setVisible(false);
             viajesDis.setVisible(true);
@@ -363,7 +373,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
         else if(evt.equals(btnEmpleados))
         {
-            lblTitulo.setText("Empleados");
+            lblTitulo.setText("EMPLEADOS");
             cliente.setVisible(false);
             user.setVisible(false);
             viajesDis.setVisible(false);
@@ -381,7 +391,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
          else if(evt.equals(btnBuques))
         {
-            lblTitulo.setText("Buques");
+            lblTitulo.setText("BUQUES");
             cliente.setVisible(false);
             user.setVisible(false);
             viajesDis.setVisible(false);
@@ -399,7 +409,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
          else if(evt.equals(btnCamarotes))
         {
-            lblTitulo.setText("Camarotes");
+            lblTitulo.setText("CAMAROTES");
             cliente.setVisible(false);
             user.setVisible(false);
             viajesDis.setVisible(false);
@@ -417,7 +427,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
           else if(evt.equals(btnVentas))
         {
-            lblTitulo.setText("Ventas");
+            lblTitulo.setText("VENTAS");
             cliente.setVisible(false);
             user.setVisible(false);
             viajesDis.setVisible(false);
@@ -435,7 +445,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
         else if(evt.equals(btnViajes))
         {
-            lblTitulo.setText("Viajes");
+            lblTitulo.setText("VIAJES");
             cliente.setVisible(false);
             user.setVisible(false);
             viajesDis.setVisible(false);
@@ -453,7 +463,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         }
          else if(evt.equals(btnDestinos))
         {
-            lblTitulo.setText("Destinos");
+            lblTitulo.setText("DESTINOS");
             cliente.setVisible(false);
             user.setVisible(false);
             viajesDis.setVisible(false);
