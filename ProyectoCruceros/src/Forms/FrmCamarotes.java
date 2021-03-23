@@ -57,12 +57,12 @@ public class FrmCamarotes extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 170, -1));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel8.setText("Tipo Buque");
+        jLabel8.setText("Buque");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Nivel");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 60, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 60, -1));
 
         txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +83,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         spNivel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spNivel.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 60, -1));
+        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 60, -1));
 
         txtTipoCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtTipoCamarote.addActionListener(new java.awt.event.ActionListener() {
