@@ -5,6 +5,8 @@
  */
 package Forms;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BRAYAN HERNADEZ
@@ -27,21 +29,180 @@ public class FrmBuques extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(96, 203, 249));
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
+        spCamarotes = new javax.swing.JSpinner();
+        spNiveles = new javax.swing.JSpinner();
+        spPersonas = new javax.swing.JSpinner();
+        cbBuque = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbBuque = new javax.swing.JTable();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 870, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
+        setBackground(new java.awt.Color(96, 203, 249));
+        setPreferredSize(new java.awt.Dimension(930, 460));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel1.setText("Cantidad Niveles");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel2.setText("Descripción");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel3.setText("Cantidad Personas");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel4.setText("Tipo Buque");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel5.setText("Cantidad Camarotes");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        txtDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
+            }
+        });
+        add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 250, -1));
+
+        spCamarotes.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        spCamarotes.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        add(spCamarotes, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 60, -1));
+
+        spNiveles.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        spNiveles.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        add(spNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 60, -1));
+
+        spPersonas.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        spPersonas.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        add(spPersonas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 280, 60, -1));
+
+        cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 190, -1));
+
+        tbBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        tbBuque.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Descripción", "Camarotes", "Niveles", "Personas", "Tipo Buque"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbBuque);
+        if (tbBuque.getColumnModel().getColumnCount() > 0) {
+            tbBuque.getColumnModel().getColumn(0).setResizable(false);
+            tbBuque.getColumnModel().getColumn(1).setResizable(false);
+            tbBuque.getColumnModel().getColumn(2).setResizable(false);
+            tbBuque.getColumnModel().getColumn(3).setResizable(false);
+            tbBuque.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, 380));
+
+        btnEditar.setBackground(new java.awt.Color(12, 69, 104));
+        btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Icono Editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 140, 40));
+
+        btnEliminar.setBackground(new java.awt.Color(12, 69, 104));
+        btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Basurero.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 140, 40));
+
+        btnAgregar.setBackground(new java.awt.Color(12, 69, 104));
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agregar25x25.png"))); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnAgregar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 140, 40));
+
+        btnActualizar.setBackground(new java.awt.Color(12, 69, 104));
+        btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actualizar.png"))); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 160, 40));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Sólo se admiten letras", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+      
+    }//GEN-LAST:event_txtDescripcionKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JComboBox<String> cbBuque;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner spCamarotes;
+    private javax.swing.JSpinner spNiveles;
+    private javax.swing.JSpinner spPersonas;
+    private javax.swing.JTable tbBuque;
+    private javax.swing.JTextField txtDescripcion;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,8 @@
  */
 package Forms;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BRAYAN HERNADEZ
@@ -27,21 +29,198 @@ public class FrmCamarotes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(96, 203, 249));
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        cbTipoBuque = new javax.swing.JComboBox<>();
+        spNivel = new javax.swing.JSpinner();
+        txtTipoCamarote = new javax.swing.JTextField();
+        btnEditar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbCamarote = new javax.swing.JTable();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 870, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 390, Short.MAX_VALUE)
-        );
+        setBackground(new java.awt.Color(96, 203, 249));
+        setPreferredSize(new java.awt.Dimension(930, 460));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel6.setText("Tipo Camarote");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 43, 170, -1));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel7.setText("Precio Unitario");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 170, -1));
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel8.setText("Tipo Buque");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 130, -1));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel9.setText("Nivel");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 60, -1));
+
+        txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPrecioActionPerformed(evt);
+            }
+        });
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
+        add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 190, 30));
+
+        cbTipoBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        cbTipoBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(cbTipoBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 190, -1));
+
+        spNivel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        spNivel.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 60, -1));
+
+        txtTipoCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtTipoCamarote.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTipoCamaroteActionPerformed(evt);
+            }
+        });
+        txtTipoCamarote.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTipoCamaroteKeyTyped(evt);
+            }
+        });
+        add(txtTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 190, 30));
+
+        btnEditar.setBackground(new java.awt.Color(12, 69, 104));
+        btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnEditar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Icono Editar.png"))); // NOI18N
+        btnEditar.setText("Editar");
+        btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 140, 40));
+
+        btnEliminar.setBackground(new java.awt.Color(12, 69, 104));
+        btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Basurero.png"))); // NOI18N
+        btnEliminar.setText("Eliminar");
+        btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 140, 40));
+
+        btnAgregar.setBackground(new java.awt.Color(12, 69, 104));
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agregar25x25.png"))); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnAgregar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 140, 40));
+
+        btnActualizar.setBackground(new java.awt.Color(12, 69, 104));
+        btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actualizar.png"))); // NOI18N
+        btnActualizar.setText("Actualizar");
+        btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 160, 40));
+
+        tbCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        tbCamarote.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo Camarote", "Precio Unitario", "Tipo Buque", "Nivel"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tbCamarote);
+        if (tbCamarote.getColumnModel().getColumnCount() > 0) {
+            tbCamarote.getColumnModel().getColumn(0).setResizable(false);
+            tbCamarote.getColumnModel().getColumn(1).setResizable(false);
+            tbCamarote.getColumnModel().getColumn(2).setResizable(false);
+            tbCamarote.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, 380));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPrecioActionPerformed
+
+    private void txtTipoCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoCamaroteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTipoCamaroteActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void txtTipoCamaroteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCamaroteKeyTyped
+
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Sólo se admiten letras", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtTipoCamaroteKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Sólo se admiten letras", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JComboBox<String> cbTipoBuque;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner spNivel;
+    private javax.swing.JTable tbCamarote;
+    private javax.swing.JTextField txtPrecio;
+    private javax.swing.JTextField txtTipoCamarote;
     // End of variables declaration//GEN-END:variables
 }
