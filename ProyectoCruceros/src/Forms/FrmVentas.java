@@ -5,6 +5,7 @@
  */
 package Forms;
 import Clases.ClsConexion;
+import Clases.ClsVentas;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,6 +27,7 @@ public class FrmVentas extends javax.swing.JPanel {
         initComponents();
     }
     ClsConexion conexion= new ClsConexion();
+    ClsVentas ventas= new ClsVentas();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,9 +152,7 @@ public class FrmVentas extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminarCam))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(21, 21, 21))
+                    .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addContainerGap(22, Short.MAX_VALUE))
         );
@@ -309,8 +309,8 @@ public class FrmVentas extends javax.swing.JPanel {
                             .addComponent(lblTotal)
                             .addComponent(jLabel11)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblNombre)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombre, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel16))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -399,24 +399,15 @@ public class FrmVentas extends javax.swing.JPanel {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        Connection con= conexion.obtenerConexion();
-        PreparedStatement ps= null;
-        ResultSet rs; 
-        String identidad= txtIdentidad.getText();
-        
-        try {
-            ps= con.prepareStatement("SELECT CONCAT(nombre, ' ', apellido)Nombre FROM [dbo].[Clientes] where identidad=?");
-            ps.setString(1,identidad );
-            rs= ps.executeQuery();
-            while(rs.next())
-            {
-                lblNombre.setText(rs.getString("Nombre"));
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Surgio un error"+ex);
-        }
+      ventas.setIdentidad(txtIdentidad.getText());
+      ventas.setCodigo_viaje(Integer.parseInt(txtCodigoViaje.getText()));
+      ventas.infoViaje();
+      lblNombre.setText(ventas.nombreCliente());
+      lblPuerto.setText(ventas.getPuerto_salida());
+      lblRegreso.setText(ventas.getFecha_regreso().toString());
+      lblSalida.setText(ventas.getFecha_salida().toString());
       
-        
+         
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 
