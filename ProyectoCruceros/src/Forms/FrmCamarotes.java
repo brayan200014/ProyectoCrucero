@@ -62,7 +62,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Nivel");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 60, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 60, -1));
 
         txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -83,7 +83,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         spNivel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spNivel.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, 60, -1));
+        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 60, -1));
 
         txtTipoCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtTipoCamarote.addActionListener(new java.awt.event.ActionListener() {
