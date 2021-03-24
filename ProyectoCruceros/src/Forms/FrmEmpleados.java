@@ -5,6 +5,13 @@
  */
 package Forms;
 
+import Clases.ClsConexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+
+import javax.swing.JOptionPane;
 /**
  *
  * @author BRAYAN HERNADEZ
@@ -27,76 +34,285 @@ public class FrmEmpleados extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        rbm = new javax.swing.JRadioButton();
+        txtidentidad = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
+        txtapellido = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txttelefono = new javax.swing.JTextField();
+        txtdireccion = new javax.swing.JTextField();
+        txtcorreo = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        rbf = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jCalendar1 = new com.toedter.calendar.JCalendar();
+        tblEmpleados = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        txtnacionalidad = new javax.swing.JTextField();
+        btnAgregar = new javax.swing.JButton();
+        btnEditar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtestado = new javax.swing.JTextField();
+        jcnacimiento = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(96, 203, 249));
+        setLayout(null);
 
-        jCheckBox1.setText("jCheckBox1");
+        buttonGroup1.add(rbm);
+        rbm.setText("Masculino");
+        add(rbm);
+        rbm.setBounds(220, 140, 80, 23);
 
-        jRadioButton1.setText("jRadioButton1");
+        txtidentidad.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtidentidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidentidadActionPerformed(evt);
+            }
+        });
+        add(txtidentidad);
+        txtidentidad.setBounds(220, 10, 170, 30);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtnombre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtnombre);
+        txtnombre.setBounds(220, 50, 170, 30);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtapellido.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtapellido);
+        txtapellido.setBounds(220, 90, 170, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addGap(103, 103, 103)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                        .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(349, 349, 349))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addComponent(jCheckBox1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(121, 121, 121))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(62, 62, 62)
-                                .addComponent(jRadioButton1)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel1.setText("Nombre:");
+        add(jLabel1);
+        jLabel1.setBounds(90, 50, 110, 20);
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel2.setText("Apellido:");
+        add(jLabel2);
+        jLabel2.setBounds(90, 90, 110, 20);
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel3.setText("Identidad:");
+        add(jLabel3);
+        jLabel3.setBounds(90, 10, 110, 20);
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel4.setText("Sexo:");
+        add(jLabel4);
+        jLabel4.setBounds(90, 140, 100, 20);
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel5.setText("Telefono:");
+        add(jLabel5);
+        jLabel5.setBounds(90, 180, 110, 20);
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel6.setText("Direccion:");
+        add(jLabel6);
+        jLabel6.setBounds(420, 50, 130, 20);
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel7.setText("Correo:");
+        add(jLabel7);
+        jLabel7.setBounds(420, 10, 120, 20);
+
+        txttelefono.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txttelefono);
+        txttelefono.setBounds(220, 180, 170, 30);
+
+        txtdireccion.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtdireccion);
+        txtdireccion.setBounds(580, 50, 220, 30);
+
+        txtcorreo.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtcorreo);
+        txtcorreo.setBounds(580, 10, 220, 30);
+
+        jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel8.setText("Fecha Nacimiento:");
+        add(jLabel8);
+        jLabel8.setBounds(420, 90, 180, 20);
+
+        buttonGroup1.add(rbf);
+        rbf.setText("Femenino");
+        add(rbf);
+        rbf.setBounds(310, 140, 80, 23);
+
+        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Id Empleado", "Estado", "Identidad", "Nombre", "Apellido", "Nacimiento", "Sexo", "Telefono", "Correo", "Nacionalidad"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblEmpleados);
+        if (tblEmpleados.getColumnModel().getColumnCount() > 0) {
+            tblEmpleados.getColumnModel().getColumn(0).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(1).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(2).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(3).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(4).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(5).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(6).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(7).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(8).setResizable(false);
+            tblEmpleados.getColumnModel().getColumn(9).setResizable(false);
+        }
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(80, 240, 750, 110);
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel9.setText("Nacionalidad:");
+        add(jLabel9);
+        jLabel9.setBounds(420, 180, 140, 20);
+
+        txtnacionalidad.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtnacionalidad);
+        txtnacionalidad.setBounds(590, 180, 210, 30);
+
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+        add(btnAgregar);
+        btnAgregar.setBounds(130, 400, 170, 31);
+
+        btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnEditar.setText("Editar");
+        add(btnEditar);
+        btnEditar.setBounds(311, 400, 140, 31);
+
+        btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnActualizar.setText("Actualizar");
+        add(btnActualizar);
+        btnActualizar.setBounds(470, 400, 140, 31);
+
+        btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnEliminar.setText("Eliminar");
+        add(btnEliminar);
+        btnEliminar.setBounds(627, 400, 160, 31);
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel10.setText("Estado:");
+        add(jLabel10);
+        jLabel10.setBounds(420, 140, 130, 20);
+
+        txtestado.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtestado);
+        txtestado.setBounds(590, 140, 210, 30);
+        add(jcnacimiento);
+        jcnacimiento.setBounds(610, 90, 190, 30);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtidentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidentidadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidentidadActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+       
+        String nombre = txtnombre.getText();
+        String apellido = txtapellido.getText() ; 
+        String identidad = txtidentidad.getText();
+        SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yy");
+        String nacimiento = dFormat.format(jcnacimiento.getDate());
+        String sexo="";
+        String telefono = txttelefono.getText();
+        String correo = txtcorreo.getText();
+        String direccion = txtdireccion.getText();
+        int estado = 1;
+        String nacionalidad = txtnacionalidad.getText();
+        
+        if(rbm.isSelected()==true){
+            sexo = "Masculino";
+        }
+        else if(rbf.isSelected()==true){
+            sexo = "Femenino";
+        }
+             
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO Empleados "
+                   + "(nombre, apellido, fecha_nacimiento, identidad, sexo, telefono, correo_electronico, "
+                   + "direccion, estado, nacionalidad) VALUES(?,?,?,?,?,?,?,?,?,?)");
+            ps.setString(2, nombre);
+           ps.setString(3, apellido);
+           ps.setString(4, apellido);
+           ps.setString(5, identidad);
+           ps.setString(6, sexo);
+           ps.setString(7, telefono);
+           ps.setString(8, correo);
+           ps.setString(9, direccion);
+           ps.setInt(11, estado);
+           ps.setString(12, nacionalidad);
+           
+           ps.executeUpdate();
+           JOptionPane.showMessageDialog(null,"Registro Agregado");
+        }
+        catch(SQLException ex){
+            JOptionPane.showMessageDialog(null,"Error de Ingreso"+ex);
+        }
+        
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JCalendar jCalendar1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JButton btnActualizar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private com.toedter.calendar.JDateChooser jcnacimiento;
+    private javax.swing.JRadioButton rbf;
+    private javax.swing.JRadioButton rbm;
+    private javax.swing.JTable tblEmpleados;
+    private javax.swing.JTextField txtapellido;
+    private javax.swing.JTextField txtcorreo;
+    private javax.swing.JTextField txtdireccion;
+    private javax.swing.JTextField txtestado;
+    private javax.swing.JTextField txtidentidad;
+    private javax.swing.JTextField txtnacionalidad;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txttelefono;
     // End of variables declaration//GEN-END:variables
 }
