@@ -218,18 +218,18 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                 .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(143, Short.MAX_VALUE))
         );
 
-        PanelPrincipal.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-188, 0, -1, 620));
+        PanelPrincipal.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-188, 0, -1, 610));
 
         PanelPrincipal1.setLayout(new javax.swing.BoxLayout(PanelPrincipal1, javax.swing.BoxLayout.LINE_AXIS));
-        PanelPrincipal.add(PanelPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 50, 930, 460));
+        PanelPrincipal.add(PanelPrincipal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 930, 560));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/WhatsApp_Image_2021-03-17_at_23.17 1 (4).png"))); // NOI18N
         PanelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 0, 60, 50));
 
-        getContentPane().add(PanelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 620));
+        getContentPane().add(PanelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 610));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
