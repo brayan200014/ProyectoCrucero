@@ -9,9 +9,12 @@ import BuqueCamarote.ClsBuque;
 import BuqueCamarote.ClsMetodosBuque;
 import Clases.ClsConexion;
 import Clases.ClsHelper;
+import java.awt.event.*;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -19,23 +22,25 @@ import javax.swing.table.DefaultTableModel;
  */
 public class FrmBuques extends javax.swing.JPanel {
 
+    DefaultTableModel dm;
+    private TableRowSorter TRSFiltro;
+
     private ClsConexion conn = new ClsConexion();
-    
+
     ClsHelper hp = new ClsHelper();
-    ClsMetodosBuque met = new ClsMetodosBuque();
+    ClsMetodosBuque metbuque = new ClsMetodosBuque();
     ClsBuque buque = new ClsBuque();
-    
+
     public FrmBuques() {
         initComponents();
-        
+
         btnActualizar.setVisible(false);
-        cbBuque.setModel(hp.getvalues());
+        cbBuque.setModel(hp.tipoBuque());
         cbBuque.setSelectedIndex(-1);
         cargarTabla();
-        
+
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -45,7 +50,7 @@ public class FrmBuques extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtDescripcion = new javax.swing.JTextField();
+        txtFiltro = new javax.swing.JTextField();
         spCamarotes = new javax.swing.JSpinner();
         spNiveles = new javax.swing.JSpinner();
         spPersonas = new javax.swing.JSpinner();
@@ -56,6 +61,8 @@ public class FrmBuques extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(930, 460));
@@ -81,13 +88,13 @@ public class FrmBuques extends javax.swing.JPanel {
         jLabel5.setText("Cantidad Camarotes");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
 
-        txtDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtFiltro.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtDescripcionKeyTyped(evt);
+                txtFiltroKeyTyped(evt);
             }
         });
-        add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 250, -1));
+        add(txtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 250, -1));
 
         spCamarotes.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spCamarotes.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
@@ -138,7 +145,7 @@ public class FrmBuques extends javax.swing.JPanel {
             tbBuque.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 20, 510, 380));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 100, 510, 300));
 
         btnEditar.setBackground(new java.awt.Color(12, 69, 104));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -161,6 +168,11 @@ public class FrmBuques extends javax.swing.JPanel {
         btnEliminar.setText("Eliminar");
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
         add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 420, 140, 40));
 
         btnAgregar.setBackground(new java.awt.Color(12, 69, 104));
@@ -184,159 +196,208 @@ public class FrmBuques extends javax.swing.JPanel {
         btnActualizar.setText("Actualizar");
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
         add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, 160, 40));
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel6.setText("Búsqueda");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, -1, -1));
+
+        txtDescripcion.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtDescripcionKeyTyped(evt);
+            }
+        });
+        add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 250, -1));
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        
-        String descripcion = txtDescripcion.getText();
-        int camarotes = (int)(spCamarotes.getValue());
-        int niveles = (int)(spNiveles.getValue());
-        int personas = (int)(spPersonas.getValue());
-        int tipoBuque = cbBuque.getSelectedIndex() + 1;
-        int estado;
-        
-          try {
-              
-            Connection cn = conn.obtenerConexion();
-            //met.insertar();
-            PreparedStatement ps = cn.prepareStatement("insert into Buques (descripcion, cantidad_camarotes, cantidad_niveles, "
-                    + "cantidad_personas, codigo_tipo_buque, estado) values (?,?,?,?,?,?)");
+    private void busqueda() {
+        int columnaTabla = 1;
+        TRSFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + txtFiltro.getText(), columnaTabla));
 
-            ps.setString(1, descripcion);
-            ps.setInt(2, camarotes);
-            ps.setInt(3, niveles);
-            ps.setInt(4, personas);
-            ps.setInt(5, tipoBuque);
-            ps.setInt(6,1);
-            
-            ps.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Registro guardado");
-            
+    }
+
+    private void cargarDatos() {
+        buque.setDescripcion(txtDescripcion.getText());
+        buque.setCamarotes((int) (spCamarotes.getValue()));
+        buque.setNiveles((int) (spNiveles.getValue()));
+        buque.setPersonas((int) (spPersonas.getValue()));
+        buque.setTipoBuque(cbBuque.getSelectedIndex() + 1);
+    }
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
+        if (txtFiltro.getText().length() == 0 || spCamarotes.getValue().equals(0) || spNiveles.getValue().equals(0)
+                || spPersonas.getValue().equals(0) || cbBuque.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, " Favor llenar todos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            cargarDatos();
+            metbuque.insertar();
             limpiar();
             cargarTabla();
-
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
         }
-        
-        
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void limpiar()
-    {
+    private void limpiar() {
         txtDescripcion.setText(null);
         spCamarotes.setValue(0);
         spNiveles.setValue(0);
         spPersonas.setValue(0);
         cbBuque.setSelectedIndex(-1);
     }
-    
-    private void cargarTabla()
-    {
+
+    private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tbBuque.getModel();
         modeloTabla.setRowCount(0);
-        
+
         PreparedStatement ps;
         ResultSet rs;
         ResultSetMetaData rsmd;
         int columnas;
-        
-        int[] anchos = {10,100,35,30,30,100};
-        for(int i =0; i< tbBuque.getColumnCount(); i ++)
-        {
+
+        int[] anchos = {10, 100, 35, 30, 30, 100};
+        for (int i = 0; i < tbBuque.getColumnCount(); i++) {
             tbBuque.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
-        
-        try
-        {
-            Connection cn = conn.obtenerConexion();
-             ps = cn.prepareStatement("select b.codigo_buque, \n" +
-                                    "b.descripcion, \n" +
-                                    "b.cantidad_camarotes, \n" +
-                                    "b.cantidad_niveles, \n" +
-                                    "b.cantidad_personas, \n" +
-                                    "tb.descripcion\n" +
-                                    "from Buques b join [dbo].[Tipo_Buque] tb\n" +
-                                    "on b.codigo_tipo_buque = tb.codigo_tipo_buque\n" +
-                                    "where estado = 1");
 
-             rs = ps.executeQuery();
-             rsmd = rs.getMetaData();
-             columnas = rsmd.getColumnCount();
-             
-             while(rs.next())
-             {
-                 Object[] fila = new Object[columnas];
-                 
-                 for(int indice = 0; indice <columnas; indice ++)
-                 {
-                     fila[indice] = rs.getObject(indice + 1);
-                 }
-                 modeloTabla.addRow(fila);
-             }
-        }
-        catch(Exception ex)
-        {
-             JOptionPane.showMessageDialog(null, ex);
+        try {
+            Connection cn = conn.obtenerConexion();
+            ps = cn.prepareStatement("select b.codigo_buque, \n"
+                    + "b.descripcion, \n"
+                    + "b.cantidad_camarotes, \n"
+                    + "b.cantidad_niveles, \n"
+                    + "b.cantidad_personas, \n"
+                    + "tb.descripcion\n"
+                    + "from Buques b join [dbo].[Tipo_Buque] tb\n"
+                    + "on b.codigo_tipo_buque = tb.codigo_tipo_buque\n"
+                    + "where estado = 1");
+
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
+
+            while (rs.next()) {
+                Object[] fila = new Object[columnas];
+
+                for (int indice = 0; indice < columnas; indice++) {
+                    fila[indice] = rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
         }
     }
-    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
 
         char c = evt.getKeyChar();
 
         if (Character.isDigit(c)) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Sólo se admiten letras", "WARNING", JOptionPane.WARNING_MESSAGE);
+        } else {
+            txtFiltro.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyReleased(final KeyEvent e) {
+                    String cadena = (txtFiltro.getText());
+                    txtFiltro.setText(cadena);
+                    busqueda();
+                }
+            });
+
+            TRSFiltro = new TableRowSorter(tbBuque.getModel());
+            tbBuque.setRowSorter(TRSFiltro);
         }
 
-    }//GEN-LAST:event_txtDescripcionKeyTyped
+
+    }//GEN-LAST:event_txtFiltroKeyTyped
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        
-        try
-        {
+
+        int fila = tbBuque.getSelectedRow();
+        int id = Integer.parseInt(tbBuque.getValueAt(fila, 0).toString());
+
+        try {
             Connection cn = conn.obtenerConexion();
-            
+
             btnAgregar.setVisible(false);
-           // btnEditar.setVisible(true);
+            btnEditar.setVisible(false);
             btnEliminar.setVisible(false);
-            btnActualizar.setVisible(false);
-            
+            btnActualizar.setVisible(true);
+
             PreparedStatement ps;
             ResultSet rs;
-            int fila = tbBuque.getSelectedRow();
-            int id = Integer.parseInt(tbBuque.getValueAt(fila,0).toString());
-            
-            ps = cn.prepareStatement(" select b.descripcion, \n" +
-            " b.cantidad_camarotes,\n" +
-            " b.cantidad_niveles, \n" +
-            " b.cantidad_personas, \n" +
-            " tb.descripcion as buque\n" +
-            " from Buques b join [dbo].[Tipo_Buque] tb \n" +
-            " on b.codigo_tipo_buque = tb.codigo_tipo_buque\n" +
-            " where codigo_buque = ? and estado = 1");
-            
+
+            ps = cn.prepareStatement(" select b.descripcion, \n"
+                    + " b.cantidad_camarotes,\n"
+                    + " b.cantidad_niveles, \n"
+                    + " b.cantidad_personas, \n"
+                    + " tb.descripcion as buque\n"
+                    + " from Buques b join [dbo].[Tipo_Buque] tb \n"
+                    + " on b.codigo_tipo_buque = tb.codigo_tipo_buque\n"
+                    + " where codigo_buque = ? and estado = 1");
+
             ps.setInt(1, id);
             rs = ps.executeQuery();
-            
-            while(rs.next())
-            {
+
+            while (rs.next()) {
                 txtDescripcion.setText(rs.getString("descripcion"));
                 spCamarotes.setValue(rs.getInt("cantidad_camarotes"));
                 spNiveles.setValue(rs.getInt("cantidad_niveles"));
                 spPersonas.setValue(rs.getInt("cantidad_personas"));
                 cbBuque.setSelectedItem(rs.getString("buque"));
             }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
 
-            
-        }
-        catch(Exception ex)
-        {
-            
-        }
+
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+
+        if (txtDescripcion.getText().length() == 0 || spCamarotes.getValue().equals(0) || spNiveles.getValue().equals(0)
+                || spPersonas.getValue().equals(0) || cbBuque.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, " Favor llenar todos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+        } else {
+            int fila = tbBuque.getSelectedRow();
+            buque.setCodigo(Integer.parseInt(tbBuque.getValueAt(fila, 0).toString()));
+
+            cargarDatos();
+            metbuque.editar();
+            limpiar();
+            cargarTabla();
+
+            btnAgregar.setVisible(true);
+            btnEditar.setVisible(true);
+            btnEliminar.setVisible(true);
+            btnActualizar.setVisible(false);
+        }
+
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        int fila = tbBuque.getSelectedRow();
+        buque.setCodigo(Integer.parseInt(tbBuque.getValueAt(fila, 0).toString()));
+
+        cargarDatos();
+        metbuque.eliminar();
+        cargarTabla();
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDescripcionKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -350,11 +411,13 @@ public class FrmBuques extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spCamarotes;
     private javax.swing.JSpinner spNiveles;
     private javax.swing.JSpinner spPersonas;
     private javax.swing.JTable tbBuque;
     private javax.swing.JTextField txtDescripcion;
+    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

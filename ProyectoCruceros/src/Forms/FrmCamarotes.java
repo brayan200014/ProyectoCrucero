@@ -5,6 +5,8 @@
  */
 package Forms;
 
+import Clases.ClsConexion;
+import Clases.ClsHelper;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +15,15 @@ import javax.swing.JOptionPane;
  */
 public class FrmCamarotes extends javax.swing.JPanel {
 
-    /**
-     * Creates new form FrmCamarotes
-     */
+  
+     private ClsConexion conn = new ClsConexion();
+     ClsHelper hp = new ClsHelper();
+     
     public FrmCamarotes() {
         initComponents();
+        cbBuque.setModel(hp.buque());
+        cbBuque.setSelectedIndex(-1);
+     
     }
 
     /**
@@ -29,40 +35,40 @@ public class FrmCamarotes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        lblTipoCamarote = new javax.swing.JLabel();
+        lblPrecioUnitario = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
-        cbTipoBuque = new javax.swing.JComboBox<>();
+        cbBuque = new javax.swing.JComboBox<>();
         spNivel = new javax.swing.JSpinner();
         txtTipoCamarote = new javax.swing.JTextField();
         btnEditar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnAgregar = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbCamarote = new javax.swing.JTable();
+        btnAgregar1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(930, 460));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel6.setText("Tipo Camarote");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(59, 43, 170, -1));
+        lblTipoCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblTipoCamarote.setText("Tipo Camarote");
+        add(lblTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 30, 170, -1));
 
-        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel7.setText("Precio Unitario");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, 170, -1));
+        lblPrecioUnitario.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblPrecioUnitario.setText("Precio Unitario");
+        add(lblPrecioUnitario, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 110, 170, -1));
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel8.setText("Buque");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 130, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Nivel");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 60, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 260, 60, -1));
 
         txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtPrecio.addActionListener(new java.awt.event.ActionListener() {
@@ -75,15 +81,15 @@ public class FrmCamarotes extends javax.swing.JPanel {
                 txtPrecioKeyTyped(evt);
             }
         });
-        add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, 190, 30));
+        add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 140, 220, 30));
 
-        cbTipoBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        cbTipoBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cbTipoBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 190, -1));
+        cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 220, -1));
 
         spNivel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spNivel.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 310, 60, -1));
+        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 60, -1));
 
         txtTipoCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtTipoCamarote.addActionListener(new java.awt.event.ActionListener() {
@@ -96,7 +102,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
                 txtTipoCamaroteKeyTyped(evt);
             }
         });
-        add(txtTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, 190, 30));
+        add(txtTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 220, 30));
 
         btnEditar.setBackground(new java.awt.Color(12, 69, 104));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -115,20 +121,6 @@ public class FrmCamarotes extends javax.swing.JPanel {
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 140, 40));
-
-        btnAgregar.setBackground(new java.awt.Color(12, 69, 104));
-        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agregar25x25.png"))); // NOI18N
-        btnAgregar.setText("Agregar");
-        btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAgregar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
-            }
-        });
-        add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 140, 40));
 
         btnActualizar.setBackground(new java.awt.Color(12, 69, 104));
         btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -172,6 +164,20 @@ public class FrmCamarotes extends javax.swing.JPanel {
         }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, 380));
+
+        btnAgregar1.setBackground(new java.awt.Color(12, 69, 104));
+        btnAgregar1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnAgregar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agregar25x25.png"))); // NOI18N
+        btnAgregar1.setText("Agregar");
+        btnAgregar1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnAgregar1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnAgregar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregar1ActionPerformed(evt);
+            }
+        });
+        add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 140, 40));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioActionPerformed
@@ -181,10 +187,6 @@ public class FrmCamarotes extends javax.swing.JPanel {
     private void txtTipoCamaroteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTipoCamaroteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTipoCamaroteActionPerformed
-
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txtTipoCamaroteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoCamaroteKeyTyped
 
@@ -206,18 +208,22 @@ public class FrmCamarotes extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtPrecioKeyTyped
 
+    private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnAgregar1;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
-    private javax.swing.JComboBox<String> cbTipoBuque;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    private javax.swing.JComboBox<String> cbBuque;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblPrecioUnitario;
+    private javax.swing.JLabel lblTipoCamarote;
     private javax.swing.JSpinner spNivel;
     private javax.swing.JTable tbCamarote;
     private javax.swing.JTextField txtPrecio;

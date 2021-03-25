@@ -3,12 +3,12 @@ package BuqueCamarote;
 
 public class ClsBuque {
     
-    public static String descripcion;
-    public static int camarotes;
-    public static int niveles;
-    public static int personas;
-    public static int tipoBuque;
-    public static int estado;
+    private static String descripcion;
+    private static int camarotes;
+    private static int niveles;
+    private static int personas;
+    private static int tipoBuque;
+    private static int codigo;
 
     public String getDescripcion() {
         return descripcion;
@@ -50,14 +50,30 @@ public class ClsBuque {
         this.tipoBuque = tipoBuque;
     }
 
-    public int getEstado() {
-        return estado;
+    public int getCodigo() {
+        return codigo;
     }
 
-    public void setEstado(int estado) {
-        this.estado = estado;
+    public void setCodigo(int codigo) {
+        ClsBuque.codigo = codigo;
     }
     
+    
+    //polimorfismo
+    public void insertar()
+    {
+        
+    }
+    
+    public void editar()
+    {
+        
+    }
+    
+    public void eliminar()
+    {
+        
+    }
     
     
     
