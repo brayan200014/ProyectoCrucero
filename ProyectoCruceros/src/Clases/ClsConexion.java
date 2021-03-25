@@ -18,7 +18,7 @@ public class ClsConexion {
 
     //metodos
     public static Connection obtenerConexion() {
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=AgenciaDeViajes";
+        String url = "jdbc:sqlserver://DESKTOP-4O10KLU:1433;databaseName=AgenciaDeViajes";
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -33,8 +33,8 @@ public class ClsConexion {
         
         try
         {
-            conn = DriverManager.getConnection(url, "sa", "semeolvido");
-             JOptionPane.showMessageDialog(null,"Conexion con exito");
+            conn = DriverManager.getConnection(url, "sa", "12345");
+            //JOptionPane.showMessageDialog(null,"Conexion con exito");
         }
         catch(Exception ex)
         {
