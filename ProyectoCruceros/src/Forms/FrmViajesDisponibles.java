@@ -21,6 +21,7 @@ public class FrmViajesDisponibles extends javax.swing.JPanel {
      */
     public FrmViajesDisponibles() {
         initComponents();
+        cargarTablaViajes();
     }
 
     /**
