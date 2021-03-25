@@ -5,51 +5,51 @@ public class ClsCamarote {
     
     private static String descripcion;
     private static double precio;
-    private static int idTipoBuque;
+    private static int idTipoCamarote;
     private static int idBuque;
     private static int nivel;
 
-    public static String getDescripcion() {
+    public  String getDescripcion() {
         return descripcion;
     }
 
-    public static void setDescripcion(String descripcion) {
+    public  void setDescripcion(String descripcion) {
         ClsCamarote.descripcion = descripcion;
     }
 
-    public static double getPrecio() {
+    public  double getPrecio() {
         return precio;
     }
 
-    public static void setPrecio(double precio) {
+    public  void setPrecio(double precio) {
         ClsCamarote.precio = precio;
     }
 
-    public static int getIdTipoBuque() {
-        return idTipoBuque;
-    }
-
-    public static void setIdTipoBuque(int idTipoBuque) {
-        ClsCamarote.idTipoBuque = idTipoBuque;
-    }
-
-    public static int getIdBuque() {
+    public  int getIdBuque() {
         return idBuque;
     }
 
-    public static void setIdBuque(int idBuque) {
+    public  void setIdBuque(int idBuque) {
         ClsCamarote.idBuque = idBuque;
     }
 
-    public static int getNivel() {
+    public  int getNivel() {
         return nivel;
     }
 
-    public static void setNivel(int nivel) {
+    public  void setNivel(int nivel) {
         ClsCamarote.nivel = nivel;
     }
+
+    public int getIdTipoCamarote() {
+        return idTipoCamarote;
+    }
+
+    public void setIdTipoCamarote(int idTipoCamarote) {
+        ClsCamarote.idTipoCamarote = idTipoCamarote;
+    }
     
-        
+      
     //polimorfismo
     public void insertarCamarote()
     {

@@ -2,8 +2,7 @@ package BuqueCamarote;
 
 import Clases.ClsConexion;
 import java.sql.*;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 
 public class ClsMetodosBuque extends ClsBuque{
 
