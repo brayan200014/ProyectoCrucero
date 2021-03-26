@@ -28,7 +28,7 @@ public class FrmVentas extends javax.swing.JPanel {
     
     ClsConexion conexion= new ClsConexion();
     ClsVentas ventas= new ClsVentas();
-    
+    DefaultTableModel modelo;
    
     float subtotal;
 
@@ -81,14 +81,16 @@ public class FrmVentas extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        lblRegreso = new javax.swing.JLabel();
         lblSalida = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         lblDescuento = new javax.swing.JLabel();
         lblPortuario = new javax.swing.JLabel();
         lblisv = new javax.swing.JLabel();
         lblTotal = new javax.swing.JLabel();
-        lblEmpleado1 = new javax.swing.JLabel();
+        lblEmpleado = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        lblPropina = new javax.swing.JLabel();
+        lblRegreso = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
@@ -117,8 +119,10 @@ public class FrmVentas extends javax.swing.JPanel {
         jLabel4.setText("Cantidad de Camarotes:");
 
         spinCantidadCam.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        spinCantidadCam.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         spinCantidadPer.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        spinCantidadPer.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setText("Cantidad de Personas:");
@@ -177,6 +181,7 @@ public class FrmVentas extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tableDetalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableDetalle);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -186,209 +191,148 @@ public class FrmVentas extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(182, 182, 182)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(spinCantidadCam, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(120, 120, 120)
-                        .addComponent(comboboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(btnAgregarCam)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnEliminarCam))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(spinCantidadPer, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(120, 120, 120)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addComponent(jLabel5)
+                    .addComponent(spinCantidadPer, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(spinCantidadCam, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(comboboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAgregarCam)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnEliminarCam))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addGap(48, 48, 48))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6))
                 .addGap(11, 11, 11)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(spinCantidadCam, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(comboboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnAgregarCam)
-                            .addComponent(btnEliminarCam))))
-                .addGap(11, 11, 11)
+                            .addComponent(btnEliminarCam)
+                            .addComponent(comboboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
+                        .addGap(22, 22, 22)
                         .addComponent(jLabel5)
                         .addGap(6, 6, 6)
                         .addComponent(spinCantidadPer, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel7)
-                        .addGap(4, 4, 4)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 870, 210));
 
         jPanel2.setBackground(new java.awt.Color(38, 151, 186));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel8.setText("Descuento:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Impuesto Portuario:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel10.setText("Subtotal:");
+        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel11.setText("Total:");
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, -1, -1));
 
         lblPuerto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblPuerto.setText("jLabel8");
+        lblPuerto.setText("-");
+        jPanel2.add(lblPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 190, -1));
 
         lblSubtotal.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblSubtotal.setText("lblSubtotal");
+        lblSubtotal.setText("0.00");
+        jPanel2.add(lblSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel14.setText("Puerto Salida:");
+        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel15.setText("Impuesto Venta:");
+        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel16.setText("Nombre Cliente:");
+        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 0, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel17.setText("Nombre Empleado:");
+        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 41, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel18.setText("Fecha Salida:");
+        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel19.setText("Fecha Regreso:");
-
-        lblRegreso.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblRegreso.setText("jLabel8");
+        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
 
         lblSalida.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblSalida.setText("jLabel8");
+        lblSalida.setText("-");
+        jPanel2.add(lblSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 200, -1));
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNombre.setText("jLabel8");
+        lblNombre.setText("-");
+        jPanel2.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 0, 180, -1));
 
         lblDescuento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblDescuento.setText("jLabel8");
+        lblDescuento.setText("0.00");
+        jPanel2.add(lblDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, -1, -1));
 
         lblPortuario.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblPortuario.setText("jLabel8");
+        lblPortuario.setText("0.00");
+        jPanel2.add(lblPortuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
 
         lblisv.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblisv.setText("lblIsv");
+        lblisv.setText("0.00");
+        jPanel2.add(lblisv, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, -1, -1));
 
         lblTotal.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblTotal.setText("jLabel8");
+        lblTotal.setText("0.00");
+        jPanel2.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
 
-        lblEmpleado1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblEmpleado1.setText("jLabel8");
+        lblEmpleado.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblEmpleado.setText("-");
+        jPanel2.add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 41, 180, -1));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(82, 82, 82)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addGap(72, 72, 72)
-                        .addComponent(lblSalida)
-                        .addGap(408, 408, 408)
-                        .addComponent(lblPortuario))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel19)
-                        .addGap(52, 52, 52)
-                        .addComponent(lblRegreso)
-                        .addGap(197, 197, 197)
-                        .addComponent(jLabel15)
-                        .addGap(61, 61, 61)
-                        .addComponent(lblisv))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addGap(70, 70, 70)
-                        .addComponent(lblPuerto)
-                        .addGap(197, 197, 197)
-                        .addComponent(jLabel11)
-                        .addGap(164, 164, 164)
-                        .addComponent(lblTotal))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel17)
-                            .addComponent(jLabel16))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(137, 137, 137)
-                                .addComponent(jLabel10)
-                                .addGap(133, 133, 133)
-                                .addComponent(lblSubtotal))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(lblEmpleado1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(137, 137, 137)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel9)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(jLabel8)
-                                        .addGap(109, 109, 109)
-                                        .addComponent(lblDescuento))))))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel16)
-                        .addComponent(lblNombre))
-                    .addComponent(jLabel10)
-                    .addComponent(lblSubtotal))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel17)
-                    .addComponent(lblEmpleado1)
-                    .addComponent(jLabel8)
-                    .addComponent(lblDescuento))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel18)
-                    .addComponent(lblSalida)
-                    .addComponent(lblPortuario))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel19)
-                    .addComponent(lblRegreso)
-                    .addComponent(jLabel15)
-                    .addComponent(lblisv))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14)
-                    .addComponent(lblPuerto)
-                    .addComponent(jLabel11)
-                    .addComponent(lblTotal)))
-        );
+        jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel12.setText("Propina:");
+        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, -1, -1));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 297, 868, 200));
+        lblPropina.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblPropina.setText("0.00");
+        jPanel2.add(lblPropina, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 160, -1, -1));
+
+        lblRegreso.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        lblRegreso.setText("-");
+        jPanel2.add(lblRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 200, -1));
+
+        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 868, 220));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel3.setText("Factura a Realizar");
@@ -396,7 +340,7 @@ public class FrmVentas extends javax.swing.JPanel {
 
         jButton1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jButton1.setText("Confirmar");
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 506, -1, -1));
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 530, -1, -1));
 
         btnBuscar.setBackground(new java.awt.Color(96, 203, 249));
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Vector (1).png"))); // NOI18N
@@ -430,12 +374,19 @@ public class FrmVentas extends javax.swing.JPanel {
        ventas.setCantidad_personas((int)spinCantidadPer.getValue());
        ventas.setTipo_camarote(comboboxTipo.getSelectedItem().toString());
        
-        DefaultTableModel  modelo= (DefaultTableModel) tableDetalle.getModel();
+        modelo= (DefaultTableModel) tableDetalle.getModel();
         modelo.addRow(new Object[]{String.valueOf(ventas.getCantidad_personas()),
           String.valueOf(ventas.getCantidad_camarotes()), ventas.getTipo_camarote()  });
         
         subtotal= subtotal+ventas.precioExtraer();
-        lblSubtotal.setText(String.valueOf(subtotal));
+        ventas.setSubtotal(subtotal);
+         lblSubtotal.setText(String.valueOf(subtotal));
+        lblDescuento.setText(String.valueOf(ventas.calculoDescuento()));
+        lblisv.setText(String.valueOf(ventas.calculoIsv()));
+        lblPortuario.setText(String.valueOf(ventas.calculoImpuestoPortuario()));
+        lblPropina.setText(String.valueOf(ventas.calculoPropina()));
+        lblTotal.setText(String.valueOf(ventas.calculoTotal()));
+        
         spinCantidadCam.setValue(0);
         spinCantidadPer.setValue(0);
         comboboxTipo.setSelectedIndex(-1);
@@ -443,6 +394,25 @@ public class FrmVentas extends javax.swing.JPanel {
 
     private void btnEliminarCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCamActionPerformed
        
+        int fila= tableDetalle.getSelectedRow();
+       
+      ventas.setCantidad_camarotes(Integer.parseInt(tableDetalle.getValueAt(fila, 1).toString()));
+      ventas.setCantidad_personas(Integer.parseInt(tableDetalle.getValueAt(fila, 0).toString()));
+      ventas.setTipo_camarote(String.valueOf(tableDetalle.getValueAt(fila, 2)));
+      subtotal= subtotal-ventas.precioExtraer();
+      ventas.setSubtotal(subtotal);
+      lblSubtotal.setText(String.valueOf(ventas.getSubtotal()));
+      lblDescuento.setText(String.valueOf(ventas.calculoDescuento()));
+      lblisv.setText(String.valueOf(ventas.calculoIsv()));
+      lblPortuario.setText(String.valueOf(ventas.calculoImpuestoPortuario()));
+      lblPropina.setText(String.valueOf(ventas.calculoPropina()));
+      lblTotal.setText(String.valueOf(ventas.calculoTotal()));
+     
+      modelo= (DefaultTableModel) tableDetalle.getModel();
+      modelo.removeRow(fila);
+     
+        
+        
     }//GEN-LAST:event_btnEliminarCamActionPerformed
 
 
@@ -455,6 +425,7 @@ public class FrmVentas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -473,9 +444,10 @@ public class FrmVentas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblDescuento;
-    private javax.swing.JLabel lblEmpleado1;
+    private javax.swing.JLabel lblEmpleado;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblPortuario;
+    private javax.swing.JLabel lblPropina;
     private javax.swing.JLabel lblPuerto;
     private javax.swing.JLabel lblRegreso;
     private javax.swing.JLabel lblSalida;
