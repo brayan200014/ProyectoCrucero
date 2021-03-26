@@ -9,7 +9,9 @@ import BuqueCamarote.ClsCamarote;
 import BuqueCamarote.ClsMetodosCamarote;
 import Clases.ClsConexion;
 import Clases.ClsHelper;
+import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,20 +19,22 @@ import javax.swing.JOptionPane;
  */
 public class FrmCamarotes extends javax.swing.JPanel {
 
-  
-     private ClsConexion conn = new ClsConexion();
-     ClsHelper hp = new ClsHelper();
-     ClsCamarote cama = new ClsCamarote();
-     ClsMetodosCamarote metcama = new ClsMetodosCamarote();
-     
+    private ClsConexion conn = new ClsConexion();
+    ClsHelper hp = new ClsHelper();
+    ClsCamarote cama = new ClsCamarote();
+    ClsMetodosCamarote metcama = new ClsMetodosCamarote();
+
     public FrmCamarotes() {
         initComponents();
+
         cbBuque.setModel(hp.buque());
-        cbBuque.setSelectedIndex(-1);
-     
+        // cbBuque.setSelectedIndex(-1);
+        cbTipoCamarote.setModel(hp.tipoCamarote());
+        //cbTipoCamarote.setSelectedIndex(-1);
+        cargarTabla();
+
     }
 
-  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -47,6 +51,8 @@ public class FrmCamarotes extends javax.swing.JPanel {
         btnAgregar1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         cbTipoCamarote = new javax.swing.JComboBox<>();
+        jLabel11 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(930, 460));
@@ -54,19 +60,19 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel8.setText("Buque");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 130, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Nivel");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 60, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 60, -1));
 
         cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 220, -1));
+        add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 220, -1));
 
         spNivel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spNivel.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 60, -1));
+        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 60, -1));
 
         btnEditar.setBackground(new java.awt.Color(12, 69, 104));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -95,13 +101,13 @@ public class FrmCamarotes extends javax.swing.JPanel {
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
         add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 160, 40));
 
-        tbCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        tbCamarote.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tbCamarote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Tipo Camarote", "Precio Unitario", "Tipo Buque", "Nivel"
+                "Tipo Camarote", "Precio ", "Buque", "Nivel"
             }
         ) {
             Class[] types = new Class [] {
@@ -144,35 +150,127 @@ public class FrmCamarotes extends javax.swing.JPanel {
         add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 140, 40));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel10.setText("Tipo Camarote");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 190, -1));
+        jLabel10.setText("Precio");
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 60, 20));
 
         cbTipoCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         cbTipoCamarote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(cbTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 90, 220, -1));
+        cbTipoCamarote.setSelectedIndex(-1);
+        cbTipoCamarote.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbTipoCamaroteItemStateChanged(evt);
+            }
+        });
+        add(cbTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 220, -1));
+
+        jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel11.setText("Tipo Camarote");
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 190, -1));
+
+        txtPrecio.setEditable(false);
+        txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 70, 30));
     }// </editor-fold>//GEN-END:initComponents
-    
-    private void datosTipoCamarote()
-    {
-       
+
+    private void cargarTabla() {
+
+        DefaultTableModel modeloTabla = (DefaultTableModel) tbCamarote.getModel();
+        modeloTabla.setRowCount(0);
+
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+
+        /*int[] anchos = {110, 10, 110, 10};
+        for (int i = 0; i < tbCamarote.getColumnCount(); i++) {
+            tbCamarote.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        }*/
+
+        try {
+            Connection cn = conn.obtenerConexion();
+            ps = cn.prepareStatement("select tc.descripcion,\n"
+                    + "tc.descripcion,\n"
+                    + "b.descripcion,\n"
+                    + "c.nivel \n"
+                    + "from [dbo].[Camarote]c  join [dbo].[Tipo_Camarote] tc \n"
+                    + "on c.codigo_tipo_camarote = tc.codigo_tipo_camarote \n"
+                    + "join [dbo].[Buques] b \n"
+                    + "on b.codigo_buque = c.codigo_buque \n"
+                    + "where c.estado = 1");
+
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
+
+            while (rs.next()) {
+                Object[] fila = new Object[columnas];
+
+                for (int indice = 0; indice < columnas; indice++) {
+                    fila[indice] = rs.getObject(indice + 1);
+                }
+                modeloTabla.addRow(fila);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }
-    
-    private void datosCamarote()
-    {
-        cama.setIdBuque( cbBuque.getSelectedIndex() + 1);
+
+    private void precio() {
+
+        String valor = cbTipoCamarote.getSelectedItem().toString();
+
+        ResultSet rs;
+        try {
+            Connection cn = conn.obtenerConexion();
+
+            PreparedStatement ps = cn.prepareStatement("select precio_unitario from Tipo_Camarote where descripcion = ?");
+
+            ps.setString(1, valor);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                txtPrecio.setText(rs.getString("precio_unitario"));
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void cargarDatos() {
+
+        cama.setIdTipoCamarote(cbTipoCamarote.getSelectedIndex() + 1);
+        cama.setIdBuque(cbBuque.getSelectedIndex() + 1);
         cama.setNivel((int) spNivel.getValue());
     }
-    
+
+    private void limpiar() {
+        // cbTipoCamarote.setSelectedIndex(-1);
+        txtPrecio.setText(null);
+        cbBuque.setSelectedIndex(-1);
+        spNivel.setValue(0);
+    }
+
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
-        
-        datosTipoCamarote();
-        datosCamarote();
-        
-        metcama.idTipoCamarote();
-        metcama.insertarTipoCamarote();
+
+        cargarDatos();
+
+        //  metcama.idTipoCamarote();
+        // metcama.insertarTipoCamarote();
         metcama.insertarCamarote();
-        
+        cargarTabla();
+        // limpiar();
+
+
     }//GEN-LAST:event_btnAgregar1ActionPerformed
+
+
+    private void cbTipoCamaroteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoCamaroteItemStateChanged
+
+        precio();
+    }//GEN-LAST:event_cbTipoCamaroteItemStateChanged
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -183,10 +281,12 @@ public class FrmCamarotes extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbBuque;
     private javax.swing.JComboBox<String> cbTipoCamarote;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spNivel;
     private javax.swing.JTable tbCamarote;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

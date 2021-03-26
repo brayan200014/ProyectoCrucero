@@ -11,7 +11,7 @@ public class ClsMetodosCamarote extends ClsCamarote {
     private ClsConexion conn = new ClsConexion();
     ClsCamarote cama = new ClsCamarote();
     
-    public void idTipoCamarote()
+    /*public void idTipoCamarote()
     {
         try
        {
@@ -31,7 +31,7 @@ public class ClsMetodosCamarote extends ClsCamarote {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
-    }
+    }*/
     
     @Override
     public void insertarTipoCamarote()
@@ -62,8 +62,7 @@ public class ClsMetodosCamarote extends ClsCamarote {
        {
            Connection cn = conn.obtenerConexion();
            
-            PreparedStatement ps = cn.prepareStatement("insert into Camarote (codigo_tipo_camarote, codigo_buque,nivel, "
-                    + "estado) values (?,?,?,?)");
+            PreparedStatement ps = cn.prepareStatement("insert into Camarote (codigo_tipo_camarote, codigo_buque,nivel, estado) values (?,?,?,?)");
 
             ps.setInt(1, cama.getIdTipoCamarote());
             ps.setInt(2, cama.getIdBuque());

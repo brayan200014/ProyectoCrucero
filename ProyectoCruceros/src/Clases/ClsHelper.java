@@ -45,7 +45,34 @@ public class ClsHelper extends ClsConexion{
         {
             Connection cn = this.obtenerConexion();
             
-            String sql = "select descripcion from Buques";
+            String sql = "select descripcion from Buques where estado = 1";
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next())
+            {
+                modelo.addElement(rs.getString(1));
+            }
+            
+            cn.close();
+            rs.close();
+        }
+        catch(Exception ex)
+        {
+            
+        }
+        return modelo;
+    }
+     
+      public DefaultComboBoxModel tipoCamarote()
+    {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        
+        try
+        {
+            Connection cn = this.obtenerConexion();
+            
+            String sql = "select descripcion from Tipo_Camarote";
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             

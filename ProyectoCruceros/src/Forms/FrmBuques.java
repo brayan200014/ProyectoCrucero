@@ -232,7 +232,7 @@ public class FrmBuques extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        if (txtFiltro.getText().length() == 0 || spCamarotes.getValue().equals(0) || spNiveles.getValue().equals(0)
+        if (txtDescripcion.getText().length() == 0 || spCamarotes.getValue().equals(0) || spNiveles.getValue().equals(0)
                 || spPersonas.getValue().equals(0) || cbBuque.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(null, " Favor llenar todos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
 

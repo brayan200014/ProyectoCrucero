@@ -8,6 +8,7 @@ public class ClsCamarote {
     private static int idTipoCamarote;
     private static int idBuque;
     private static int nivel;
+    private static String seleccion;
 
     public  String getDescripcion() {
         return descripcion;
@@ -48,6 +49,16 @@ public class ClsCamarote {
     public void setIdTipoCamarote(int idTipoCamarote) {
         ClsCamarote.idTipoCamarote = idTipoCamarote;
     }
+
+    public String getSeleccion() {
+        return seleccion;
+    }
+
+    public void setSeleccion(String seleccion) {
+        ClsCamarote.seleccion = seleccion;
+    }
+    
+    
     
       
     //polimorfismo
