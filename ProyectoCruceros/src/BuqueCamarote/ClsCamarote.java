@@ -1,44 +1,44 @@
-
 package BuqueCamarote;
 
 public class ClsCamarote {
-    
+
     private static String descripcion;
     private static double precio;
     private static int idTipoCamarote;
     private static int idBuque;
     private static int nivel;
     private static String seleccion;
+    private static int codigo;
 
-    public  String getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public  void setDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         ClsCamarote.descripcion = descripcion;
     }
 
-    public  double getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public  void setPrecio(double precio) {
+    public void setPrecio(double precio) {
         ClsCamarote.precio = precio;
     }
 
-    public  int getIdBuque() {
+    public int getIdBuque() {
         return idBuque;
     }
 
-    public  void setIdBuque(int idBuque) {
+    public void setIdBuque(int idBuque) {
         ClsCamarote.idBuque = idBuque;
     }
 
-    public  int getNivel() {
+    public int getNivel() {
         return nivel;
     }
 
-    public  void setNivel(int nivel) {
+    public void setNivel(int nivel) {
         ClsCamarote.nivel = nivel;
     }
 
@@ -57,28 +57,21 @@ public class ClsCamarote {
     public void setSeleccion(String seleccion) {
         ClsCamarote.seleccion = seleccion;
     }
-    
-    
-    
-      
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        ClsCamarote.codigo = codigo;
+    }
+
     //polimorfismo
-    public void insertarCamarote()
-    {
-        
+    public void insertarEditarCamarote() {
+
     }
-    
-     public void insertarTipoCamarote()
-    {
-        
-    }
-     
-    public void editar()
-    {
-        
-    }
-    
-    public void eliminar()
-    {
-        
+
+    public void eliminar() {
+
     }
 }

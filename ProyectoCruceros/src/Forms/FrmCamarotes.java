@@ -11,6 +11,7 @@ import Clases.ClsConexion;
 import Clases.ClsHelper;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,16 +24,18 @@ public class FrmCamarotes extends javax.swing.JPanel {
     ClsHelper hp = new ClsHelper();
     ClsCamarote cama = new ClsCamarote();
     ClsMetodosCamarote metcama = new ClsMetodosCamarote();
+    String valor;
 
     public FrmCamarotes() {
         initComponents();
 
         cbBuque.setModel(hp.buque());
-        // cbBuque.setSelectedIndex(-1);
+        cbBuque.setSelectedIndex(-1);
         cbTipoCamarote.setModel(hp.tipoCamarote());
-        //cbTipoCamarote.setSelectedIndex(-1);
-        cargarTabla();
+        cbTipoCamarote.setSelectedIndex(-1);
 
+        cargarTabla();
+        btnActualizar.setVisible(false);
     }
 
     @SuppressWarnings("unchecked")
@@ -53,6 +56,8 @@ public class FrmCamarotes extends javax.swing.JPanel {
         cbTipoCamarote = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         txtPrecio = new javax.swing.JTextField();
+        txtNiveles = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(930, 460));
@@ -68,6 +73,11 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbBuque.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbBuqueItemStateChanged(evt);
+            }
+        });
         add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 220, -1));
 
         spNivel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -81,7 +91,12 @@ public class FrmCamarotes extends javax.swing.JPanel {
         btnEditar.setText("Editar");
         btnEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEditar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 420, 140, 40));
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
+        add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, 140, 40));
 
         btnEliminar.setBackground(new java.awt.Color(12, 69, 104));
         btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -90,7 +105,12 @@ public class FrmCamarotes extends javax.swing.JPanel {
         btnEliminar.setText("Eliminar");
         btnEliminar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEliminar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 420, 140, 40));
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 140, 40));
 
         btnActualizar.setBackground(new java.awt.Color(12, 69, 104));
         btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -99,7 +119,12 @@ public class FrmCamarotes extends javax.swing.JPanel {
         btnActualizar.setText("Actualizar");
         btnActualizar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnActualizar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 420, 160, 40));
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
+        add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 160, 40));
 
         tbCamarote.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tbCamarote.setModel(new javax.swing.table.DefaultTableModel(
@@ -107,14 +132,14 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Tipo Camarote", "Precio ", "Buque", "Nivel"
+                "Id", "Tipo Camarote", "Precio ", "Buque", "Nivel"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -131,6 +156,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
             tbCamarote.getColumnModel().getColumn(1).setResizable(false);
             tbCamarote.getColumnModel().getColumn(2).setResizable(false);
             tbCamarote.getColumnModel().getColumn(3).setResizable(false);
+            tbCamarote.getColumnModel().getColumn(4).setResizable(false);
         }
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, 380));
@@ -147,7 +173,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
                 btnAgregar1ActionPerformed(evt);
             }
         });
-        add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 420, 140, 40));
+        add(btnAgregar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 420, 140, 40));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel10.setText("Precio");
@@ -170,6 +196,14 @@ public class FrmCamarotes extends javax.swing.JPanel {
         txtPrecio.setEditable(false);
         txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 70, 30));
+
+        txtNiveles.setEditable(false);
+        txtNiveles.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        add(txtNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 70, 30));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel1.setText("Nivel/es");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void cargarTabla() {
@@ -182,15 +216,15 @@ public class FrmCamarotes extends javax.swing.JPanel {
         ResultSetMetaData rsmd;
         int columnas;
 
-        /*int[] anchos = {110, 10, 110, 10};
+        int[] anchos = {10, 110, 10, 110, 10};
         for (int i = 0; i < tbCamarote.getColumnCount(); i++) {
             tbCamarote.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
-        }*/
-
+        }
         try {
             Connection cn = conn.obtenerConexion();
-            ps = cn.prepareStatement("select tc.descripcion,\n"
+            ps = cn.prepareStatement("select c.codigo_camarote,\n"
                     + "tc.descripcion,\n"
+                    + "tc.precio_unitario,\n"
                     + "b.descripcion,\n"
                     + "c.nivel \n"
                     + "from [dbo].[Camarote]c  join [dbo].[Tipo_Camarote] tc \n"
@@ -218,9 +252,9 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
     private void precio() {
 
-        String valor = cbTipoCamarote.getSelectedItem().toString();
-
+        valor = cbTipoCamarote.getSelectedItem().toString();
         ResultSet rs;
+
         try {
             Connection cn = conn.obtenerConexion();
 
@@ -232,6 +266,59 @@ public class FrmCamarotes extends javax.swing.JPanel {
             if (rs.next()) {
 
                 txtPrecio.setText(rs.getString("precio_unitario"));
+
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void nivel() {
+
+        SpinnerNumberModel nm = new SpinnerNumberModel();
+
+        String valor = cbBuque.getSelectedItem().toString();
+
+        ResultSet rs;
+        try {
+            Connection cn = conn.obtenerConexion();
+
+            PreparedStatement ps = cn.prepareStatement("select cantidad_niveles from Buques where descripcion = ?");
+
+            ps.setString(1, valor);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                txtNiveles.setText(rs.getString("cantidad_niveles"));
+                nm.setMinimum(0);
+                nm.setMaximum(rs.getInt("cantidad_niveles"));
+                spNivel.setModel(nm);
+
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+
+    private void idBuque() {
+
+        String valor = cbBuque.getSelectedItem().toString();
+
+        ResultSet rs;
+        try {
+            Connection cn = conn.obtenerConexion();
+
+            PreparedStatement ps = cn.prepareStatement("select codigo_buque from [dbo].[Buques] where descripcion = ? and estado = 1");
+
+            ps.setString(1, valor);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                cama.setIdBuque(rs.getInt("codigo_buque"));
             }
 
         } catch (Exception ex) {
@@ -242,26 +329,29 @@ public class FrmCamarotes extends javax.swing.JPanel {
     private void cargarDatos() {
 
         cama.setIdTipoCamarote(cbTipoCamarote.getSelectedIndex() + 1);
-        cama.setIdBuque(cbBuque.getSelectedIndex() + 1);
+        idBuque();
         cama.setNivel((int) spNivel.getValue());
     }
 
     private void limpiar() {
-        // cbTipoCamarote.setSelectedIndex(-1);
+        cbTipoCamarote.setSelectedIndex(-1);
         txtPrecio.setText(null);
         cbBuque.setSelectedIndex(-1);
         spNivel.setValue(0);
+        txtNiveles.setText(null);
     }
 
     private void btnAgregar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregar1ActionPerformed
 
-        cargarDatos();
+        if (spNivel.getValue().equals(0) || cbTipoCamarote.getSelectedIndex() == -1 || cbBuque.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, " Favor llenar todos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            cargarDatos();
+            metcama.insertarEditarCamarote();
+            cargarTabla();
+            limpiar();
 
-        //  metcama.idTipoCamarote();
-        // metcama.insertarTipoCamarote();
-        metcama.insertarCamarote();
-        cargarTabla();
-        // limpiar();
+        }
 
 
     }//GEN-LAST:event_btnAgregar1ActionPerformed
@@ -269,8 +359,98 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
     private void cbTipoCamaroteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbTipoCamaroteItemStateChanged
 
-        precio();
+        if (cbTipoCamarote.getSelectedIndex() > -1) {
+            precio();
+        }
+
     }//GEN-LAST:event_cbTipoCamaroteItemStateChanged
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+
+        if (tbCamarote.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para editar", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int fila = tbCamarote.getSelectedRow();
+            int id = Integer.parseInt(tbCamarote.getValueAt(fila, 0).toString());
+
+            try {
+                Connection cn = conn.obtenerConexion();
+
+                btnAgregar1.setVisible(false);
+                btnEditar.setVisible(false);
+                btnEliminar.setVisible(false);
+                btnActualizar.setVisible(true);
+
+                PreparedStatement ps;
+                ResultSet rs;
+
+                ps = cn.prepareStatement("select tc.descripcion,\n"
+                        + "b.descripcion as buque,\n"
+                        + "c.nivel \n"
+                        + "from [dbo].[Camarote]c  join [dbo].[Tipo_Camarote] tc \n"
+                        + "on c.codigo_tipo_camarote = tc.codigo_tipo_camarote \n"
+                        + "join [dbo].[Buques] b \n"
+                        + "on b.codigo_buque = c.codigo_buque \n"
+                        + "where c.codigo_camarote = ? and   c.estado = 1");
+
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    cbTipoCamarote.setSelectedItem(rs.getString("descripcion"));
+                    cbBuque.setSelectedItem(rs.getString("buque"));
+                    spNivel.setValue(rs.getInt("nivel"));
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
+            }
+        }
+
+
+    }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void cbBuqueItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbBuqueItemStateChanged
+
+        if (cbBuque.getSelectedIndex() > -1) {
+            nivel();
+        }
+
+    }//GEN-LAST:event_cbBuqueItemStateChanged
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+
+        if (spNivel.getValue().equals(0) || cbTipoCamarote.getSelectedIndex() == -1 || cbBuque.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, " Favor llenar todos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int fila = tbCamarote.getSelectedRow();
+            cama.setCodigo(Integer.parseInt(tbCamarote.getValueAt(fila, 0).toString()));
+            int codigo = cama.getCodigo();
+
+            cargarDatos();
+            metcama.insertarEditarCamarote(codigo);
+            cargarTabla();
+            limpiar();
+
+            btnAgregar1.setVisible(true);
+            btnEditar.setVisible(true);
+            btnEliminar.setVisible(true);
+            btnActualizar.setVisible(false);
+        }
+    }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
+        if (tbCamarote.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int fila = tbCamarote.getSelectedRow();
+            cama.setCodigo(Integer.parseInt(tbCamarote.getValueAt(fila, 0).toString()));
+
+            metcama.eliminar();
+            cargarTabla();
+        }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -280,6 +460,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cbBuque;
     private javax.swing.JComboBox<String> cbTipoCamarote;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel8;
@@ -287,6 +468,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spNivel;
     private javax.swing.JTable tbCamarote;
+    private javax.swing.JTextField txtNiveles;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

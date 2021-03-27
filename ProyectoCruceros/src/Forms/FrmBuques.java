@@ -322,41 +322,46 @@ public class FrmBuques extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
 
-        int fila = tbBuque.getSelectedRow();
-        int id = Integer.parseInt(tbBuque.getValueAt(fila, 0).toString());
+        if (tbBuque.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para editar", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int fila = tbBuque.getSelectedRow();
+            int id = Integer.parseInt(tbBuque.getValueAt(fila, 0).toString());
 
-        try {
-            Connection cn = conn.obtenerConexion();
+            try {
+                Connection cn = conn.obtenerConexion();
 
-            btnAgregar.setVisible(false);
-            btnEditar.setVisible(false);
-            btnEliminar.setVisible(false);
-            btnActualizar.setVisible(true);
+                btnAgregar.setVisible(false);
+                btnEditar.setVisible(false);
+                btnEliminar.setVisible(false);
+                btnActualizar.setVisible(true);
 
-            PreparedStatement ps;
-            ResultSet rs;
+                PreparedStatement ps;
+                ResultSet rs;
 
-            ps = cn.prepareStatement(" select b.descripcion, \n"
-                    + " b.cantidad_camarotes,\n"
-                    + " b.cantidad_niveles, \n"
-                    + " b.cantidad_personas, \n"
-                    + " tb.descripcion as buque\n"
-                    + " from Buques b join [dbo].[Tipo_Buque] tb \n"
-                    + " on b.codigo_tipo_buque = tb.codigo_tipo_buque\n"
-                    + " where codigo_buque = ? and estado = 1");
+                ps = cn.prepareStatement(" select b.descripcion, \n"
+                        + " b.cantidad_camarotes,\n"
+                        + " b.cantidad_niveles, \n"
+                        + " b.cantidad_personas, \n"
+                        + " tb.descripcion as buque\n"
+                        + " from Buques b join [dbo].[Tipo_Buque] tb \n"
+                        + " on b.codigo_tipo_buque = tb.codigo_tipo_buque\n"
+                        + " where codigo_buque = ? and estado = 1");
 
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
 
-            while (rs.next()) {
-                txtDescripcion.setText(rs.getString("descripcion"));
-                spCamarotes.setValue(rs.getInt("cantidad_camarotes"));
-                spNiveles.setValue(rs.getInt("cantidad_niveles"));
-                spPersonas.setValue(rs.getInt("cantidad_personas"));
-                cbBuque.setSelectedItem(rs.getString("buque"));
+                while (rs.next()) {
+                    txtDescripcion.setText(rs.getString("descripcion"));
+                    spCamarotes.setValue(rs.getInt("cantidad_camarotes"));
+                    spNiveles.setValue(rs.getInt("cantidad_niveles"));
+                    spPersonas.setValue(rs.getInt("cantidad_personas"));
+                    cbBuque.setSelectedItem(rs.getString("buque"));
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, ex);
             }
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, ex);
+
         }
 
 
@@ -387,12 +392,16 @@ public class FrmBuques extends javax.swing.JPanel {
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
 
-        int fila = tbBuque.getSelectedRow();
-        buque.setCodigo(Integer.parseInt(tbBuque.getValueAt(fila, 0).toString()));
+        if (tbBuque.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            int fila = tbBuque.getSelectedRow();
+            buque.setCodigo(Integer.parseInt(tbBuque.getValueAt(fila, 0).toString()));
 
-        cargarDatos();
-        metbuque.eliminar();
-        cargarTabla();
+            metbuque.eliminar();
+            cargarTabla();
+        }
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
