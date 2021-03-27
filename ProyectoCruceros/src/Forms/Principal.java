@@ -93,7 +93,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
 
         lblTitulo.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         lblTitulo.setText("TITULO MOSTRADO");
-        PanelPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+        PanelPrincipal.add(lblTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 20, -1, -1));
 
         PanelMenu.setBackground(new java.awt.Color(0, 87, 139));
         PanelMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));

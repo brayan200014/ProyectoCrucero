@@ -8,9 +8,12 @@ package Clases;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 /**
  *
@@ -75,6 +78,8 @@ public class ClsViajes {
     }
     
     //Metodos
+    
+    //Ingresa los viajes a la base de datos
     public void ingresarViaje(){
         
         try{
@@ -105,5 +110,77 @@ public class ClsViajes {
     
     public void consultarViajes(){
         
+    }
+    
+    //Llena el comboBox de Puertos
+    public DefaultComboBoxModel getvalues(){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("Select descripcion From [dbo].[Puertos-Destinos]");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                modelo.addElement(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showInputDialog(null, e.toString());
+        }
+        
+        return modelo;
+    }
+    
+    //Llena el comboBox de Buques
+    public DefaultComboBoxModel getvalues(int i){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("Select descripcion From [dbo].[Buques]");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                modelo.addElement(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showInputDialog(null, e.toString());
+        }
+        
+        return modelo;
+    }
+    
+    //Llena el comboBox de destinos 
+    public DefaultComboBoxModel getvalues(String i){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("Select descripcion From [dbo].[Destinos_Turisticos]");
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                modelo.addElement(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showInputDialog(null, e.toString());
+        }
+        
+        return modelo;
     }
 }
