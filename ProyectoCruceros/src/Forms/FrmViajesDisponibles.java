@@ -131,6 +131,11 @@ public class FrmViajesDisponibles extends javax.swing.JPanel {
         int columnas;
         String parametro = "%"+txtBuscador.getText()+"%";
         
+        int[] anchos = {10, 75, 75, 75, 75,75};
+        for (int i = 0; i < tblViajesDisponibles.getColumnCount(); i++) {
+            tblViajesDisponibles.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        }
+        
         try{
             Connection con = ClsConexion.obtenerConexion();
             

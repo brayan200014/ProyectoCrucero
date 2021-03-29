@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  * @author BRAYAN HERNADEZ
  */
 public class FrmViajes extends javax.swing.JPanel {
-
+    //Objetos
     ClsViajes viaje = new ClsViajes();
     
     /**
@@ -27,9 +27,9 @@ public class FrmViajes extends javax.swing.JPanel {
     public FrmViajes() {
         initComponents();
         cargarTablaViajes();
-        cbPuerto.setModel(viaje.getvalues());
-        cbBuque.setModel(viaje.getvalues(2));
-        cbDestinoTuristico.setModel(viaje.getvalues("3"));
+        cbPuerto.setModel(viaje.getvalues());//Llena el comboBox de puertos
+        cbBuque.setModel(viaje.getvalues(2));//Llena el comboBox de Buques
+        cbDestinoTuristico.setModel(viaje.getvalues("3"));//Llena el comboBox de destinos
     }
 
     /**
@@ -129,6 +129,11 @@ public class FrmViajes extends javax.swing.JPanel {
         jLabel5.setText("Buque:");
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -177,15 +182,22 @@ public class FrmViajes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Destino Turistico"
+                "ID", "Destino Turistico", "Fecha salida", "Fecha regreso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane3.setViewportView(jTable1);
@@ -272,7 +284,7 @@ public class FrmViajes extends javax.swing.JPanel {
                         .addComponent(btnActualizar)
                         .addGap(42, 42, 42)
                         .addComponent(btnElimnar)))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,11 +334,30 @@ public class FrmViajes extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarDestinoActionPerformed
 
+    //Guardar  los datos e ingresa el viaje a la base de datos
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         
         guardarDatos();
         viaje.ingresarViaje();
+        cargarTablaViajes();
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    //
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+        int fila = tblViajes.getSelectedRow();
+        int codigo = Integer.parseInt(tblViajes.getValueAt(fila, 0).toString());
+        
+        viaje.editarViaje(codigo);
+        
+        txtNombre.setText(viaje.getDescripcion());
+        jdcFechaSalida.setDate(Date.valueOf(viaje.getFechaSalida()));
+        jdcFechaRegreso.setDate(Date.valueOf(viaje.getFechaRegreso()));
+        cbBuque.setSelectedIndex(viaje.getCodigoBuque() - 1);
+        cbPuerto.setSelectedIndex(viaje.getCodigoPuerto() - 1);
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     //Llena la tabla con los viajes existentes
     private void cargarTablaViajes(){
@@ -378,8 +409,8 @@ public class FrmViajes extends javax.swing.JPanel {
         
         viaje.setFechaSalida(df.format(jdcFechaSalida.getDate()));
         viaje.setFechaRegreso(df.format(jdcFechaRegreso.getDate()));
-        viaje.setCodigoBuque(1);
-        viaje.setCodigoPuerto(1);
+        viaje.setCodigoBuque(cbBuque.getSelectedIndex() + 1);
+        viaje.setCodigoPuerto(cbPuerto.getSelectedIndex() + 1);
         viaje.setDescripcion(txtNombre.getText());
     }
 

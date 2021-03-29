@@ -5,12 +5,7 @@
  */
 package Clases;
 
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
@@ -93,9 +88,50 @@ public class ClsViajes {
             ps.setString(4, fechaRegreso);
             ps.setString(5, descripcion);
             ps.executeUpdate();
+            
+            /*CallableStatement cs = con.prepareCall("{call IngresarViaje(?,?,TRY_CONVERT(DATETIME, ? ,120), TRY_CONVERT(DATETIME, ? ,120),?)}");
+            cs.setInt(1, codigoBuque);
+            cs.setInt(2, codigoPuerto);
+            cs.setString(3, fechaSalida);
+            cs.setString(4, fechaRegreso);
+            cs.setString(5, descripcion);
+            
+            ResultSet rs = cs.executeQuery();*/
+            
             JOptionPane.showMessageDialog(null, "Registro guardados");
+            
         }
         catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    //Ingresa los destinos al viaje
+    public void ingresarDestino(){
+        
+    }
+    
+    public void editarViaje(int codigo){
+        try{
+            PreparedStatement ps;
+            ResultSet rs;
+            
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("SELECT * FROM Viajes WHERE codigo_viaje = ?");
+            
+            ps.setInt(1, codigo);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                descripcion = rs.getString("descripcion");
+                fechaSalida = String.valueOf(rs.getDate("fecha_partida"));
+                fechaRegreso = String.valueOf(rs.getDate("fecha_regreso"));
+                codigoPuerto = rs.getInt("codigo_puerto");
+                codigoBuque = rs.getInt("codigo_buque");
+            }
+        }
+        catch(Exception e){
             JOptionPane.showMessageDialog(null, e.toString());
         }
     }
