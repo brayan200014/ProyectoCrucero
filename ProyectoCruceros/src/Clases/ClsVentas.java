@@ -7,6 +7,9 @@ package Clases;
 
 import java.sql.*;
 import Clases.ClsConexion;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
@@ -34,6 +37,16 @@ public class ClsVentas extends ClsVentasMetodos{
     private static float isv;
     private static float propina;
     private static float total;
+   // private static ArrayList camarotes;
+    ArrayList <Integer> camarotes= new ArrayList<Integer>();
+   
+   /* public  ArrayList getCamarotes() {
+        return camarotes;
+    }
+
+    public  void setCamarotes(ArrayList camarotes) {
+        ClsVentas.camarotes = camarotes;
+    }*/
 
     public  float getPropina() {
         return propina;
@@ -147,7 +160,7 @@ public class ClsVentas extends ClsVentasMetodos{
     public  void setTipo_camarote(String tipo_camarote) {
         ClsVentas.tipo_camarote = tipo_camarote;
     }
-
+ 
     public java.util.Date getFecha_salida() {
         return fecha_salida;
     }
@@ -192,8 +205,33 @@ public class ClsVentas extends ClsVentasMetodos{
      ClsConexion conexion= new ClsConexion();
      PreparedStatement ps= null;
      ResultSet rs; 
+     ResultSetMetaData rsmd;
         
+      public  String nombreEmpleado(int codigo)
+    {
+        String nombre= null;
+        codigo= 2;
      
+        try {
+            Connection con= conexion.obtenerConexion();
+            ps= con.prepareStatement("execute infoEmpleado ?");
+            ps.setInt(1,codigo);
+            rs= ps.executeQuery();
+            if(rs.next())
+            {
+                codigo=(rs.getInt("codigo_empleado"));
+                nombre=(rs.getString("nombre"));
+            } else 
+            {
+                JOptionPane.showMessageDialog(null, "No existe el empleado en la base de datos"
+                        + "", "Warning", JOptionPane.ERROR_MESSAGE);
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Surgio un error"+ex);
+        }
+      return nombre;
+    }
     public  String nombreCliente()
     {
         String nombre= null;
@@ -299,6 +337,150 @@ public class ClsVentas extends ClsVentasMetodos{
         
           return precio*cantidad_personas*cantidad_dias;
                  
+     }
+     
+     public void insertarVenta(int codigo)
+     {    
+         codigo=2;
+         try 
+         {
+             Connection con= conexion.obtenerConexion();
+             ps= con.prepareStatement("execute insertarVenta ?,?,?,?,?,?,?,?");
+             ps.setInt(1, codigo_cliente);
+             ps.setInt(2,codigo_viaje);
+             ps.setInt(3, codigo);
+             ps.setFloat(4, subtotal);
+             ps.setFloat(5, isv);
+             ps.setFloat(6, is_portuario);
+             ps.setFloat(7, propina);
+             ps.setFloat(8, descuento);
+             ps.executeUpdate();
+             JOptionPane.showMessageDialog(null, "Registro Guardado con exito", "Information", JOptionPane.INFORMATION_MESSAGE);
+             con.close();
+             
+         }
+         catch(SQLException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Ocurrio un error al insertar los datos", "Warning", JOptionPane.WARNING_MESSAGE);
+         }
+     }
+     
+     public int extraerCodigoVenta()
+     {
+         int codigoVenta=0;
+         try 
+         {
+             Connection con= conexion.obtenerConexion();
+             ps= con.prepareStatement("SELECT IDENT_CURRENT('Ventas')CodigoVenta");
+             rs=ps.executeQuery();
+             while(rs.next())
+             {
+                 codigoVenta= rs.getInt("CodigoVenta");
+             }
+         }
+         catch(SQLException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos", "Warning", JOptionPane.WARNING_MESSAGE);
+         }
+         return codigoVenta;
+     }
+        
+     /*public int extraerCodigoTipo(String tipo)
+     {
+         int codigo=0;
+         
+         try 
+         {
+             Connection con= conexion.obtenerConexion();
+             ps= con.prepareStatement("SELECT  codigo_tipo_camarote FROM [dbo].[Tipo_Camarote] WHERE descripcion= ?");
+             rs=ps.executeQuery();
+             if(rs.next())
+             {
+                 codigo= rs.getInt("codigo_tipo_camarote");
+             }
+         }
+         catch(SQLException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos", "Warning", JOptionPane.WARNING_MESSAGE);
+         }
+         return codigo;
+     }*/
+     
+     public ArrayList codigosCamarotes(int cantidad)
+     {
+         int column=0;
+       
+        camarotes.clear();
+        
+           try 
+         {
+             Connection con= conexion.obtenerConexion();
+             ps= con.prepareStatement("execute extraerCodigoCamarotes ?,?,?,?");
+             ps.setInt(1, codigo_viaje);
+             ps.setInt(2, codigo_buque);
+             ps.setString(3,tipo_camarote );
+             ps.setInt(4, cantidad);
+               JOptionPane.showMessageDialog(null,cantidad);
+             rs=ps.executeQuery();
+             rsmd=rs.getMetaData();
+             column= rsmd.getColumnCount();
+             while(rs.next())
+             {
+              int [] fila= new int [column]; 
+              int j=0;
+               for(int i=0; i<column;i++)
+               {
+                   fila[i]= rs.getInt(i+1);
+               }
+                
+                camarotes.add((fila[j]));
+                j++;
+                
+             }
+         
+             
+         }
+         catch(SQLException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos", "Warning", JOptionPane.WARNING_MESSAGE);
+         }
+            return camarotes;
+     }
+     
+     public void insertarDetalle(int codigoVenta, int codigoCamarote)
+     {
+         try 
+         {
+             Connection con= conexion.obtenerConexion();
+              ps=con.prepareStatement("execute insertarDetalleVenta ?,?,?,?");
+              ps.setInt(1, codigoVenta);
+              ps.setInt(2, codigoCamarote);
+              ps.setInt(3,cantidad_personas);
+              ps.setInt(4, cantidad_dias);
+              ps.executeUpdate();
+               JOptionPane.showMessageDialog(null, "Registro Guardado con exito", "Information", JOptionPane.INFORMATION_MESSAGE);
+         }
+           catch(SQLException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos"+ex, "Warning", JOptionPane.WARNING_MESSAGE);
+         }
+        
+     }
+     
+     public void eliminarVenta()
+     {
+         try 
+         {
+             Connection con= conexion.obtenerConexion();
+              ps=con.prepareStatement("DELETE FROM Ventas WHERE "
+                      + "codigo_viaje=(SELECT IDENT_CURRENT('Ventas'))");
+              ps.executeUpdate();
+              
+         }
+           catch(SQLException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos"+ex, "Warning", JOptionPane.WARNING_MESSAGE);
+         }
      }
      
     @Override

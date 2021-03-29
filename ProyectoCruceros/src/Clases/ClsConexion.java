@@ -34,7 +34,7 @@ public class ClsConexion {
         try
         {
             conn = DriverManager.getConnection(url, "sa", "semeolvido");
-             JOptionPane.showMessageDialog(null,"Conexion con exito");
+             
         }
         catch(Exception ex)
         {
