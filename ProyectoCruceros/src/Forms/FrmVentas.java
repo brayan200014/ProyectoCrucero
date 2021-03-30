@@ -129,10 +129,10 @@ public class FrmVentas extends javax.swing.JPanel {
         jLabel4.setText("Cantidad de Camarotes:");
 
         spinCantidadCam.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        spinCantidadCam.setModel(new javax.swing.SpinnerNumberModel());
+        spinCantidadCam.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
         spinCantidadPer.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        spinCantidadPer.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        spinCantidadPer.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 4));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setText("Cantidad de Personas:");
@@ -530,6 +530,8 @@ public class FrmVentas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnVerificarDisponibilidadActionPerformed
 
+    
+    
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
        
@@ -545,6 +547,7 @@ public class FrmVentas extends javax.swing.JPanel {
             ventas.setIs_portuario(Float.parseFloat(lblPortuario.getText()));
             ventas.setPropina(Float.parseFloat(lblPropina.getText()));
             ventas.insertarVenta(2);
+            int codigo_venta= ventas.extraerCodigoVenta();
             for (int i = 0; i < tableDetalle.getRowCount(); i++) {
             
                 ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
@@ -553,8 +556,9 @@ public class FrmVentas extends javax.swing.JPanel {
                 for (int j = 0; j < Integer.parseInt(tableDetalle.getValueAt(i, 1).toString()); j++) {
                   
                         ventas.setCantidad_personas(Integer.parseInt(JOptionPane.showInputDialog(null, "Distribucion para la " + i + " Habitacion")));
-                 
-                         ventas.insertarDetalle(ventas.extraerCodigoVenta(), camarotes.get(j));
+                        ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
+                        JOptionPane.showMessageDialog(null, camarotes.get(j));
+                        ventas.insertarDetalle(codigo_venta, camarotes.get(j));
 
                 }
 
@@ -562,8 +566,32 @@ public class FrmVentas extends javax.swing.JPanel {
             }
 
         }
+        limpiarControles();
+        
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void limpiarControles()
+    {
+        lblSubtotal.setText("0.00");
+        lblEmpleado.setText("-");
+        lblNombre.setText("-");
+        lblPortuario.setText("0.00");
+        lblisv.setText("0.00");
+        lblDescuento.setText("0.00");
+        lblPropina.setText("0.00");
+        lblTotal.setText("0.00");
+        lblRegreso.setText("-");
+        lblSalida.setText("-");
+        lblPuerto.setText("-");
+        txtIdentidad.setText(" ");
+        txtCodigoViaje.setText("");
+        comboboxTipo.setSelectedIndex(-1);
+        modelo = (DefaultTableModel) tableDetalle.getModel();
+        for(int i=0; i<tableDetalle.getRowCount(); i++)
+        {
+            modelo.removeRow(i);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarCam;

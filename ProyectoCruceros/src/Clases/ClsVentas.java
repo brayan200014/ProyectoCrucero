@@ -420,7 +420,6 @@ public class ClsVentas extends ClsVentasMetodos{
              ps.setInt(2, codigo_buque);
              ps.setString(3,tipo_camarote );
              ps.setInt(4, cantidad);
-               JOptionPane.showMessageDialog(null,cantidad);
              rs=ps.executeQuery();
              rsmd=rs.getMetaData();
              column= rsmd.getColumnCount();
@@ -452,11 +451,12 @@ public class ClsVentas extends ClsVentasMetodos{
          try 
          {
              Connection con= conexion.obtenerConexion();
-              ps=con.prepareStatement("execute insertarDetalleVenta ?,?,?,?");
-              ps.setInt(1, codigoVenta);
-              ps.setInt(2, codigoCamarote);
-              ps.setInt(3,cantidad_personas);
-              ps.setInt(4, cantidad_dias);
+              ps=con.prepareStatement("execute insertarDetalleVenta ?,?,?,?,?");
+              ps.setInt(1, codigo_viaje);
+              ps.setInt(2, codigoVenta);
+              ps.setInt(3, codigoCamarote);
+              ps.setInt(4,cantidad_dias);
+              ps.setInt(5, cantidad_personas);
               ps.executeUpdate();
                JOptionPane.showMessageDialog(null, "Registro Guardado con exito", "Information", JOptionPane.INFORMATION_MESSAGE);
          }
