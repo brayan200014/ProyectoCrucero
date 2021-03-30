@@ -9,10 +9,13 @@ import BuqueCamarote.ClsCamarote;
 import BuqueCamarote.ClsMetodosCamarote;
 import Clases.ClsConexion;
 import Clases.ClsHelper;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.RowFilter;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
 
 /**
  *
@@ -25,6 +28,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
     ClsCamarote cama = new ClsCamarote();
     ClsMetodosCamarote metcama = new ClsMetodosCamarote();
     String valor;
+    private TableRowSorter TRSFiltro;
 
     public FrmCamarotes() {
         initComponents();
@@ -58,6 +62,8 @@ public class FrmCamarotes extends javax.swing.JPanel {
         txtPrecio = new javax.swing.JTextField();
         txtNiveles = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtBusqueda = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(930, 460));
@@ -65,11 +71,11 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel8.setText("Buque");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 130, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, 130, -1));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Nivel");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 60, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, 60, -1));
 
         cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -78,11 +84,11 @@ public class FrmCamarotes extends javax.swing.JPanel {
                 cbBuqueItemStateChanged(evt);
             }
         });
-        add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 220, -1));
+        add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 220, -1));
 
         spNivel.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spNivel.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 60, -1));
+        add(spNivel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, 60, -1));
 
         btnEditar.setBackground(new java.awt.Color(12, 69, 104));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -159,7 +165,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
             tbCamarote.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, 380));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 100, -1, 300));
 
         btnAgregar1.setBackground(new java.awt.Color(12, 69, 104));
         btnAgregar1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -177,7 +183,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel10.setText("Precio");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 60, 20));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 30, 60, 20));
 
         cbTipoCamarote.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         cbTipoCamarote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -187,24 +193,46 @@ public class FrmCamarotes extends javax.swing.JPanel {
                 cbTipoCamaroteItemStateChanged(evt);
             }
         });
-        add(cbTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 220, -1));
+        add(cbTipoCamarote, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 220, -1));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel11.setText("Tipo Camarote");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 190, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 190, -1));
 
         txtPrecio.setEditable(false);
         txtPrecio.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 90, 70, 30));
+        add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 70, 30));
 
         txtNiveles.setEditable(false);
         txtNiveles.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        add(txtNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 70, 30));
+        add(txtNiveles, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, 70, 30));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Nivel/es");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 130, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel2.setText("Búsqueda");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 30, -1, -1));
+
+        txtBusqueda.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtBusqueda.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtBusquedaKeyTyped(evt);
+            }
+        });
+        add(txtBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 60, 450, 30));
     }// </editor-fold>//GEN-END:initComponents
+
+    public void cargarBuques()
+    {
+         cbBuque.setModel(hp.buque());
+    }
+    private void busqueda() {
+        int columnaTabla = 1;
+        TRSFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + txtBusqueda.getText(), columnaTabla));
+
+    }
 
     private void cargarTabla() {
 
@@ -452,6 +480,26 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void txtBusquedaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBusquedaKeyTyped
+
+        char c = evt.getKeyChar();
+
+        txtBusqueda.addKeyListener(new KeyAdapter() {
+
+            @Override
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (txtBusqueda.getText());
+                txtBusqueda.setText(cadena);
+                busqueda();
+            }
+        });
+
+        TRSFiltro = new TableRowSorter(tbCamarote.getModel());
+        tbCamarote.setRowSorter(TRSFiltro);
+
+
+    }//GEN-LAST:event_txtBusquedaKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -463,11 +511,13 @@ public class FrmCamarotes extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner spNivel;
     private javax.swing.JTable tbCamarote;
+    private javax.swing.JTextField txtBusqueda;
     private javax.swing.JTextField txtNiveles;
     private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables

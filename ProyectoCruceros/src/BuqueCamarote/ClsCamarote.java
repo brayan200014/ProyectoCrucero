@@ -3,13 +3,13 @@ package BuqueCamarote;
 public class ClsCamarote {
 
     private static String descripcion;
-    private static double precio;
+   // private static double precio;
     private static int idTipoCamarote;
     private static int idBuque;
     private static int nivel;
-    private static String seleccion;
+  //  private static String seleccion;
     private static int codigo;
-
+    
     public String getDescripcion() {
         return descripcion;
     }
@@ -18,13 +18,13 @@ public class ClsCamarote {
         ClsCamarote.descripcion = descripcion;
     }
 
-    public double getPrecio() {
+    /*public double getPrecio() {
         return precio;
     }
 
     public void setPrecio(double precio) {
         ClsCamarote.precio = precio;
-    }
+    }*/
 
     public int getIdBuque() {
         return idBuque;
@@ -50,13 +50,13 @@ public class ClsCamarote {
         ClsCamarote.idTipoCamarote = idTipoCamarote;
     }
 
-    public String getSeleccion() {
+   /* public String getSeleccion() {
         return seleccion;
     }
 
     public void setSeleccion(String seleccion) {
         ClsCamarote.seleccion = seleccion;
-    }
+    }*/
 
     public int getCodigo() {
         return codigo;

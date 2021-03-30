@@ -84,6 +84,31 @@ public class ClsMetodosBuque extends ClsBuque{
             JOptionPane.showMessageDialog(null, ex);
         }
      }
+     
+     public boolean existente()
+     {
+       boolean existe = false;
+       
+        ResultSet rs;
+        try {
+            Connection cn = conn.obtenerConexion();
+
+            PreparedStatement ps = cn.prepareStatement("select descripcion from buques where descripcion = ? and estado = 1");
+
+            ps.setString(1, buque.getDescripcion());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+               existe = true;
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+        
+        return existe;
+     }
 
     
      }

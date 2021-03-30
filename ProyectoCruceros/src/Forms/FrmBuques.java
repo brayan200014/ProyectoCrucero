@@ -25,8 +25,9 @@ public class FrmBuques extends javax.swing.JPanel {
     DefaultTableModel dm;
     private TableRowSorter TRSFiltro;
 
-    private ClsConexion conn = new ClsConexion();
+    ClsConexion conn = new ClsConexion();
 
+    FrmCamarotes frmcama = new FrmCamarotes();
     ClsHelper hp = new ClsHelper();
     ClsMetodosBuque metbuque = new ClsMetodosBuque();
     ClsBuque buque = new ClsBuque();
@@ -63,6 +64,7 @@ public class FrmBuques extends javax.swing.JPanel {
         btnActualizar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtDescripcion = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(930, 460));
@@ -94,7 +96,7 @@ public class FrmBuques extends javax.swing.JPanel {
                 txtFiltroKeyTyped(evt);
             }
         });
-        add(txtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 250, -1));
+        add(txtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 510, -1));
 
         spCamarotes.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spCamarotes.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
@@ -214,6 +216,14 @@ public class FrmBuques extends javax.swing.JPanel {
             }
         });
         add(txtDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 250, -1));
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 430, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void busqueda() {
@@ -237,11 +247,19 @@ public class FrmBuques extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, " Favor llenar todos campos", "ERROR", JOptionPane.ERROR_MESSAGE);
 
         } else {
-            cargarDatos();
-            metbuque.insertar();
-            limpiar();
-            cargarTabla();
+            buque.setDescripcion(txtDescripcion.getText());
+
+            if (metbuque.existente() == true) {
+                JOptionPane.showMessageDialog(null, "Buque ya existente", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                cargarDatos();
+                metbuque.insertar();
+                limpiar();
+                cargarTabla();
+                frmcama.cargarBuques();
+            }
         }
+
 
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -400,13 +418,28 @@ public class FrmBuques extends javax.swing.JPanel {
 
             metbuque.eliminar();
             cargarTabla();
+            frmcama.cargarBuques();
         }
 
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txtDescripcionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDescripcionKeyTyped
-        // TODO add your handling code here:
+
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Sólo se admiten letras", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+
+
     }//GEN-LAST:event_txtDescripcionKeyTyped
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       FrmReservaciones reser = new FrmReservaciones();
+       
+       reser.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -415,6 +448,7 @@ public class FrmBuques extends javax.swing.JPanel {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JComboBox<String> cbBuque;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
