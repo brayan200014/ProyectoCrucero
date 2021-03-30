@@ -139,6 +139,11 @@ public class FrmViajes extends javax.swing.JPanel {
         cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnElimnar.setText("Eliminar");
 
@@ -358,6 +363,14 @@ public class FrmViajes extends javax.swing.JPanel {
         cbPuerto.setSelectedIndex(viaje.getCodigoPuerto() - 1);
         
     }//GEN-LAST:event_btnEditarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        
+        guardarDatos();
+        viaje.actualizarViaje();
+        cargarTablaViajes();
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     //Llena la tabla con los viajes existentes
     private void cargarTablaViajes(){

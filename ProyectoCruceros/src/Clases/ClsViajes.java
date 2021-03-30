@@ -111,6 +111,7 @@ public class ClsViajes {
         
     }
     
+    //Extrae los datos de la base para su edicion
     public void editarViaje(int codigo){
         try{
             PreparedStatement ps;
@@ -124,6 +125,7 @@ public class ClsViajes {
             rs = ps.executeQuery();
             
             while(rs.next()){
+                codigoViaje = rs.getInt("codigo_viaje");
                 descripcion = rs.getString("descripcion");
                 fechaSalida = String.valueOf(rs.getDate("fecha_partida"));
                 fechaRegreso = String.valueOf(rs.getDate("fecha_regreso"));
@@ -136,8 +138,27 @@ public class ClsViajes {
         }
     }
     
+    //Confirma la edicion en la base de datos
     public void actualizarViaje(){
-        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            PreparedStatement ps = con.prepareStatement("UPDATE [dbo].[Viajes] SET [codigo_buque] = ?, [codigo_puerto] = ?, [fecha_partida] = TRY_CONVERT(DATETIME,?,120), [fecha_regreso] = TRY_CONVERT(DATETIME,?,120), [descripcion] = ?\n" +
+                                                        "Where codigo_viaje = ?");
+            
+            ps.setInt(1, codigoBuque);
+            ps.setInt(2, codigoPuerto);
+            ps.setString(3, fechaSalida);
+            ps.setString(4, fechaRegreso);
+            ps.setString(5, descripcion);
+            ps.setInt(6, codigoViaje);
+            ps.executeUpdate();
+            
+            JOptionPane.showMessageDialog(null, "Registro modificados");
+            
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
     }
     
     public void eliminarViaje(){
