@@ -3,8 +3,6 @@ package Forms;
 import Clases.ClsConexion;
 import Clases.ClsEmpleados;
 import Clases.ClsEmpleadosMetodos;
-import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,10 +30,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
 
         int columnas;
         try {
-            ps = con.prepareStatement("SELECT codigo_empleado, nombre, apellido,"
-                    + "fecha_nacimiento, identidad, sexo, telefono, correo_electronico, "
-                    + "direccion, codigo_puesto, estado,"
-                    + "nacionalidad FROM Empleados");
+            ps = con.prepareStatement("SELECT * FROM Empleados");
             rs = ps.executeQuery();
             rsmd = rs.getMetaData();
             columnas = rsmd.getColumnCount();
@@ -209,10 +204,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
 
         tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Id", "Nombre", "Apellido", "Nacimiento", "Identidad", "Sexo", "Telefono", "Correo", "Direccion", "Codigo Puesto", "Estado", "Nacionalidad"
@@ -369,7 +361,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         try {
-            jcnacimiento.getCalendarButton().setEnabled(false);
+            //jcnacimiento.getCalendarButton().setEnabled(false);
             
             int fila = tblEmpleados.getSelectedRow();
             int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
@@ -438,20 +430,11 @@ public class FrmEmpleados extends javax.swing.JPanel {
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
         int fila = tblEmpleados.getSelectedRow();
         int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
-        try {       
-            ps = con.prepareStatement("UPDATE Empleados SET estado=? WHERE codigo_empleado=?");
-            ps.setInt(1, 0);
-            ps.setInt(2, id);
-          
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro Deshabilitado");
-            limpiar();
-            cargarTabla();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de Deshabilitacion" + ex);
-        }
-        
-        
+        emp.setId(id);
+      
+        empmetodos.Eliminar();
+        limpiar();
+        cargarTabla();
         
     }//GEN-LAST:event_btnEliminarActionPerformed
 

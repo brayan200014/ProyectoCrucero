@@ -57,4 +57,22 @@ public class ClsEmpleadosMetodos extends ClsEmpleados{
             JOptionPane.showMessageDialog(null, "Error de Actualizacion" + ex);
         }
     }
+    
+    @Override
+    public void Eliminar(){
+        try {       
+            ps = con.prepareStatement("UPDATE Empleados SET estado=? WHERE codigo_empleado=?");
+            ps.setInt(1, 0);
+            ps.setInt(2, id);
+             if (JOptionPane.showConfirmDialog(null, "¿Desea Despedir al Empleado?",
+                "WARNING", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
+             {
+                 ps.executeUpdate();
+                 JOptionPane.showMessageDialog(null, "Empleado Despedido");
+             }
+   
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al Eliminar" + ex);
+        }
+    }
 }

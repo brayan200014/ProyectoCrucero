@@ -109,4 +109,8 @@ public class ClsEmpleados {
     public void Actualizar(){
         
     }
+    
+    public void Eliminar(){
+        
+    }
 }
