@@ -399,6 +399,7 @@ public class FrmVentas extends javax.swing.JPanel {
             lblPuerto.setText(ventas.getPuerto_salida());
             lblRegreso.setText(ventas.getFecha_regreso().toString());
             lblSalida.setText(ventas.getFecha_salida().toString());
+            lblEmpleado.setText(ventas.nombreEmpleado(2));
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
