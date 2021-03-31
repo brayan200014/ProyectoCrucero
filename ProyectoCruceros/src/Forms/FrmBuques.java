@@ -113,6 +113,8 @@ public class FrmBuques extends javax.swing.JPanel {
         cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         add(cbBuque, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 350, 260, -1));
 
+        tbBuque.setBackground(new java.awt.Color(96, 203, 249));
+        tbBuque.setBorder(new javax.swing.border.MatteBorder(null));
         tbBuque.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tbBuque.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -137,6 +139,12 @@ public class FrmBuques extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tbBuque.setGridColor(new java.awt.Color(255, 255, 255));
+        tbBuque.setSelectionBackground(new java.awt.Color(12, 69, 104));
+        tbBuque.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbBuque.setShowHorizontalLines(false);
+        tbBuque.getTableHeader().setResizingAllowed(false);
+        tbBuque.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbBuque);
         if (tbBuque.getColumnModel().getColumnCount() > 0) {
             tbBuque.getColumnModel().getColumn(0).setResizable(false);
@@ -147,7 +155,7 @@ public class FrmBuques extends javax.swing.JPanel {
             tbBuque.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(412, 100, 510, 300));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 130, 510, 170));
 
         btnEditar.setBackground(new java.awt.Color(12, 69, 104));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -280,7 +288,7 @@ public class FrmBuques extends javax.swing.JPanel {
         ResultSetMetaData rsmd;
         int columnas;
 
-        int[] anchos = {10, 100, 35, 30, 30, 100};
+        int[] anchos = {10, 100, 45, 30, 45, 100};
         for (int i = 0; i < tbBuque.getColumnCount(); i++) {
             tbBuque.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }

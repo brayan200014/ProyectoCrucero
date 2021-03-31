@@ -21,7 +21,7 @@ public class ClsMetodosReservaciones extends ClsReservaciones{
             ps.setInt(1, reser.getCodigo());
 
             ps.executeUpdate();
-
+            
             JOptionPane.showMessageDialog(null, "Reservación Cancelada");
 
         } catch (Exception ex) {

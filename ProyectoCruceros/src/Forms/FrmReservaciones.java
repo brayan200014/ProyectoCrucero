@@ -3,15 +3,17 @@ package Forms;
 import Clases.ClsConexion;
 import Reservaciones.ClsMetodosReservaciones;
 import Reservaciones.ClsReservaciones;
+import java.awt.event.*;
 import java.sql.*;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import javax.swing.table.*;
 
 public class FrmReservaciones extends javax.swing.JFrame {
 
     ClsConexion conn = new ClsConexion();
     ClsReservaciones reser = new ClsReservaciones();
     ClsMetodosReservaciones metreser = new ClsMetodosReservaciones();
+    private TableRowSorter TRSFiltro;
 
     public FrmReservaciones() {
         initComponents();
@@ -25,18 +27,18 @@ public class FrmReservaciones extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbReservaciones = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
+        txtFiltro = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(96, 203, 249));
-        setPreferredSize(new java.awt.Dimension(930, 460));
 
         jPanel1.setBackground(new java.awt.Color(96, 203, 249));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tbReservaciones.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        tbReservaciones.setBackground(new java.awt.Color(96, 203, 249));
+        tbReservaciones.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tbReservaciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -60,6 +62,11 @@ public class FrmReservaciones extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbReservaciones.setAutoscrolls(false);
+        tbReservaciones.setSelectionBackground(new java.awt.Color(12, 69, 104));
+        tbReservaciones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbReservaciones.getTableHeader().setResizingAllowed(false);
+        tbReservaciones.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbReservaciones);
         if (tbReservaciones.getColumnModel().getColumnCount() > 0) {
             tbReservaciones.getColumnModel().getColumn(0).setResizable(false);
@@ -69,49 +76,101 @@ public class FrmReservaciones extends javax.swing.JFrame {
             tbReservaciones.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 690, 250));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 690, 250));
 
-        jTextField1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 490, 30));
+        txtFiltro.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtFiltro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFiltroKeyTyped(evt);
+            }
+        });
+        jPanel1.add(txtFiltro, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 490, 30));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Búsqueda");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
+        btnCancelar.setBackground(new java.awt.Color(12, 69, 104));
         btnCancelar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
         btnCancelar.setText("Cancelar Reservación");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, -1, 40));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 360, -1, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 930, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void verificarEstado() {
+        ResultSet rs;
+        try {
+            Connection cn = conn.obtenerConexion();
+
+            PreparedStatement ps = cn.prepareStatement("select estado from Reservaciones where codigo_viaje = ?");
+
+            ps.setInt(1, reser.getCodigo());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                reser.setEstado(rs.getInt("estado"));
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+
+    }
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+       
+
         if (tbReservaciones.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
+
             int fila = tbReservaciones.getSelectedRow();
             reser.setCodigo(Integer.parseInt(tbReservaciones.getValueAt(fila, 0).toString()));
-
             metreser.cancelar();
             cargarTabla();
+
         }
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtFiltroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFiltroKeyTyped
+        char c = evt.getKeyChar();
+
+        if (Character.isDigit(c)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Sólo se admiten letras", "WARNING", JOptionPane.WARNING_MESSAGE);
+        } else {
+            txtFiltro.addKeyListener(new KeyAdapter() {
+
+                @Override
+                public void keyReleased(final KeyEvent e) {
+                    String cadena = (txtFiltro.getText());
+                    txtFiltro.setText(cadena);
+                    busqueda();
+                }
+            });
+
+            TRSFiltro = new TableRowSorter(tbReservaciones.getModel());
+            tbReservaciones.setRowSorter(TRSFiltro);
+        }
+    }//GEN-LAST:event_txtFiltroKeyTyped
 
     private void cargarTabla() {
         DefaultTableModel modeloTabla = (DefaultTableModel) tbReservaciones.getModel();
@@ -177,12 +236,17 @@ public class FrmReservaciones extends javax.swing.JFrame {
         });
     }
 
+    private void busqueda() {
+        int columnaTabla = 1;
+        TRSFiltro.setRowFilter(RowFilter.regexFilter("(?i)" + txtFiltro.getText(), columnaTabla));
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tbReservaciones;
+    private javax.swing.JTextField txtFiltro;
     // End of variables declaration//GEN-END:variables
 }

@@ -132,6 +132,8 @@ public class FrmCamarotes extends javax.swing.JPanel {
         });
         add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 420, 160, 40));
 
+        tbCamarote.setBackground(new java.awt.Color(96, 203, 249));
+        tbCamarote.setBorder(new javax.swing.border.MatteBorder(null));
         tbCamarote.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         tbCamarote.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -156,6 +158,11 @@ public class FrmCamarotes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tbCamarote.setAutoscrolls(false);
+        tbCamarote.setSelectionBackground(new java.awt.Color(12, 69, 104));
+        tbCamarote.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tbCamarote.getTableHeader().setResizingAllowed(false);
+        tbCamarote.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tbCamarote);
         if (tbCamarote.getColumnModel().getColumnCount() > 0) {
             tbCamarote.getColumnModel().getColumn(0).setResizable(false);
