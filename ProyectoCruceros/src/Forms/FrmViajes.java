@@ -27,9 +27,18 @@ public class FrmViajes extends javax.swing.JPanel {
     public FrmViajes() {
         initComponents();
         cargarTablaViajes();
-        cbPuerto.setModel(viaje.getvalues());//Llena el comboBox de puertos
-        cbBuque.setModel(viaje.getvalues(2));//Llena el comboBox de Buques
-        cbDestinoTuristico.setModel(viaje.getvalues("3"));//Llena el comboBox de destinos
+        cbPuerto.setModel(viaje.getvaluesPuertos());//Llena el comboBox de puertos
+        cbBuque.setModel(viaje.getvaluesBuques());//Llena el comboBox de Buques
+        cbDestinoTuristico.setModel(viaje.getvaluesDestinos());//Llena el comboBox de destinos
+        cbPuertoDestino.setModel(viaje.getvaluesPuertos());//Llena el comboBox de puerto del destino
+        
+        /*Establece los comboBox en menos uno para que no este seleccionado ninguno
+        al momento de iniciar el jpanel
+        */
+        cbPuerto.setSelectedIndex(-1);
+        cbBuque.setSelectedIndex(-1);
+        cbDestinoTuristico.setSelectedIndex(-1);
+        cbPuertoDestino.setSelectedIndex(-1);
     }
 
     /**
@@ -53,7 +62,7 @@ public class FrmViajes extends javax.swing.JPanel {
         cbPuerto = new javax.swing.JComboBox<>();
         btnAgregar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
         cbBuque = new javax.swing.JComboBox<>();
         btnActualizar = new javax.swing.JButton();
         btnElimnar = new javax.swing.JButton();
@@ -61,13 +70,15 @@ public class FrmViajes extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         cbDestinoTuristico = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        jdcFechaSalida1 = new com.toedter.calendar.JDateChooser();
+        jdcFechaLlegada = new com.toedter.calendar.JDateChooser();
         jLabel9 = new javax.swing.JLabel();
-        jdcFechaRegreso1 = new com.toedter.calendar.JDateChooser();
+        jdcFechaPartida = new com.toedter.calendar.JDateChooser();
         btnEliminarDestino = new javax.swing.JButton();
         btnAgregarDestino = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblDestinos = new javax.swing.JTable();
+        cbPuertoDestino = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(920, 460));
@@ -128,10 +139,10 @@ public class FrmViajes extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel5.setText("Buque:");
 
-        btnEditar.setText("Editar");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnConsultarActionPerformed(evt);
             }
         });
 
@@ -155,16 +166,21 @@ public class FrmViajes extends javax.swing.JPanel {
 
         cbDestinoTuristico.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         cbDestinoTuristico.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbDestinoTuristico.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbDestinoTuristicoItemStateChanged(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel8.setText("Fecha de salida:");
+        jLabel8.setText("Fecha de llegada:");
 
-        jdcFechaSalida1.setDateFormatString("yyyy/MM/dd hh:mm:ss");
+        jdcFechaLlegada.setDateFormatString("yyyy/MM/dd hh:mm:ss");
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        jLabel9.setText("Fecha de regreso:");
+        jLabel9.setText("Fecha de partida:");
 
-        jdcFechaRegreso1.setDateFormatString("yyyy/MM/dd hh:mm:ss");
+        jdcFechaPartida.setDateFormatString("yyyy/MM/dd hh:mm:ss");
 
         btnEliminarDestino.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         btnEliminarDestino.setText("Eliminar destino");
@@ -182,19 +198,19 @@ public class FrmViajes extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblDestinos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Destino Turistico", "Fecha salida", "Fecha regreso"
+                "ID", "Destino", "Puerto", "Fecha de llegada", "Fecha de partida"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -205,7 +221,13 @@ public class FrmViajes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(tblDestinos);
+
+        cbPuertoDestino.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        cbPuertoDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        jLabel7.setText("Puerto del destino:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -214,40 +236,50 @@ public class FrmViajes extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(cbDestinoTuristico, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jdcFechaSalida1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
+                        .addComponent(jdcFechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAgregarDestino))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(cbDestinoTuristico, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbPuertoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
+                    .addComponent(jLabel8)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
-                            .addComponent(jdcFechaRegreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jdcFechaPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(btnEliminarDestino))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jLabel6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
                 .addGap(9, 9, 9)
-                .addComponent(cbDestinoTuristico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbDestinoTuristico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbPuertoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8)
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jdcFechaSalida1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdcFechaLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAgregarDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(8, 8, 8)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jdcFechaRegreso1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jdcFechaPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminarDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -275,7 +307,7 @@ public class FrmViajes extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(cbBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(40, 40, 40)
+                        .addGap(63, 63, 63)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(120, 120, 120)
@@ -284,12 +316,12 @@ public class FrmViajes extends javax.swing.JPanel {
                         .addGap(257, 257, 257)
                         .addComponent(btnAgregar)
                         .addGap(35, 35, 35)
-                        .addComponent(btnEditar)
+                        .addComponent(btnConsultar)
                         .addGap(34, 34, 34)
                         .addComponent(btnActualizar)
                         .addGap(42, 42, 42)
                         .addComponent(btnElimnar)))
-                .addContainerGap(114, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,20 +355,44 @@ public class FrmViajes extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAgregar)
-                    .addComponent(btnEditar)
+                    .addComponent(btnConsultar)
                     .addComponent(btnActualizar)
                     .addComponent(btnElimnar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    //Agrega destinos a la tabla tblDestinos
     private void btnAgregarDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDestinoActionPerformed
-        // TODO add your handling code here:
+        SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        
+        int[] anchos = {10, 50, 20, 50, 50};
+        for (int i = 0; i < tblDestinos.getColumnCount(); i++) {
+            tblDestinos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        }
+        
+        DefaultTableModel modelo=(DefaultTableModel) tblDestinos.getModel(); 
+ 
+        Object [] fila=new Object[5]; 
+ 
+        fila[0]=cbDestinoTuristico.getSelectedIndex() + 1;
+        fila[1]= cbDestinoTuristico.getSelectedItem();
+        fila[2]=cbPuertoDestino.getSelectedIndex() + 1;
+        fila[3]=df.format(jdcFechaLlegada.getDate());
+        fila[4]=df.format(jdcFechaPartida.getDate());
+ 
+        modelo.addRow(fila); 
+  
+        tblDestinos.setModel(modelo);
         
     }//GEN-LAST:event_btnAgregarDestinoActionPerformed
 
+    //Elimina el destino deleccionado de la tabla
     private void btnEliminarDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDestinoActionPerformed
-        // TODO add your handling code here:
+        int fila = tblDestinos.getSelectedRow();
+        
+        DefaultTableModel modelo = (DefaultTableModel)tblDestinos.getModel();
+        modelo.removeRow(fila);
     }//GEN-LAST:event_btnEliminarDestinoActionPerformed
 
     //Guardar  los datos e ingresa el viaje a la base de datos
@@ -344,17 +400,20 @@ public class FrmViajes extends javax.swing.JPanel {
         
         guardarDatos();
         viaje.ingresarViaje();
+        ingresarDestinos();
+        limpiar();
         cargarTablaViajes();
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    //
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+    //Extrae los datos de la base de datos del viaje seleccionado
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
         
         int fila = tblViajes.getSelectedRow();
         int codigo = Integer.parseInt(tblViajes.getValueAt(fila, 0).toString());
         
-        viaje.editarViaje(codigo);
+        viaje.consultarViaje(codigo);
+        cargarTablaDestino(codigo);
         
         txtNombre.setText(viaje.getDescripcion());
         jdcFechaSalida.setDate(Date.valueOf(viaje.getFechaSalida()));
@@ -362,17 +421,24 @@ public class FrmViajes extends javax.swing.JPanel {
         cbBuque.setSelectedIndex(viaje.getCodigoBuque() - 1);
         cbPuerto.setSelectedIndex(viaje.getCodigoPuerto() - 1);
         
-    }//GEN-LAST:event_btnEditarActionPerformed
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         
         guardarDatos();
         viaje.actualizarViaje();
+        
+        limpiar();
         cargarTablaViajes();
         
     }//GEN-LAST:event_btnActualizarActionPerformed
 
-    //Llena la tabla con los viajes existentes
+    private void cbDestinoTuristicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDestinoTuristicoItemStateChanged
+
+        
+    }//GEN-LAST:event_cbDestinoTuristicoItemStateChanged
+
+    //Llena la tabla de viajes con los viajes existentes
     private void cargarTablaViajes(){
         DefaultTableModel modeloTabla = (DefaultTableModel) tblViajes.getModel();
         
@@ -416,7 +482,54 @@ public class FrmViajes extends javax.swing.JPanel {
         }
     }
     
-    //Guardo los datos en la clase ClsViajes
+    //Llena la tabla de destinos con los destinos de ese viaje
+    private  void cargarTablaDestino(int codigo){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblDestinos.getModel();
+        
+        modeloTabla.setRowCount(0);
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        
+        int[] anchos = {10, 50, 20, 50, 50};
+        for (int i = 0; i < tblDestinos.getColumnCount(); i++) {
+            tblDestinos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        }
+        
+        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("Select pd.codigo_destino, dt.descripcion, dd.codigo_puerto, dd.fecha_llegada, dd.fecha_salida\n" +
+                                        "From [dbo].[Detalle_destinos] dd join [dbo].[Puertos-Destinos] pd\n" +
+                                        "on dd.codigo_puerto = pd.codigo_puerto\n" +
+                                        "join [dbo].[Destinos_Turisticos] dt\n" +
+                                        "on pd.codigo_destino = dt.codigo_destino\n" +
+                                        "Where codigo_viaje = ?");
+            
+            ps.setInt(1, codigo);
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
+            
+            while(rs.next()){
+                Object[] fila = new Object[columnas];
+                
+                for (int i = 0; i < columnas; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                
+                modeloTabla.addRow(fila);
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    //Guardo los datos del viaje en la clase ClsViajes
     private void guardarDatos(){
         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         
@@ -426,33 +539,62 @@ public class FrmViajes extends javax.swing.JPanel {
         viaje.setCodigoPuerto(cbPuerto.getSelectedIndex() + 1);
         viaje.setDescripcion(txtNombre.getText());
     }
+    
+    //Ingresa los destinos de la tabla en la base de datos
+    private void ingresarDestinos(){
+        
+        for (int i = 0; i < tblDestinos.getRowCount(); i++) {
+            viaje.ingresarDestino(Integer.parseInt(tblDestinos.getValueAt(i,2).toString()), 
+                tblDestinos.getValueAt(i, 3).toString() , tblDestinos.getValueAt(i, 4).toString());
+        }
+        
+    }
+    
+    //Limpia los datos del formulario
+    private void limpiar(){
+        txtNombre.setText(null);
+        jdcFechaSalida.setDate(null);
+        jdcFechaRegreso.setDate(null);
+        cbPuerto.setSelectedIndex(-1);
+        cbBuque.setSelectedIndex(-1);
+        cbDestinoTuristico.setSelectedIndex(-1);
+        cbPuertoDestino.setSelectedIndex(-1);
+        jdcFechaLlegada.setDate(null);
+        jdcFechaPartida.setDate(null);
+        
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblDestinos.getModel();
+        
+        modeloTabla.setRowCount(0);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregarDestino;
-    private javax.swing.JButton btnEditar;
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminarDestino;
     private javax.swing.JButton btnElimnar;
     private javax.swing.JComboBox<String> cbBuque;
     private javax.swing.JComboBox<String> cbDestinoTuristico;
     private javax.swing.JComboBox<String> cbPuerto;
+    private javax.swing.JComboBox<String> cbPuertoDestino;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
+    private com.toedter.calendar.JDateChooser jdcFechaLlegada;
+    private com.toedter.calendar.JDateChooser jdcFechaPartida;
     private com.toedter.calendar.JDateChooser jdcFechaRegreso;
-    private com.toedter.calendar.JDateChooser jdcFechaRegreso1;
     private com.toedter.calendar.JDateChooser jdcFechaSalida;
-    private com.toedter.calendar.JDateChooser jdcFechaSalida1;
+    private javax.swing.JTable tblDestinos;
     private javax.swing.JTable tblViajes;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables

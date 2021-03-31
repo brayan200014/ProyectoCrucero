@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Jorge Ayala
@@ -98,7 +99,7 @@ public class ClsViajes {
             
             ResultSet rs = cs.executeQuery();*/
             
-            JOptionPane.showMessageDialog(null, "Registro guardados");
+            JOptionPane.showMessageDialog(null, "Viaje ingresado");
             
         }
         catch(SQLException e){
@@ -107,12 +108,26 @@ public class ClsViajes {
     }
     
     //Ingresa los destinos al viaje
-    public void ingresarDestino(){
+    public void ingresarDestino(int cPuerto, String fechaL, String fechaS){
+        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO [dbo].[Detalle_destinos]\n" +
+                                                        "VALUES((Select MAX(codigo_viaje) From [dbo].[Viajes]), ?, TRY_CONVERT(DATETIME,?,120),TRY_CONVERT(DATETIME,?,120))");
+            
+            ps.setInt(1, cPuerto);
+            ps.setString(2, fechaL);
+            ps.setString(3, fechaS);
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
         
     }
     
     //Extrae los datos de la base para su edicion
-    public void editarViaje(int codigo){
+    public void consultarViaje(int codigo){
         try{
             PreparedStatement ps;
             ResultSet rs;
@@ -153,7 +168,7 @@ public class ClsViajes {
             ps.setInt(6, codigoViaje);
             ps.executeUpdate();
             
-            JOptionPane.showMessageDialog(null, "Registro modificados");
+            JOptionPane.showMessageDialog(null, "Viaje modificado");
             
         }
         catch(SQLException e){
@@ -165,12 +180,8 @@ public class ClsViajes {
         
     }
     
-    public void consultarViajes(){
-        
-    }
-    
     //Llena el comboBox de Puertos
-    public DefaultComboBoxModel getvalues(){
+    public DefaultComboBoxModel getvaluesPuertos(){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         
         PreparedStatement ps;
@@ -193,8 +204,32 @@ public class ClsViajes {
         return modelo;
     }
     
+    public DefaultComboBoxModel getvaluesPuertos(int codigo){
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("Select descripcion From [dbo].[Puertos-Destinos] where codigo_destino = ?");
+            ps.setInt(1, codigo);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                modelo.addElement(rs.getString(1));
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showInputDialog(null, e.toString());
+        }
+        
+        return modelo;
+    }
+    
     //Llena el comboBox de Buques
-    public DefaultComboBoxModel getvalues(int i){
+    public DefaultComboBoxModel getvaluesBuques(){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         
         PreparedStatement ps;
@@ -218,7 +253,7 @@ public class ClsViajes {
     }
     
     //Llena el comboBox de destinos 
-    public DefaultComboBoxModel getvalues(String i){
+    public DefaultComboBoxModel getvaluesDestinos(){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         
         PreparedStatement ps;
@@ -240,4 +275,5 @@ public class ClsViajes {
         
         return modelo;
     }
+    
 }
