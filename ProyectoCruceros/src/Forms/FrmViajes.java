@@ -32,7 +32,7 @@ public class FrmViajes extends javax.swing.JPanel {
         cbDestinoTuristico.setModel(viaje.getvaluesDestinos());//Llena el comboBox de destinos
         cbPuertoDestino.setModel(viaje.getvaluesPuertos());//Llena el comboBox de puerto del destino
         
-        /*Establece los comboBox en menos uno para que no este seleccionado ninguno
+        /*Establece los comboBox en -1 para que no este seleccionado ninguno
         al momento de iniciar el jpanel
         */
         cbPuerto.setSelectedIndex(-1);
