@@ -115,7 +115,7 @@ public class FrmReservaciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void verificarEstado() {
+   /* public void verificarEstado() {
         ResultSet rs;
         try {
             Connection cn = conn.obtenerConexion();
@@ -126,7 +126,6 @@ public class FrmReservaciones extends javax.swing.JFrame {
             rs = ps.executeQuery();
 
             if (rs.next()) {
-
                 reser.setEstado(rs.getInt("estado"));
             }
 
@@ -134,18 +133,23 @@ public class FrmReservaciones extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
 
-    }
+    }*/
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       
 
         if (tbReservaciones.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Seleccione una fila para eliminar", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
+            int fila = tbReservaciones.getSelectedRow(); 
+            reser.setEstado(tbReservaciones.getValueAt(fila, 4).toString());
+            String estado = reser.getEstado();
 
-            int fila = tbReservaciones.getSelectedRow();
-            reser.setCodigo(Integer.parseInt(tbReservaciones.getValueAt(fila, 0).toString()));
-            metreser.cancelar();
-            cargarTabla();
+            if (estado == "Cancelado") {
+                JOptionPane.showMessageDialog(null, "Viaje ya antes cancelado", "ERROR", JOptionPane.ERROR_MESSAGE);
+            } else {
+                reser.setCodigo(Integer.parseInt(tbReservaciones.getValueAt(fila, 0).toString()));
+                metreser.cancelar();
+                cargarTabla();
+            }
 
         }
     }//GEN-LAST:event_btnCancelarActionPerformed

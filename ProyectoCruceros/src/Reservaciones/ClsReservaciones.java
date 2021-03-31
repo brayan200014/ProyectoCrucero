@@ -3,7 +3,7 @@ package Reservaciones;
 public class ClsReservaciones {
 
     private static int codigo;
-    private static int estado;
+    private static String estado;
 
     public int getCodigo() {
         return codigo;
@@ -13,11 +13,11 @@ public class ClsReservaciones {
         ClsReservaciones.codigo = codigo;
     }
 
-    public int getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(int estado) {
+    public void setEstado(String estado) {
         ClsReservaciones.estado = estado;
     }
 
