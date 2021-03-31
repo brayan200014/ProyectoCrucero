@@ -5,6 +5,8 @@
  */
 package Forms;
 
+import Clases.ClsConexion;
+import com.sun.jdi.connect.spi.Connection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,6 +16,7 @@ import java.awt.event.ActionListener;
  */
 public class Principal extends javax.swing.JFrame implements ActionListener {
 
+    
     /**
      * Creates new form Principal
      */
@@ -284,6 +287,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             java.util.logging.Logger.getLogger(Principal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
+        
+        
+        
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
