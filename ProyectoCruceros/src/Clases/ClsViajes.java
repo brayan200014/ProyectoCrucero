@@ -180,6 +180,39 @@ public class ClsViajes {
         
     }
     
+    //Elimina todos los destinos de un viaje
+    public void eliminarDestinos(){
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            
+            PreparedStatement ps = con.prepareStatement("DELETE FROM [dbo].[Detalle_destinos] WHERE codigo_viaje = ?");
+            
+            ps.setInt(1, codigoViaje);
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    //Vuelve a insertar los destinos de un viaje
+    public void actualizarDestinos(int cPuerto, String fechaL, String fechaS){
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            PreparedStatement ps = con.prepareStatement("INSERT INTO [dbo].[Detalle_destinos]\n" +
+                                                        "VALUES( ?, ?, TRY_CONVERT(DATETIME,?,120),TRY_CONVERT(DATETIME,?,120))");
+            
+            ps.setInt(1, codigoViaje);
+            ps.setInt(2, cPuerto);
+            ps.setString(3, fechaL);
+            ps.setString(4, fechaS);
+            ps.executeUpdate();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
     //Llena el comboBox de Puertos
     public DefaultComboBoxModel getvaluesPuertos(){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();

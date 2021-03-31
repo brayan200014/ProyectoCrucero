@@ -65,7 +65,7 @@ public class FrmViajes extends javax.swing.JPanel {
         btnConsultar = new javax.swing.JButton();
         cbBuque = new javax.swing.JComboBox<>();
         btnActualizar = new javax.swing.JButton();
-        btnElimnar = new javax.swing.JButton();
+        btnLimpiar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         cbDestinoTuristico = new javax.swing.JComboBox<>();
@@ -156,7 +156,12 @@ public class FrmViajes extends javax.swing.JPanel {
             }
         });
 
-        btnElimnar.setText("Eliminar");
+        btnLimpiar.setText("Limpiar");
+        btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimpiarActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(52, 161, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -320,7 +325,7 @@ public class FrmViajes extends javax.swing.JPanel {
                         .addGap(34, 34, 34)
                         .addComponent(btnActualizar)
                         .addGap(42, 42, 42)
-                        .addComponent(btnElimnar)))
+                        .addComponent(btnLimpiar)))
                 .addContainerGap(121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -357,7 +362,7 @@ public class FrmViajes extends javax.swing.JPanel {
                     .addComponent(btnAgregar)
                     .addComponent(btnConsultar)
                     .addComponent(btnActualizar)
-                    .addComponent(btnElimnar))
+                    .addComponent(btnLimpiar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -387,7 +392,7 @@ public class FrmViajes extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnAgregarDestinoActionPerformed
 
-    //Elimina el destino deleccionado de la tabla
+    //Elimina el destino seleccionado de la tabla
     private void btnEliminarDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDestinoActionPerformed
         int fila = tblDestinos.getSelectedRow();
         
@@ -427,6 +432,12 @@ public class FrmViajes extends javax.swing.JPanel {
         
         guardarDatos();
         viaje.actualizarViaje();
+        viaje.eliminarDestinos();
+        
+        for (int i = 0; i < tblDestinos.getRowCount(); i++) {
+            viaje.actualizarDestinos(Integer.parseInt(tblDestinos.getValueAt(i,2).toString()), 
+                tblDestinos.getValueAt(i, 3).toString() , tblDestinos.getValueAt(i, 4).toString());
+        }
         
         limpiar();
         cargarTablaViajes();
@@ -434,9 +445,12 @@ public class FrmViajes extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void cbDestinoTuristicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDestinoTuristicoItemStateChanged
-
         
     }//GEN-LAST:event_cbDestinoTuristicoItemStateChanged
+
+    private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Llena la tabla de viajes con los viajes existentes
     private void cargarTablaViajes(){
@@ -573,7 +587,7 @@ public class FrmViajes extends javax.swing.JPanel {
     private javax.swing.JButton btnAgregarDestino;
     private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEliminarDestino;
-    private javax.swing.JButton btnElimnar;
+    private javax.swing.JButton btnLimpiar;
     private javax.swing.JComboBox<String> cbBuque;
     private javax.swing.JComboBox<String> cbDestinoTuristico;
     private javax.swing.JComboBox<String> cbPuerto;
