@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Clases;
+package Ventas;
 
+import Ventas.ClsVentasMetodos;
 import java.sql.*;
+import Clases.ClsConexion;
 import Clases.ClsConexion;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.*;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -37,6 +40,8 @@ public class ClsVentas extends ClsVentasMetodos{
     private static float isv;
     private static float propina;
     private static float total;
+    private float desc;
+    public DefaultTableModel modelo;
    // private static ArrayList camarotes;
     ArrayList <Integer> camarotes= new ArrayList<Integer>();
    
@@ -350,10 +355,10 @@ public class ClsVentas extends ClsVentasMetodos{
              ps.setInt(2,codigo_viaje);
              ps.setInt(3, codigo);
              ps.setFloat(4, subtotal);
-             ps.setFloat(5, isv);
-             ps.setFloat(6, is_portuario);
-             ps.setFloat(7, propina);
-             ps.setFloat(8, descuento);
+             ps.setFloat(5, (float)0.07);
+             ps.setFloat(6, (float)0.05);
+             ps.setFloat(7, (float)0.10);
+             ps.setFloat(8, desc);
              ps.executeUpdate();
              JOptionPane.showMessageDialog(null, "Registro Guardado con exito", "Information", JOptionPane.INFORMATION_MESSAGE);
              con.close();
@@ -483,16 +488,47 @@ public class ClsVentas extends ClsVentasMetodos{
          }
      }
      
+     public void cargarDatosVentas ()
+     {
+         int columnas;
+        
+      /*  modelo.setRowCount(0);*/
+        try 
+         {
+             Connection con= conexion.obtenerConexion();
+            ps=con.prepareStatement("execute cargarDatosVentas");
+             rs=ps.executeQuery();
+             rsmd= rs.getMetaData();
+             columnas= rsmd.getColumnCount();
+             while(rs.next())
+             {
+                Object [] fila= new Object[columnas];
+                 for(int i=0; i<columnas; i++)
+                 {
+                     fila[i]=rs.getObject(i+1);
+                 }
+                 modelo.addRow(fila);
+             }
+         }
+         catch(SQLException ex)
+         {
+              JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos"+ex, "Warning", JOptionPane.WARNING_MESSAGE);
+         }
+      
+     }
     @Override
      public float calculoDescuento()
      {
+      
          if(edad>=60)
          {
              descuento= subtotal*(float)0.25;
+             desc= (float)0.25;
          }
          else
          {
              descuento=0;
+             desc=0;
          }
          return descuento;
      }

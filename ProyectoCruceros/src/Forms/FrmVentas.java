@@ -6,7 +6,7 @@
 package Forms;
 
 import Clases.ClsConexion;
-import Clases.ClsVentas;
+import Ventas.ClsVentas;
 import java.awt.Dialog;
 import java.sql.*;
 import java.util.ArrayList;
@@ -37,6 +37,10 @@ public class FrmVentas extends javax.swing.JPanel {
         comboboxTipo.setSelectedIndex(-1);
         lblNombre.setText("Prueba");
         lblEmpleado.setText(ventas.nombreEmpleado(2));
+        btnVerificarDisponibilidad.setEnabled(false);
+        btnConfirmar.setEnabled(false);
+        btnAgregarCam.setEnabled(false);
+        btnEliminarCam.setEnabled(false);
 
         // camarotes= new DefaultListModel();
         // listSelectCam.setModel(camarotes);
@@ -348,8 +352,11 @@ public class FrmVentas extends javax.swing.JPanel {
         jLabel3.setText("Factura a Realizar");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 268, -1, -1));
 
+        btnVerificarDisponibilidad.setBackground(new java.awt.Color(12, 69, 104));
         btnVerificarDisponibilidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnVerificarDisponibilidad.setForeground(new java.awt.Color(255, 255, 255));
         btnVerificarDisponibilidad.setText("Verificar");
+        btnVerificarDisponibilidad.setBorderPainted(false);
         btnVerificarDisponibilidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerificarDisponibilidadActionPerformed(evt);
@@ -367,8 +374,11 @@ public class FrmVentas extends javax.swing.JPanel {
         });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(873, 24, 30, 29));
 
+        btnConfirmar.setBackground(new java.awt.Color(12, 69, 104));
         btnConfirmar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnConfirmar.setForeground(new java.awt.Color(255, 255, 255));
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setBorderPainted(false);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
@@ -382,14 +392,11 @@ public class FrmVentas extends javax.swing.JPanel {
         // TODO add your handling code here:
         String identidad = txtIdentidad.getText();
         String codigo = txtCodigoViaje.getText();
-        if (identidad.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Debe Ingresar un valor en la identidad"
+        if (identidad.isEmpty() || codigo.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Faltan Datos Por Ingresar"
                     + "", "Warning", JOptionPane.ERROR_MESSAGE);
         } else if (identidad.length() < 13 || identidad.length() > 13) {
             JOptionPane.showMessageDialog(null, "La identidad debe contener 13 caracteres"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else if (codigo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Ingresar el codigo de viaje"
                     + "", "Warning", JOptionPane.ERROR_MESSAGE);
         } else {
             ventas.setIdentidad(txtIdentidad.getText());
@@ -400,6 +407,10 @@ public class FrmVentas extends javax.swing.JPanel {
             lblRegreso.setText(ventas.getFecha_regreso().toString());
             lblSalida.setText(ventas.getFecha_salida().toString());
             lblEmpleado.setText(ventas.nombreEmpleado(2));
+            btnVerificarDisponibilidad.setEnabled(true);
+            btnConfirmar.setEnabled(false);
+            btnAgregarCam.setEnabled(true);
+            btnEliminarCam.setEnabled(true);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
@@ -490,32 +501,7 @@ public class FrmVentas extends javax.swing.JPanel {
         ArrayList<Integer> camarotes = new ArrayList<Integer>();
         if (tableDetalle.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "No tiene ningun producto agregado", "Information", JOptionPane.INFORMATION_MESSAGE);
-        } /*else 
-        {
-             ventas.setSubtotal(Float.parseFloat(lblSubtotal.getText()));
-             ventas.setIsv(Float.parseFloat(lblisv.getText()));
-             ventas.setDescuento(Float.parseFloat(lblDescuento.getText()));
-             ventas.setIs_portuario(Float.parseFloat(lblPortuario.getText()));
-             ventas.setPropina(Float.parseFloat(lblPropina.getText()));
-             ventas.insertarVenta(2);
-            for(int i=0; i<=tableDetalle.getRowCount();i++)
-            {
-                ventas.codigosCamarotes(Integer.parseInt(tableDetalle.getValueAt(i, 1).toString()));
-                if(ventas.getCamarotes().size()<Integer.parseInt(tableDetalle.getValueAt(i, 1).toString()))
-                {
-                    JOptionPane.showMessageDialog(null, "No hay Suficientes para"+ventas.getTipo_camarote());
-                }
-                
-                for(int j=0; j<=i;j++)
-                {
-                    ventas.setCantidad_personas(Integer.parseInt(tableDetalle.getValueAt(j, 0).toString()));
-                    ventas.setTipo_camarote(tableDetalle.getValueAt(j, 2).toString());
-                    JOptionPane.showMessageDialog(null, " " + ventas.getCamarotes().indexOf(j));
-                    ventas.insertarDetalle(ventas.extraerCodigoVenta(), ventas.getCamarotes().indexOf(j));
-                }
-              
-            }
-        }*/ else {
+        }  else {
             for (int i = 0; i < tableDetalle.getRowCount(); i++) {
                 ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
                 camarotes.addAll(ventas.codigosCamarotes(Integer.parseInt(tableDetalle.getValueAt(i, 1).toString())));
@@ -523,12 +509,14 @@ public class FrmVentas extends javax.swing.JPanel {
 
                 if (camarotes.size() < Integer.parseInt(tableDetalle.getValueAt(i, 1).toString())) {
                     JOptionPane.showMessageDialog(null, "No hay Suficientes camarotes para  " + ventas.getTipo_camarote());
+                   
                 }
 
                 camarotes.clear();
             }
-
+            btnConfirmar.setEnabled(true);
         }
+        
     }//GEN-LAST:event_btnVerificarDisponibilidadActionPerformed
 
     
@@ -538,7 +526,7 @@ public class FrmVentas extends javax.swing.JPanel {
        
         
         ArrayList<Integer> camarotes = new ArrayList<Integer>();
-        int acumulador = 0;
+        int cantidad;
         if (tableDetalle.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "No tiene ningun producto agregado", "Information", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -556,7 +544,18 @@ public class FrmVentas extends javax.swing.JPanel {
 
                 for (int j = 0; j < Integer.parseInt(tableDetalle.getValueAt(i, 1).toString()); j++) {
                   
-                        ventas.setCantidad_personas(Integer.parseInt(JOptionPane.showInputDialog(null, "Distribucion para la " + i + " Habitacion")));
+                       
+                        do
+                        {
+                            cantidad=Integer.parseInt(JOptionPane.showInputDialog(null, "Distribucion para la "+i+" Habitacion"));
+                            ventas.setCantidad_personas(cantidad);
+                            if(cantidad<=0 || cantidad>4)
+                            {
+                                JOptionPane.showMessageDialog(null, "Minimo y maximo de personas por habitacion 4, por lo tanto ingrese un valor entre 1 y 4");
+                            }
+                        }while(cantidad<=0 || cantidad>4);
+                        
+                          
                         ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
                         JOptionPane.showMessageDialog(null, camarotes.get(j));
                         ventas.insertarDetalle(codigo_venta, camarotes.get(j));
@@ -568,6 +567,7 @@ public class FrmVentas extends javax.swing.JPanel {
 
         }
         limpiarControles();
+        
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -587,11 +587,16 @@ public class FrmVentas extends javax.swing.JPanel {
         txtIdentidad.setText(" ");
         txtCodigoViaje.setText("");
         comboboxTipo.setSelectedIndex(-1);
+        btnVerificarDisponibilidad.setEnabled(false);
+        btnConfirmar.setEnabled(false);
+        btnAgregarCam.setEnabled(false);
+        btnEliminarCam.setEnabled(false);
         modelo = (DefaultTableModel) tableDetalle.getModel();
         for(int i=0; i<tableDetalle.getRowCount(); i++)
         {
             modelo.removeRow(i);
         }
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
