@@ -42,16 +42,9 @@ public class ClsVentas extends ClsVentasMetodos{
     private static float total;
     private float desc;
     public DefaultTableModel modelo;
-   // private static ArrayList camarotes;
-    ArrayList <Integer> camarotes= new ArrayList<Integer>();
-   
-   /* public  ArrayList getCamarotes() {
-        return camarotes;
-    }
+   ArrayList <Integer> camarotes= new ArrayList<Integer>();
+   ArrayList <Integer> destinos= new ArrayList<Integer>();
 
-    public  void setCamarotes(ArrayList camarotes) {
-        ClsVentas.camarotes = camarotes;
-    }*/
 
     public  float getPropina() {
         return propina;
@@ -251,11 +244,11 @@ public class ClsVentas extends ClsVentasMetodos{
                 codigo_cliente=(rs.getInt("codigo_cliente"));
                 nombre=(rs.getString("Nombre"));
                 edad=(rs.getInt("Edad"));
-            } else 
+            }/* else 
             {
                 JOptionPane.showMessageDialog(null, "No existe el cliente en la base de datos"
                         + "", "Warning", JOptionPane.ERROR_MESSAGE);
-            }
+            }*/
             
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Surgio un error"+ex);
@@ -264,9 +257,9 @@ public class ClsVentas extends ClsVentasMetodos{
     }
      
     
-     public  void infoViaje()
+     public  int infoViaje()
     { 
-        
+        int codigo=0;
         try {
             Connection con= conexion.obtenerConexion();
             ps= con.prepareStatement("execute datosViajesVenta ?");
@@ -274,6 +267,7 @@ public class ClsVentas extends ClsVentasMetodos{
             rs= ps.executeQuery();
             if(rs.next())
             {
+                codigo=(rs.getInt("codigo_viaje"));
                 puerto_salida=(rs.getString("descripcion"));
                 fecha_salida=(rs.getDate("fecha_partida"));
                 fecha_regreso=(rs.getDate("fecha_regreso"));
@@ -281,16 +275,32 @@ public class ClsVentas extends ClsVentasMetodos{
                 cantidad_dias=(rs.getInt("CantidadDias"));
                 
             }
-            else 
-            {
-                JOptionPane.showMessageDialog(null, "No existe ese codigo de viaje en la base de datos"
-                        + "", "Warning", JOptionPane.ERROR_MESSAGE);
-            }
+          
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Surgio un error"+ex);
         }
      
-        
+        return codigo;
+    }
+     
+     public  String descripcionBuque()
+    {
+        String nombre= null;
+     
+        try {
+            Connection con= conexion.obtenerConexion();
+            ps= con.prepareStatement("  SELECT descripcion FROM [dbo].[Buques] where codigo_buque= ?");
+            ps.setInt(1,codigo_buque);
+            rs= ps.executeQuery();
+            if(rs.next())
+            {
+                nombre= (rs.getString("descripcion"));
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Surgio un error"+ex);
+        }
+      return nombre;
     }
      
      public DefaultComboBoxModel  getValues()
@@ -389,27 +399,6 @@ public class ClsVentas extends ClsVentasMetodos{
          }
          return codigoVenta;
      }
-        
-     /*public int extraerCodigoTipo(String tipo)
-     {
-         int codigo=0;
-         
-         try 
-         {
-             Connection con= conexion.obtenerConexion();
-             ps= con.prepareStatement("SELECT  codigo_tipo_camarote FROM [dbo].[Tipo_Camarote] WHERE descripcion= ?");
-             rs=ps.executeQuery();
-             if(rs.next())
-             {
-                 codigo= rs.getInt("codigo_tipo_camarote");
-             }
-         }
-         catch(SQLException ex)
-         {
-             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos", "Warning", JOptionPane.WARNING_MESSAGE);
-         }
-         return codigo;
-     }*/
      
      public ArrayList codigosCamarotes(int cantidad)
      {
@@ -472,6 +461,46 @@ public class ClsVentas extends ClsVentasMetodos{
         
      }
      
+      
+    /*  public ArrayList destinos()
+     {
+         int column=0;
+       
+        destinos.clear();
+        
+           try 
+         {
+             Connection con= conexion.obtenerConexion();
+             ps= con.prepareStatement("execute destinosViajesItem ?");
+             ps.setInt(1, codigo_viaje);
+             rs=ps.executeQuery();
+             rsmd=rs.getMetaData();
+             column= rsmd.getColumnCount();
+             while(rs.next())
+             {
+              String [] fila= new String [column]; 
+              int j=0;
+               for(int i=0; i<column;i++)
+               {
+                   fila[i]= rs.getString(i+1);    
+                 
+                     destinos.add(Integer.parseInt(fila[i]));
+               }
+                 
+               /* destinos.add((fila[j]));
+                j++;
+                
+             }
+         
+             
+         }
+         catch(SQLException ex)
+         {
+             JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos", "Warning", JOptionPane.WARNING_MESSAGE);
+         }
+            return destinos;
+     }*/
+      
      public void eliminarVenta()
      {
          try 
@@ -488,11 +517,11 @@ public class ClsVentas extends ClsVentasMetodos{
          }
      }
      
-     public void cargarDatosVentas ()
+     /*public void cargarDatosVentas ()
      {
          int columnas;
         
-      /*  modelo.setRowCount(0);*/
+        modelo.setRowCount(0);
         try 
          {
              Connection con= conexion.obtenerConexion();
@@ -515,7 +544,7 @@ public class ClsVentas extends ClsVentasMetodos{
               JOptionPane.showMessageDialog(null, "Ocurrio un error al extraer los datos"+ex, "Warning", JOptionPane.WARNING_MESSAGE);
          }
       
-     }
+     }*/
     @Override
      public float calculoDescuento()
      {

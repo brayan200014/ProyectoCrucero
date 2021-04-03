@@ -28,6 +28,7 @@ public class FrmVentas extends javax.swing.JPanel {
     ClsConexion conexion = new ClsConexion();
     ClsVentas ventas = new ClsVentas();
     DefaultTableModel modelo;
+   
 
     float subtotal;
 
@@ -71,6 +72,7 @@ public class FrmVentas extends javax.swing.JPanel {
         btnEliminarCam = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableDetalle = new javax.swing.JTable();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -128,27 +130,35 @@ public class FrmVentas extends javax.swing.JPanel {
         add(txtCodigoViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 24, 280, -1));
 
         jPanel1.setBackground(new java.awt.Color(38, 151, 186));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel4.setText("Cantidad de Camarotes:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 11, -1, -1));
 
         spinCantidadCam.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spinCantidadCam.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
+        jPanel1.add(spinCantidadCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 45, 284, 27));
 
         spinCantidadPer.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spinCantidadPer.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 4));
+        jPanel1.add(spinCantidadPer, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 123, 284, 27));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setText("Cantidad de Personas:");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 94, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel6.setText("Tipo de Camarote:");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 11, -1, -1));
 
         comboboxTipo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         comboboxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jPanel1.add(comboboxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 47, 223, -1));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setText("Camarotes Seleccionados:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 81, -1, -1));
 
         btnAgregarCam.setBackground(new java.awt.Color(12, 69, 104));
         btnAgregarCam.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
@@ -160,6 +170,7 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnAgregarCamActionPerformed(evt);
             }
         });
+        jPanel1.add(btnAgregarCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(656, 49, -1, -1));
 
         btnEliminarCam.setBackground(new java.awt.Color(12, 69, 104));
         btnEliminarCam.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
@@ -171,6 +182,7 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnEliminarCamActionPerformed(evt);
             }
         });
+        jPanel1.add(btnEliminarCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 49, -1, -1));
 
         tableDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,60 +210,8 @@ public class FrmVentas extends javax.swing.JPanel {
         tableDetalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableDetalle);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addComponent(spinCantidadPer, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(spinCantidadCam, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(comboboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAgregarCam)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnEliminarCam))
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel6))
-                .addGap(48, 48, 48))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
-                .addGap(11, 11, 11)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(spinCantidadCam, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnAgregarCam)
-                            .addComponent(btnEliminarCam)
-                            .addComponent(comboboxTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel5)
-                        .addGap(6, 6, 6)
-                        .addComponent(spinCantidadPer, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 110, 420, 90));
+        jPanel1.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, -1, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 870, 210));
 
@@ -312,7 +272,7 @@ public class FrmVentas extends javax.swing.JPanel {
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblNombre.setText("-");
-        jPanel2.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 0, 180, -1));
+        jPanel2.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 0, 240, -1));
 
         lblDescuento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDescuento.setText("0.00");
@@ -332,7 +292,7 @@ public class FrmVentas extends javax.swing.JPanel {
 
         lblEmpleado.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblEmpleado.setText("-");
-        jPanel2.add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 41, 180, -1));
+        jPanel2.add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 41, 250, -1));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel12.setText("Propina:");
@@ -392,13 +352,26 @@ public class FrmVentas extends javax.swing.JPanel {
         // TODO add your handling code here:
         String identidad = txtIdentidad.getText();
         String codigo = txtCodigoViaje.getText();
+        int cod= Integer.parseInt(txtCodigoViaje.getText());
+        ventas.setIdentidad(identidad);
+        ventas.setCodigo_viaje(cod);
         if (identidad.isEmpty() || codigo.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Faltan Datos Por Ingresar"
                     + "", "Warning", JOptionPane.ERROR_MESSAGE);
         } else if (identidad.length() < 13 || identidad.length() > 13) {
             JOptionPane.showMessageDialog(null, "La identidad debe contener 13 caracteres"
                     + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else {
+        } else if(ventas.nombreCliente()== null)
+        {
+             JOptionPane.showMessageDialog(null, "El cliente no existe en la base de datos"
+                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(ventas.infoViaje()==0)
+        { JOptionPane.showMessageDialog(null, "Codigo de viaje ingresado es incorrecto"
+                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else {
             ventas.setIdentidad(txtIdentidad.getText());
             ventas.setCodigo_viaje(Integer.parseInt(txtCodigoViaje.getText()));
             ventas.infoViaje();
@@ -500,7 +473,7 @@ public class FrmVentas extends javax.swing.JPanel {
         // TODO add your handling code here:
         ArrayList<Integer> camarotes = new ArrayList<Integer>();
         if (tableDetalle.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "No tiene ningun producto agregado", "Information", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No tiene ningun camarote agregado", "Information", JOptionPane.INFORMATION_MESSAGE);
         }  else {
             for (int i = 0; i < tableDetalle.getRowCount(); i++) {
                 ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
@@ -508,7 +481,7 @@ public class FrmVentas extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, camarotes);
 
                 if (camarotes.size() < Integer.parseInt(tableDetalle.getValueAt(i, 1).toString())) {
-                    JOptionPane.showMessageDialog(null, "No hay Suficientes camarotes para  " + ventas.getTipo_camarote());
+                    JOptionPane.showMessageDialog(null, "No hay Suficientes camarotes para  " + ventas.getTipo_camarote()+"  Eliminar de la lista");
                    
                 }
 
@@ -537,6 +510,7 @@ public class FrmVentas extends javax.swing.JPanel {
             ventas.setPropina(Float.parseFloat(lblPropina.getText()));
             ventas.insertarVenta(2);
             int codigo_venta= ventas.extraerCodigoVenta();
+            
             for (int i = 0; i < tableDetalle.getRowCount(); i++) {
             
                 ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
@@ -566,7 +540,10 @@ public class FrmVentas extends javax.swing.JPanel {
             }
 
         }
-        limpiarControles();
+       
+         FrmFactura factura= new FrmFactura(lblNombre.getText(), lblEmpleado.getText());
+         factura.setVisible(true);
+         limpiarControles();
         
         
     }//GEN-LAST:event_btnConfirmarActionPerformed
@@ -627,6 +604,7 @@ public class FrmVentas extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblDescuento;
     private javax.swing.JLabel lblEmpleado;
     private javax.swing.JLabel lblNombre;

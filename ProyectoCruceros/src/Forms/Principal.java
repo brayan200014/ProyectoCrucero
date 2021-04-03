@@ -26,6 +26,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     FrmVentas ventas= new FrmVentas();
     FrmViajes viajes= new FrmViajes();
     FrmDestinos destinos= new FrmDestinos();
+    FrmListadoVentas listadoVentas= new FrmListadoVentas();
     
     public Principal() {
         initComponents();
