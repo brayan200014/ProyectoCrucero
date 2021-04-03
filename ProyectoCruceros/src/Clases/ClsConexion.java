@@ -9,7 +9,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *e
  * @author BRAYAN HERNADEZ
  */
 public class ClsConexion {
@@ -35,16 +35,21 @@ public class ClsConexion {
         
         try
         {
+<<<<<<< HEAD
 
             conn = DriverManager.getConnection(url, "sa", "123456");
              //JOptionPane.showMessageDialog(null,"Conexion con exito");
 
             //JOptionPane.showMessageDialog(null,"Conexion con exito");
 
+=======
+            conn = DriverManager.getConnection(url, "sa", "123456");
+            //JOptionPane.showMessageDialog(null,"Conexion con exito");
+>>>>>>> Origin/empleados
         }
         catch(Exception ex)
         {
-             JOptionPane.showMessageDialog(null,"Error de conexion");
+             JOptionPane.showMessageDialog(null,"Error de conexion"+ex);
         }
         
         return conn;
