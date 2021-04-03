@@ -115,21 +115,16 @@ public class FrmDestinos extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(900, 405));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel1.setText("Puerto de Destino: ");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel2.setText("Estado: ");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, -1, -1));
 
         txtPuertoDestino.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        add(txtPuertoDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 150, -1));
 
         txtIdDestino.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        add(txtIdDestino, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 150, -1));
 
         btnIngresar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnIngresar.setText("Ingresar");
@@ -139,7 +134,6 @@ public class FrmDestinos extends javax.swing.JPanel {
                 btnIngresarActionPerformed(evt);
             }
         });
-        add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, -1, -1));
 
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnEditar.setText("Editar");
@@ -150,7 +144,6 @@ public class FrmDestinos extends javax.swing.JPanel {
                 btnEditarActionPerformed(evt);
             }
         });
-        add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 400, -1, -1));
 
         btnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnLimpiar.setText("Limpiar");
@@ -160,13 +153,11 @@ public class FrmDestinos extends javax.swing.JPanel {
                 btnLimpiarActionPerformed(evt);
             }
         });
-        add(btnLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, -1, -1));
 
         btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnEliminar.setText("Eliminar");
         btnEliminar.setMinimumSize(new java.awt.Dimension(95, 25));
         btnEliminar.setPreferredSize(new java.awt.Dimension(95, 25));
-        add(btnEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 400, -1, -1));
 
         tblPuertos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -198,19 +189,74 @@ public class FrmDestinos extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblPuertos);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 500, 230));
-
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         jLabel4.setText("ID Destino: ");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
 
         bgEstadoPuerto.add(rbActivo);
         rbActivo.setText("Activo");
-        add(rbActivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
 
         bgEstadoPuerto.add(rbInactivo);
         rbInactivo.setText("Inactivo");
-        add(rbInactivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtPuertoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(txtIdDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(rbActivo)
+                                .addGap(15, 15, 15)
+                                .addComponent(rbInactivo)))
+                        .addGap(110, 110, 110)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(111, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(14, 14, 14)
+                        .addComponent(txtPuertoDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addGap(14, 14, 14)
+                        .addComponent(txtIdDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(rbActivo)
+                            .addComponent(rbInactivo)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(70, 70, 70)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
