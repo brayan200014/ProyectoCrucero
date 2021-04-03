@@ -207,7 +207,7 @@ public class FrmViajes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Destino", "Puerto", "Fecha de llegada", "Fecha de partida"
+                "Destino", "ID Puerto", "Fecha de llegada", "Fecha de partida"
             }
         ) {
             Class[] types = new Class [] {
@@ -228,7 +228,6 @@ public class FrmViajes extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tblDestinos);
 
         cbPuertoDestino.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        cbPuertoDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel7.setText("Puerto del destino:");
@@ -370,51 +369,81 @@ public class FrmViajes extends javax.swing.JPanel {
     private void btnAgregarDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDestinoActionPerformed
         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         
-        int[] anchos = {50, 20, 50, 50};
-        for (int i = 0; i < tblDestinos.getColumnCount(); i++) {
-            tblDestinos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        if(cbDestinoTuristico.getSelectedIndex() < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione un Destino");
         }
-        
-        DefaultTableModel modelo=(DefaultTableModel) tblDestinos.getModel(); 
- 
-        Object [] fila=new Object[4]; 
- 
-        fila[0]=cbDestinoTuristico.getSelectedItem().toString();
-        fila[1]=viaje.codigoPuerto(cbPuertoDestino.getSelectedItem().toString());
-        fila[2]=df.format(jdcFechaLlegada.getDate());
-        fila[3]=df.format(jdcFechaPartida.getDate());
- 
-        modelo.addRow(fila); 
-  
-        tblDestinos.setModel(modelo);
-        
-        cbDestinoTuristico.setSelectedIndex(-1);
-        cbPuertoDestino.setSelectedIndex(-1);
-        jdcFechaLlegada.setDate(null);
-        jdcFechaPartida.setDate(null);
+        else{
+            if(jdcFechaLlegada.getDate() == null || jdcFechaPartida.getDate() == null){
+                JOptionPane.showMessageDialog(null, "Ingrese el intinerario del destino");
+            }
+            else{
+                int[] anchos = {50, 20, 50, 50};
+                for (int i = 0; i < tblDestinos.getColumnCount(); i++) {
+                    tblDestinos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+                }
+
+                DefaultTableModel modelo=(DefaultTableModel) tblDestinos.getModel(); 
+
+                Object [] fila=new Object[4]; 
+
+                fila[0]=cbDestinoTuristico.getSelectedItem().toString();
+                fila[1]=viaje.codigoPuerto(cbPuertoDestino.getSelectedItem().toString());
+                fila[2]=df.format(jdcFechaLlegada.getDate());
+                fila[3]=df.format(jdcFechaPartida.getDate());
+
+                modelo.addRow(fila); 
+
+                tblDestinos.setModel(modelo);
+
+                cbDestinoTuristico.setSelectedIndex(-1);
+                cbPuertoDestino.setSelectedIndex(-1);
+                jdcFechaLlegada.setDate(null);
+                jdcFechaPartida.setDate(null);
+            }
+        }
     }//GEN-LAST:event_btnAgregarDestinoActionPerformed
 
     //Elimina el destino seleccionado de la tabla
     private void btnEliminarDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarDestinoActionPerformed
-        int fila = tblDestinos.getSelectedRow();
+        if(tblDestinos.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione el destino a eliminar");
+        }
+        else{
+            int fila = tblDestinos.getSelectedRow();
         
-        DefaultTableModel modelo = (DefaultTableModel)tblDestinos.getModel();
-        modelo.removeRow(fila);
+            DefaultTableModel modelo = (DefaultTableModel)tblDestinos.getModel();
+            modelo.removeRow(fila);
+        }
     }//GEN-LAST:event_btnEliminarDestinoActionPerformed
 
     //Guardar  los datos e ingresa el viaje a la base de datos
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
         
-        if (txtNombre.getText() == null) {
+        if (txtNombre.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Ingrese una descripcion");
         }
         else{
-            guardarDatos();
-            viaje.ingresarViaje();
-            ingresarDestinos();
-            limpiar();
-            cargarTablaViajes();
+            if(jdcFechaRegreso.getDate() == null || jdcFechaSalida.getDate() == null){
+                JOptionPane.showMessageDialog(null, "Ingrese las fechas");
+            }
+            else{
+                if(cbPuerto.getSelectedIndex() < 0){
+                    JOptionPane.showMessageDialog(null, "Seleccione un puerto");
+                }
+                else{
+                    if(cbBuque.getSelectedIndex() < 0){
+                        JOptionPane.showMessageDialog(null, "Seleccione un buque");
+                    }
+                    else{
+                        guardarDatos();
+                        viaje.ingresarViaje();
+                        ingresarDestinos();
+                        limpiar();
+                        cargarTablaViajes();
+                    }
+                }
+            }
             
         }
         
@@ -422,35 +451,64 @@ public class FrmViajes extends javax.swing.JPanel {
 
     //Extrae los datos de la base de datos del viaje seleccionado
     private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
-        
-        int fila = tblViajes.getSelectedRow();
-        int codigo = Integer.parseInt(tblViajes.getValueAt(fila, 0).toString());
-        
-        viaje.consultarViaje(codigo);
-        cargarTablaDestino(codigo);
-        
-        txtNombre.setText(viaje.getDescripcion());
-        jdcFechaSalida.setDate(Date.valueOf(viaje.getFechaSalida()));
-        jdcFechaRegreso.setDate(Date.valueOf(viaje.getFechaRegreso()));
-        cbBuque.setSelectedItem(viaje.getDescripBuque());
-        cbPuerto.setSelectedItem(viaje.getDescripPuerto());
+        if(tblViajes.getSelectedRow() < 0){
+            JOptionPane.showMessageDialog(null, "Seleccione el viaje a consultar");
+        }
+        else{
+            int fila = tblViajes.getSelectedRow();
+            int codigo = Integer.parseInt(tblViajes.getValueAt(fila, 0).toString());
+
+            viaje.consultarViaje(codigo);
+            cargarTablaDestino(codigo);
+
+            txtNombre.setText(viaje.getDescripcion());
+            jdcFechaSalida.setDate(Date.valueOf(viaje.getFechaSalida()));
+            jdcFechaRegreso.setDate(Date.valueOf(viaje.getFechaRegreso()));
+            cbBuque.setSelectedItem(viaje.getDescripBuque());
+            cbPuerto.setSelectedItem(viaje.getDescripPuerto());
+        }
         
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        
-        guardarDatos();
-        viaje.actualizarViaje();
-        viaje.eliminarDestinos();
-        
-        for (int i = 0; i < tblDestinos.getRowCount(); i++) {
-            viaje.actualizarDestinos(Integer.parseInt(tblDestinos.getValueAt(i,1).toString()), 
-                tblDestinos.getValueAt(i, 2).toString() , tblDestinos.getValueAt(i, 3).toString());
+        if(viaje.getCodigoViaje() < 1){
+            JOptionPane.showMessageDialog(null, "Debe consultar el viaje a modificar");
         }
-        
-        limpiar();
-        cargarTablaViajes();
-        
+        else{
+            if (txtNombre.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Ingrese una descripcion");
+            }
+            else{
+                if(jdcFechaRegreso.getDate() == null || jdcFechaSalida.getDate() == null){
+                    JOptionPane.showMessageDialog(null, "Ingrese las fechas");
+                }
+                else{
+                    if(cbPuerto.getSelectedIndex() < 0){
+                        JOptionPane.showMessageDialog(null, "Seleccione un puerto");
+                    }
+                    else{
+                        if(cbBuque.getSelectedIndex() < 0){
+                            JOptionPane.showMessageDialog(null, "Seleccione un buque");
+                        }
+                        else{
+                            guardarDatos();
+                            viaje.actualizarViaje();
+                            viaje.eliminarDestinos();
+
+                            for (int i = 0; i < tblDestinos.getRowCount(); i++) {
+                                viaje.actualizarDestinos(Integer.parseInt(tblDestinos.getValueAt(i,1).toString()), 
+                                    tblDestinos.getValueAt(i, 2).toString() , tblDestinos.getValueAt(i, 3).toString());
+                            }
+
+                            limpiar();
+                            viaje.setCodigoViaje(0);
+                            cargarTablaViajes();
+                        }
+                    }
+                }
+
+            }
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void cbDestinoTuristicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDestinoTuristicoItemStateChanged
