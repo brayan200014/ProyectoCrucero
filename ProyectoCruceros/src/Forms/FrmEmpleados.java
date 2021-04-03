@@ -14,7 +14,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
     Connection con = ClsConexion.obtenerConexion();
     ClsEmpleados emp = new ClsEmpleados();
     ClsEmpleadosMetodos empmetodos = new ClsEmpleadosMetodos();
-    SimpleDateFormat dFormat = new SimpleDateFormat("yy-MM-dd");
+    SimpleDateFormat dFormat = new SimpleDateFormat("yyyy/MM/dd");
     int seleccion;
 
     PreparedStatement ps;
@@ -323,7 +323,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
         add(btnEliminar);
         btnEliminar.setBounds(650, 400, 160, 40);
 
-        jcnacimiento.setDateFormatString("y MMM d");
+        jcnacimiento.setDateFormatString("yyyy/MM/dd");
         jcnacimiento.setMaxSelectableDate(new java.util.Date(1262329281000L));
         jcnacimiento.setMinSelectableDate(new java.util.Date(-631126705000L));
         add(jcnacimiento);
@@ -350,10 +350,16 @@ public class FrmEmpleados extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
+        if(rbm.isSelected() == false
+                && rbm.isSelected() == false )
+        {
+             JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        else if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
                 || txttelefono.getText().equals("") || txtcorreo.getText().equals("") || txtdireccion.getText().equals("")
-                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || rbm.isSelected() == false
-                || rbm.isSelected() == false || jcnacimiento.getDate() == null) {
+                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || jcnacimiento.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
                     "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -433,10 +439,17 @@ public class FrmEmpleados extends javax.swing.JPanel {
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
+         if(rbm.isSelected() == false
+                && rbm.isSelected() == false )
+        {
+             JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        else 
         if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
                 || txttelefono.getText().equals("") || txtcorreo.getText().equals("") || txtdireccion.getText().equals("")
-                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || rbm.isSelected() == false
-                || rbm.isSelected() == false || jcnacimiento.getDate() == null) {
+                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || jcnacimiento.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
                     "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {

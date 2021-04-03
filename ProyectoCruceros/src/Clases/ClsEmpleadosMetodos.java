@@ -15,7 +15,7 @@ public class ClsEmpleadosMetodos extends ClsEmpleados{
         try {
             ps = con.prepareStatement("INSERT INTO Empleados "
                     + "(nombre, apellido, fecha_nacimiento, identidad, sexo, telefono, correo_electronico, "
-                    + "direccion, codigo_puesto, estado, nacionalidad) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+                    + "direccion, codigo_puesto, estado, nacionalidad) VALUES(?,?,TRY_CONVERT(DATETIME, ?),?,?,?,?,?,?,?,?)");
             ps.setString(1, nombre);
             ps.setString(2, apellido);
             ps.setString(3, nacimiento);
@@ -39,7 +39,7 @@ public class ClsEmpleadosMetodos extends ClsEmpleados{
     public void Actualizar(){
         try {       
             ps = con.prepareStatement("UPDATE Empleados SET nombre=?, "
-                    + "apellido=?, fecha_nacimiento=?, identidad=?, sexo=?, telefono=?, "
+                    + "apellido=?, fecha_nacimiento=TRY_CONVERT(DATETIME, ?), identidad=?, sexo=?, telefono=?, "
                     + "correo_electronico=?,direccion=?, codigo_puesto=?, nacionalidad=? WHERE codigo_empleado=?");
             ps.setString(1, nombre);
             ps.setString(2, apellido);

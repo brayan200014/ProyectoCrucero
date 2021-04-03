@@ -35,17 +35,15 @@ public class ClsConexion {
         
         try
         {
-<<<<<<< HEAD
 
-            conn = DriverManager.getConnection(url, "sa", "123456");
              //JOptionPane.showMessageDialog(null,"Conexion con exito");
 
             //JOptionPane.showMessageDialog(null,"Conexion con exito");
 
-=======
+
             conn = DriverManager.getConnection(url, "sa", "123456");
             //JOptionPane.showMessageDialog(null,"Conexion con exito");
->>>>>>> Origin/empleados
+
         }
         catch(Exception ex)
         {
