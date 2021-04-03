@@ -220,7 +220,7 @@ public class FrmUsuarios extends javax.swing.JPanel {
             int estado = 1;
             usu.setIdEmpleado(Integer.parseInt(txtidemp.getText()));
             usu.setNombreUsuario(txtnombreUsuario.getText());
-            usu.setContrasena(txtidemp.getText());
+            usu.setContrasena(txtcontra.getText());
             usu.setEstado(estado);
 
             usumet.Insertar();
@@ -271,7 +271,7 @@ public class FrmUsuarios extends javax.swing.JPanel {
 
             usu.setId(id);
             usu.setNombreUsuario(txtnombreUsuario.getText());
-            usu.setContrasena(txtidemp.getText());
+            usu.setContrasena(txtcontra.getText());
 
             usumet.Actualizar();
             limpiar();

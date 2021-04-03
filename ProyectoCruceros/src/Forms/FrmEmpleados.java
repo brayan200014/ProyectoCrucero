@@ -14,7 +14,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
     Connection con = ClsConexion.obtenerConexion();
     ClsEmpleados emp = new ClsEmpleados();
     ClsEmpleadosMetodos empmetodos = new ClsEmpleadosMetodos();
-    SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yy");
+    SimpleDateFormat dFormat = new SimpleDateFormat("yy-MM-dd");
     int seleccion;
 
     PreparedStatement ps;
@@ -323,6 +323,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
         add(btnEliminar);
         btnEliminar.setBounds(650, 400, 160, 40);
 
+        jcnacimiento.setDateFormatString("y MMM d");
         jcnacimiento.setMaxSelectableDate(new java.util.Date(1262329281000L));
         jcnacimiento.setMinSelectableDate(new java.util.Date(-631126705000L));
         add(jcnacimiento);
