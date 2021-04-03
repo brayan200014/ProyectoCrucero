@@ -29,7 +29,7 @@ public class FrmVentas extends javax.swing.JPanel {
     ClsVentas ventas = new ClsVentas();
     DefaultTableModel modelo;
    
-
+/*Comentario*/
     float subtotal;
 
     public FrmVentas() {
