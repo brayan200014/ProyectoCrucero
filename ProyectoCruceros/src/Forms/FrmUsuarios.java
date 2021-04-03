@@ -157,7 +157,7 @@ public class FrmUsuarios extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblUsuarios);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(458, 107, 419, 195);
+        jScrollPane1.setBounds(428, 107, 470, 195);
 
         txtidemp.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtidemp.addActionListener(new java.awt.event.ActionListener() {

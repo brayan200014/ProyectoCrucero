@@ -350,10 +350,12 @@ public class FrmEmpleados extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
+        if (rbm.isSelected() == false && rbm.isSelected() == false) {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+        } else if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
                 || txttelefono.getText().equals("") || txtcorreo.getText().equals("") || txtdireccion.getText().equals("")
-                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || rbm.isSelected() == false
-                || rbm.isSelected() == false || jcnacimiento.getDate() == null) {
+                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || jcnacimiento.getDate() == null) {
             JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
                     "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
@@ -432,7 +434,10 @@ public class FrmEmpleados extends javax.swing.JPanel {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-
+        if (rbm.isSelected() == false && rbm.isSelected() == false) {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
         if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
                 || txttelefono.getText().equals("") || txtcorreo.getText().equals("") || txtdireccion.getText().equals("")
                 || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || rbm.isSelected() == false
@@ -473,9 +478,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
             btnAgregar.setEnabled(true);
             btnEliminar.setEnabled(false);
             seleccion = 0;
-
         }
-
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
