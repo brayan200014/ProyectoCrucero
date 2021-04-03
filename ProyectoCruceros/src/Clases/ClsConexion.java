@@ -33,13 +33,10 @@ public class ClsConexion {
         
         try
         {
-<<<<<<< HEAD
-            conn = DriverManager.getConnection(url, "sa", "1234");
-             JOptionPane.showMessageDialog(null,"Conexion con exito");
-=======
-            conn = DriverManager.getConnection(url, "sa", "semeolvido");
-             
->>>>>>> origin/RamaVentasBrayan
+
+            conn = DriverManager.getConnection(url, "sa", "123456");
+           
+
         }
         catch(Exception ex)
         {
