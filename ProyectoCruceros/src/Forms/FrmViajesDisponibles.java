@@ -5,6 +5,11 @@
  */
 package Forms;
 
+import Clases.ClsConexion;
+import javax.swing.table.DefaultTableModel;
+import java.sql.*;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author BRAYAN HERNADEZ
@@ -16,6 +21,7 @@ public class FrmViajesDisponibles extends javax.swing.JPanel {
      */
     public FrmViajesDisponibles() {
         initComponents();
+        cargarTablaViajes();
     }
 
     /**
@@ -27,22 +33,163 @@ public class FrmViajesDisponibles extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtBuscador = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblViajesDisponibles = new javax.swing.JTable();
+        btnSeleccionar = new javax.swing.JButton();
+        btnBuscar2 = new javax.swing.JButton();
+
         setBackground(new java.awt.Color(96, 203, 249));
-        setPreferredSize(new java.awt.Dimension(870, 390));
+        setPreferredSize(new java.awt.Dimension(920, 460));
+
+        txtBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscadorKeyPressed(evt);
+            }
+        });
+
+        tblViajesDisponibles.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo", "Descripción", "Buque", "Puerto de salida", "Fecha de salida", "Fecha de llegada"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblViajesDisponibles);
+
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
+        btnBuscar2.setBackground(new java.awt.Color(96, 203, 249));
+        btnBuscar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Vector (1).png"))); // NOI18N
+        btnBuscar2.setBorderPainted(false);
+        btnBuscar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 869, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(136, 136, 136)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 666, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 391, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBuscar2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 263, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cargarTablaViajes(){
+        DefaultTableModel modeloTabla = (DefaultTableModel) tblViajesDisponibles.getModel();
+        
+        modeloTabla.setRowCount(0);
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        ResultSetMetaData rsmd;
+        int columnas;
+        String parametro = "%"+txtBuscador.getText()+"%";
+        
+        int[] anchos = {10, 75, 75, 75, 75,75};
+        for (int i = 0; i < tblViajesDisponibles.getColumnCount(); i++) {
+            tblViajesDisponibles.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        }
+        
+        try{
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("SELECT codigo_viaje,v.descripcion, b.descripcion, p.descripcion ,fecha_partida,fecha_regreso \n" +
+                                        "FROM [dbo].[Viajes] v join [dbo].[Buques] b\n" +
+                                        "on v.codigo_buque = b.codigo_buque \n" +
+                                        "join [dbo].[Puertos-Destinos] p\n" +
+                                        "on v.codigo_puerto = p.codigo_puerto\n" +
+                                        "WHERE v.descripcion LIKE ? AND fecha_partida > GETDATE()");
+            
+            ps.setString(1, parametro);
+            rs = ps.executeQuery();
+            rsmd = rs.getMetaData();
+            columnas = rsmd.getColumnCount();
+            
+            while(rs.next()){
+                Object[] fila = new Object[columnas];
+                
+                for (int i = 0; i < columnas; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                
+                modeloTabla.addRow(fila);
+            }
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+    }
+    
+    private void txtBuscadorKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorKeyPressed
+
+        cargarTablaViajes();
+
+    }//GEN-LAST:event_txtBuscadorKeyPressed
+
+    private void btnBuscar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar2ActionPerformed
+
+        cargarTablaViajes();
+
+    }//GEN-LAST:event_btnBuscar2ActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscar1;
+    private javax.swing.JButton btnBuscar2;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblViajesDisponibles;
+    private javax.swing.JTextField txtBuscador;
     // End of variables declaration//GEN-END:variables
 }
