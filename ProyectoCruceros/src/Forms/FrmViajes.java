@@ -30,7 +30,7 @@ public class FrmViajes extends javax.swing.JPanel {
         cbPuerto.setModel(viaje.getvaluesPuertos());//Llena el comboBox de puertos
         cbBuque.setModel(viaje.getvaluesBuques());//Llena el comboBox de Buques
         cbDestinoTuristico.setModel(viaje.getvaluesDestinos());//Llena el comboBox de destinos
-        cbPuertoDestino.setModel(viaje.getvaluesPuertos());//Llena el comboBox de puerto del destino
+        //cbPuertoDestino.setModel(viaje.getvaluesPuertos());//Llena el comboBox de puerto del destino
         
         /*Establece los comboBox en -1 para que no este seleccionado ninguno
         al momento de iniciar el jpanel
@@ -208,14 +208,14 @@ public class FrmViajes extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Destino", "Puerto", "Fecha de llegada", "Fecha de partida"
+                "Destino", "Puerto", "Fecha de llegada", "Fecha de partida"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -371,25 +371,28 @@ public class FrmViajes extends javax.swing.JPanel {
     private void btnAgregarDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarDestinoActionPerformed
         SimpleDateFormat df = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
         
-        int[] anchos = {10, 50, 20, 50, 50};
+        int[] anchos = {50, 20, 50, 50};
         for (int i = 0; i < tblDestinos.getColumnCount(); i++) {
             tblDestinos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
         
         DefaultTableModel modelo=(DefaultTableModel) tblDestinos.getModel(); 
  
-        Object [] fila=new Object[5]; 
+        Object [] fila=new Object[4]; 
  
-        fila[0]=cbDestinoTuristico.getSelectedIndex() + 1;
-        fila[1]= cbDestinoTuristico.getSelectedItem();
-        fila[2]=cbPuertoDestino.getSelectedIndex() + 1;
-        fila[3]=df.format(jdcFechaLlegada.getDate());
-        fila[4]=df.format(jdcFechaPartida.getDate());
+        fila[0]=cbDestinoTuristico.getSelectedItem().toString();
+        fila[1]=viaje.codigoPuerto(cbPuertoDestino.getSelectedItem().toString());
+        fila[2]=df.format(jdcFechaLlegada.getDate());
+        fila[3]=df.format(jdcFechaPartida.getDate());
  
         modelo.addRow(fila); 
   
         tblDestinos.setModel(modelo);
         
+        cbDestinoTuristico.setSelectedIndex(-1);
+        cbPuertoDestino.setSelectedIndex(-1);
+        jdcFechaLlegada.setDate(null);
+        jdcFechaPartida.setDate(null);
     }//GEN-LAST:event_btnAgregarDestinoActionPerformed
 
     //Elimina el destino seleccionado de la tabla
@@ -402,12 +405,19 @@ public class FrmViajes extends javax.swing.JPanel {
 
     //Guardar  los datos e ingresa el viaje a la base de datos
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+
         
-        guardarDatos();
-        viaje.ingresarViaje();
-        ingresarDestinos();
-        limpiar();
-        cargarTablaViajes();
+        if (txtNombre.getText() == null) {
+            JOptionPane.showMessageDialog(null, "Ingrese una descripcion");
+        }
+        else{
+            guardarDatos();
+            viaje.ingresarViaje();
+            ingresarDestinos();
+            limpiar();
+            cargarTablaViajes();
+            
+        }
         
     }//GEN-LAST:event_btnAgregarActionPerformed
 
@@ -423,8 +433,8 @@ public class FrmViajes extends javax.swing.JPanel {
         txtNombre.setText(viaje.getDescripcion());
         jdcFechaSalida.setDate(Date.valueOf(viaje.getFechaSalida()));
         jdcFechaRegreso.setDate(Date.valueOf(viaje.getFechaRegreso()));
-        cbBuque.setSelectedIndex(viaje.getCodigoBuque() - 1);
-        cbPuerto.setSelectedIndex(viaje.getCodigoPuerto() - 1);
+        cbBuque.setSelectedItem(viaje.getDescripBuque());
+        cbPuerto.setSelectedItem(viaje.getDescripPuerto());
         
     }//GEN-LAST:event_btnConsultarActionPerformed
 
@@ -435,8 +445,8 @@ public class FrmViajes extends javax.swing.JPanel {
         viaje.eliminarDestinos();
         
         for (int i = 0; i < tblDestinos.getRowCount(); i++) {
-            viaje.actualizarDestinos(Integer.parseInt(tblDestinos.getValueAt(i,2).toString()), 
-                tblDestinos.getValueAt(i, 3).toString() , tblDestinos.getValueAt(i, 4).toString());
+            viaje.actualizarDestinos(Integer.parseInt(tblDestinos.getValueAt(i,1).toString()), 
+                tblDestinos.getValueAt(i, 2).toString() , tblDestinos.getValueAt(i, 3).toString());
         }
         
         limpiar();
@@ -446,10 +456,15 @@ public class FrmViajes extends javax.swing.JPanel {
 
     private void cbDestinoTuristicoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbDestinoTuristicoItemStateChanged
         
+        if(cbDestinoTuristico.getSelectedIndex() > -1){
+            cbPuertoDestino.setModel(viaje.getvaluesPuertos(viaje.codigoDestino(cbDestinoTuristico.getSelectedItem().toString())));
+        }
+        
     }//GEN-LAST:event_cbDestinoTuristicoItemStateChanged
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiar();
+        viaje.setCodigoViaje(0);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Llena la tabla de viajes con los viajes existentes
@@ -507,7 +522,7 @@ public class FrmViajes extends javax.swing.JPanel {
         ResultSetMetaData rsmd;
         int columnas;
         
-        int[] anchos = {10, 50, 20, 50, 50};
+        int[] anchos = {50, 20, 50, 50};
         for (int i = 0; i < tblDestinos.getColumnCount(); i++) {
             tblDestinos.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
@@ -516,7 +531,7 @@ public class FrmViajes extends javax.swing.JPanel {
         try{
             Connection con = ClsConexion.obtenerConexion();
             
-            ps = con.prepareStatement("Select pd.codigo_destino, dt.descripcion, dd.codigo_puerto, dd.fecha_llegada, dd.fecha_salida\n" +
+            ps = con.prepareStatement("Select dt.descripcion, dd.codigo_puerto, dd.fecha_llegada, dd.fecha_salida\n" +
                                         "From [dbo].[Detalle_destinos] dd join [dbo].[Puertos-Destinos] pd\n" +
                                         "on dd.codigo_puerto = pd.codigo_puerto\n" +
                                         "join [dbo].[Destinos_Turisticos] dt\n" +
@@ -549,8 +564,8 @@ public class FrmViajes extends javax.swing.JPanel {
         
         viaje.setFechaSalida(df.format(jdcFechaSalida.getDate()));
         viaje.setFechaRegreso(df.format(jdcFechaRegreso.getDate()));
-        viaje.setCodigoBuque(cbBuque.getSelectedIndex() + 1);
-        viaje.setCodigoPuerto(cbPuerto.getSelectedIndex() + 1);
+        viaje.setCodigoBuque(viaje.codigoBuque(cbBuque.getSelectedItem().toString()));
+        viaje.setCodigoPuerto(viaje.codigoPuerto(cbPuerto.getSelectedItem().toString()));
         viaje.setDescripcion(txtNombre.getText());
     }
     
@@ -558,8 +573,8 @@ public class FrmViajes extends javax.swing.JPanel {
     private void ingresarDestinos(){
         
         for (int i = 0; i < tblDestinos.getRowCount(); i++) {
-            viaje.ingresarDestino(Integer.parseInt(tblDestinos.getValueAt(i,2).toString()), 
-                tblDestinos.getValueAt(i, 3).toString() , tblDestinos.getValueAt(i, 4).toString());
+            viaje.ingresarDestino(Integer.parseInt(tblDestinos.getValueAt(i,1).toString()), 
+                tblDestinos.getValueAt(i, 2).toString() , tblDestinos.getValueAt(i, 3).toString());
         }
         
     }

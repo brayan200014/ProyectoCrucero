@@ -20,7 +20,9 @@ public class ClsViajes {
     private String descripcion;
     private int codigoViaje;
     private int codigoBuque; //Codigo del buque asignado para el viaje
+    private String descripBuque;
     private int codigoPuerto; //codigo del puerto de donde partira el viaje
+    private String descripPuerto;
     private String fechaSalida;
     private String fechaRegreso;
 
@@ -72,6 +74,24 @@ public class ClsViajes {
     public void setFechaRegreso(String fechaRegreso) {
         this.fechaRegreso = fechaRegreso;
     }
+
+    public String getDescripBuque() {
+        return descripBuque;
+    }
+
+    public void setDescripBuque(String descripBuque) {
+        this.descripBuque = descripBuque;
+    }
+
+    public String getDescripPuerto() {
+        return descripPuerto;
+    }
+
+    public void setDescripPuerto(String descripPuerto) {
+        this.descripPuerto = descripPuerto;
+    }
+    
+    
     
     //Metodos
     
@@ -134,18 +154,21 @@ public class ClsViajes {
             
             Connection con = ClsConexion.obtenerConexion();
             
-            ps = con.prepareStatement("SELECT * FROM Viajes WHERE codigo_viaje = ?");
+            ps = con.prepareStatement("Select codigo_viaje, b.descripcion, p.descripcion, fecha_partida, fecha_regreso, v.descripcion\n" +
+                                        "From [dbo].[Viajes] v join [dbo].[Buques] b\n" +
+                                        "on v.codigo_buque = b.codigo_buque join [dbo].[Puertos-Destinos] p\n" +
+                                        "on v.codigo_puerto = p.codigo_puerto WHERE codigo_viaje = ?");
             
             ps.setInt(1, codigo);
             rs = ps.executeQuery();
             
             while(rs.next()){
-                codigoViaje = rs.getInt("codigo_viaje");
-                descripcion = rs.getString("descripcion");
-                fechaSalida = String.valueOf(rs.getDate("fecha_partida"));
-                fechaRegreso = String.valueOf(rs.getDate("fecha_regreso"));
-                codigoPuerto = rs.getInt("codigo_puerto");
-                codigoBuque = rs.getInt("codigo_buque");
+                codigoViaje = rs.getInt(1);
+                descripcion = rs.getString(6);
+                fechaSalida = String.valueOf(rs.getDate(4));
+                fechaRegreso = String.valueOf(rs.getDate(5));
+                descripPuerto = rs.getString(3);
+                descripBuque = rs.getString(2);
             }
         }
         catch(Exception e){
@@ -213,6 +236,93 @@ public class ClsViajes {
         }
     }
     
+    //Consulta el codigo del puerto
+    public int codigoPuerto(String descrip){
+        int codigoP = 0;
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("SELECT codigo_puerto FROM [Puertos-Destinos] WHERE descripcion = ?");
+            
+            ps.setString(1, descrip);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                codigoP = rs.getInt("codigo_puerto");
+            }
+            
+            
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        
+        return codigoP;
+    }
+    
+    //Consulta el codigo del buque
+    public int codigoBuque(String descrip){
+        int codigoB = 0;
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("SELECT codigo_buque FROM [dbo].[Buques] WHERE descripcion = ?");
+            
+            ps.setString(1, descrip);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                codigoB = rs.getInt("codigo_buque");
+            }
+            
+            
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        
+        return codigoB;
+    }
+    
+    //Consulta el codigo del destino
+    public int codigoDestino(String descrip){
+        int codigoD = 0;
+        
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        try{
+            
+            Connection con = ClsConexion.obtenerConexion();
+            
+            ps = con.prepareStatement("SELECT codigo_destino FROM [dbo].[Destinos_Turisticos] WHERE descripcion = ?");
+            
+            ps.setString(1, descrip);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                codigoD = rs.getInt("codigo_destino");
+            }
+            
+            
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.toString());
+        }
+        
+        return codigoD;
+    }
+    
     //Llena el comboBox de Puertos
     public DefaultComboBoxModel getvaluesPuertos(){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
@@ -237,6 +347,7 @@ public class ClsViajes {
         return modelo;
     }
     
+    //Llena el comboBox de puertos del destino filtrado por el destino seleccionado
     public DefaultComboBoxModel getvaluesPuertos(int codigo){
         DefaultComboBoxModel modelo = new DefaultComboBoxModel();
         
