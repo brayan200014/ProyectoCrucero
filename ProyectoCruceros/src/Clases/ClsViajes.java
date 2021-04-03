@@ -276,7 +276,7 @@ public class ClsViajes {
             
             Connection con = ClsConexion.obtenerConexion();
             
-            ps = con.prepareStatement("SELECT codigo_buque FROM [dbo].[Buques] WHERE descripcion = ?");
+            ps = con.prepareStatement("SELECT codigo_buque FROM [dbo].[Buques] WHERE descripcion = ? and estado = 1");
             
             ps.setString(1, descrip);
             rs = ps.executeQuery();
