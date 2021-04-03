@@ -35,16 +35,9 @@ public class ClsConexion {
         
         try
         {
-<<<<<<< HEAD
 
-            conn = DriverManager.getConnection(url, "sa", "123456");
-           
-
-           
-
-=======
-            conn = DriverManager.getConnection(url, "sa", "123456");
->>>>>>> origin/viajesAlejandro
+           conn = DriverManager.getConnection(url, "sa", "123456");
+          
         }
         catch(Exception ex)
         {
