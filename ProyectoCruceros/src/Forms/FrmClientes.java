@@ -1,4 +1,3 @@
-
 package Forms;
 
 import Clases.ClsConexion;
@@ -10,17 +9,19 @@ import javax.swing.JTextField;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import javax.swing.table.DefaultTableModel;
- 
+
 public class FrmClientes extends javax.swing.JPanel {
-        
-    ClsClientes cli=new ClsClientes();
-    ClsMetodosCliente meCli= new ClsMetodosCliente();
-   
+
+    ClsClientes cli = new ClsClientes();
+    ClsMetodosCliente meCli = new ClsMetodosCliente();
+    int seleccion;
+
     public FrmClientes() {
         initComponents();
         cargarTabla();
+        jButton3.setEnabled(false);
     }
-    
+
     private void cargarTabla() {
         DefaultTableModel modelotabla = (DefaultTableModel) JTabla.getModel();
         modelotabla.setRowCount(0);
@@ -50,8 +51,8 @@ public class FrmClientes extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error Carga de Datos" + ex);
         }
     }
-    
-    private void LimpiarRegistro(){
+
+    private void LimpiarRegistro() {
         txtNombre.setText(null);
         txtApellido.setText(null);
         txtIdentidad.setText(null);
@@ -62,7 +63,7 @@ public class FrmClientes extends javax.swing.JPanel {
         txtNacionalidad.setText(null);
         txtCorreo.setText(null);
     }
-   
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -171,7 +172,13 @@ public class FrmClientes extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        JTabla.setColumnSelectionAllowed(true);
         JTabla.getTableHeader().setReorderingAllowed(false);
+        JTabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JTablaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(JTabla);
         JTabla.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         if (JTabla.getColumnModel().getColumnCount() > 0) {
@@ -280,109 +287,138 @@ public class FrmClientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-     
-        SimpleDateFormat dFormat=new SimpleDateFormat("dd-MM-yy");
-        String fecha_nacimiento=dFormat.format(jDateNacimiento.getDate());
-        String sexo=" ";
-       if(rbMasculino.isSelected()==true){
-           sexo="Masculino";
-       }else if(rbFemenino.isSelected()==true){
-           sexo="Femenino";
-       }
-        cli.setNombre(txtNombre.getText());
-        cli.setApellido(txtApellido.getText());
-        cli.setIdentidad(txtIdentidad.getText());
-        cli.setTelefono(txtTelefono.getText());
-        cli.setNacionalidad(txtNacionalidad.getText());
-        cli.setDireccion(txtDireccion.getText());
-        cli.setCorreo_electronico(txtCorreo.getText());
-        cli.setFecha_nacimiento(fecha_nacimiento);
-        cli.setSexo(sexo);
-        
-        meCli.Insertar();
-        cargarTabla();
-        LimpiarRegistro();
-        
-        
+
+        if (txtNombre.getText().equals("") || txtApellido.getText().equals("")
+                || txtIdentidad.getText().equals("") || txtTelefono.getText().equals("") || txtNacionalidad.getText().equals("")
+                || rbMasculino.isSelected() == false || rbFemenino.isSelected() == false || jDateNacimiento.getDate() == null || txtDireccion.getText().equals("") || txtCorreo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Favor llenar todos los campos que se le pide");
+        } else {
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yy");
+            String fecha_nacimiento = dFormat.format(jDateNacimiento.getDate());
+            String sexo = " ";
+            if (rbMasculino.isSelected() == true) {
+                sexo = "Masculino";
+            } else if (rbFemenino.isSelected() == true) {
+                sexo = "Femenino";
+            }
+            cli.setNombre(txtNombre.getText());
+            cli.setApellido(txtApellido.getText());
+            cli.setIdentidad(txtIdentidad.getText());
+            cli.setTelefono(txtTelefono.getText());
+            cli.setNacionalidad(txtNacionalidad.getText());
+            cli.setDireccion(txtDireccion.getText());
+            cli.setCorreo_electronico(txtCorreo.getText());
+            cli.setFecha_nacimiento(fecha_nacimiento);
+            cli.setSexo(sexo);
+
+            meCli.Insertar();
+            cargarTabla();
+            LimpiarRegistro();
+        }
+
+
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        try {
-            jDateNacimiento.getCalendarButton().setEnabled(false);
-            int fila = JTabla.getSelectedRow();
-            int id = Integer.parseInt(JTabla.getValueAt(fila, 0).toString());
-            ResultSet rs;
-            PreparedStatement ps;
-            Connection conn = ClsConexion.obtenerConexion();
-            ps = conn.prepareStatement("SELECT nombre,apellido,fecha_nacimiento,identidad,sexo,telefono,correo_electronico,direccion,nacionalidad FROM Clientes where codigo_cliente=?");
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
+        if (seleccion == 1) {
+            btnAgregar.setEnabled(false);
+            btnEditar.setEnabled(false);
+            jButton3.setEnabled(true);
 
-            while (rs.next()) {
-                txtNombre.setText(rs.getString("nombre"));
-                txtApellido.setText(rs.getString("apellido"));
-                jDateNacimiento.setDate(rs.getDate("fecha_nacimiento"));
-                txtIdentidad.setText(rs.getString("identidad"));
-                
-                if (rs.getString("sexo").equals("Masculino")) {
-                    rbMasculino.setSelected(true);
-                } else if (rs.getString("sexo").equals("Femenino")) {
-                    rbFemenino.setSelected(true);
+            try {
+                jDateNacimiento.getCalendarButton().setEnabled(false);
+                int fila = JTabla.getSelectedRow();
+                int id = Integer.parseInt(JTabla.getValueAt(fila, 0).toString());
+                ResultSet rs;
+                PreparedStatement ps;
+                Connection conn = ClsConexion.obtenerConexion();
+                ps = conn.prepareStatement("SELECT nombre,apellido,fecha_nacimiento,identidad,sexo,telefono,correo_electronico,direccion,nacionalidad FROM Clientes where codigo_cliente=?");
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    txtNombre.setText(rs.getString("nombre"));
+                    txtApellido.setText(rs.getString("apellido"));
+                    jDateNacimiento.setDate(rs.getDate("fecha_nacimiento"));
+                    txtIdentidad.setText(rs.getString("identidad"));
+
+                    if (rs.getString("sexo").equals("Masculino")) {
+                        rbMasculino.setSelected(true);
+                    } else if (rs.getString("sexo").equals("Femenino")) {
+                        rbFemenino.setSelected(true);
+                    }
+                    txtTelefono.setText(rs.getString("telefono"));
+                    txtCorreo.setText(rs.getString("correo_electronico"));
+                    txtDireccion.setText(rs.getString("direccion"));
+                    txtNacionalidad.setText(rs.getString("nacionalidad"));
+
                 }
-                txtTelefono.setText(rs.getString("telefono"));
-                txtCorreo.setText(rs.getString("correo_electronico"));
-                txtDireccion.setText(rs.getString("direccion"));
-                txtNacionalidad.setText(rs.getString("nacionalidad"));
-
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error de Seleccion" + ex);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error de Seleccion" + ex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un registro de la tabla");
         }
+
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        SimpleDateFormat dFormat=new SimpleDateFormat("dd-MM-yy");
-        String fecha_nacimiento=dFormat.format(jDateNacimiento.getDate());
-        String sexo=" ";
-       if(rbMasculino.isSelected()==true){
-           sexo="Masculino";
-       }else if(rbFemenino.isSelected()==true){
-           sexo="Femenino";
-       }
-        
-        int fila = JTabla.getSelectedRow();
-        int id = Integer.parseInt(JTabla.getValueAt(fila, 0).toString());
-        
-        cli.setId(id);
-        cli.setNombre(txtNombre.getText());
-        cli.setApellido(txtApellido.getText());
-        cli.setIdentidad(txtIdentidad.getText());
-        cli.setTelefono(txtTelefono.getText());
-        cli.setNacionalidad(txtNacionalidad.getText());
-        cli.setDireccion(txtDireccion.getText());
-        cli.setCorreo_electronico(txtCorreo.getText());
-        cli.setFecha_nacimiento(fecha_nacimiento);
-        cli.setSexo(sexo);
-        
-        meCli.Actualizar();
-        LimpiarRegistro();
-        cargarTabla();
-        
+
+        if (txtNombre.getText().equals("") || txtApellido.getText().equals("")
+                || txtIdentidad.getText().equals("") || txtTelefono.getText().equals("") || txtNacionalidad.getText().equals("")
+                || rbMasculino.isSelected() == false || rbFemenino.isSelected() == false || jDateNacimiento.getDate() == null 
+                || txtDireccion.getText().equals("") || txtCorreo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Favor llenar todos los campos que se le pide");
+        } else {
+            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yy");
+            String fecha_nacimiento = dFormat.format(jDateNacimiento.getDate());
+            String sexo = " ";
+            if (rbMasculino.isSelected() == true) {
+                sexo = "Masculino";
+            } else if (rbFemenino.isSelected() == true) {
+                sexo = "Femenino";
+            }
+
+            int fila = JTabla.getSelectedRow();
+            int id = Integer.parseInt(JTabla.getValueAt(fila, 0).toString());
+
+            cli.setId(id);
+            cli.setNombre(txtNombre.getText());
+            cli.setApellido(txtApellido.getText());
+            cli.setIdentidad(txtIdentidad.getText());
+            cli.setTelefono(txtTelefono.getText());
+            cli.setNacionalidad(txtNacionalidad.getText());
+            cli.setDireccion(txtDireccion.getText());
+            cli.setCorreo_electronico(txtCorreo.getText());
+            cli.setFecha_nacimiento(fecha_nacimiento);
+            cli.setSexo(sexo);
+
+            meCli.Actualizar();
+            LimpiarRegistro();
+            cargarTabla();
+            seleccion = 0;
+            jButton3.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnAgregar.setEnabled(true);
+
+        }
+
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char letra = evt.getKeyChar();
-        
-        if(Character.isDigit(letra)){
+
+        if (Character.isDigit(letra)) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingrese solamente letras", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtNombreKeyTyped
 
     private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
-         char letra = evt.getKeyChar();
-        
-        if(Character.isDigit(letra)){
+        char letra = evt.getKeyChar();
+
+        if (Character.isDigit(letra)) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingrese solamente letras", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -390,16 +426,16 @@ public class FrmClientes extends javax.swing.JPanel {
 
     private void txtIdentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyTyped
         char numero = evt.getKeyChar();
-        if((numero<'0' || numero>'9') && numero != evt.VK_BACK_SPACE){
+        if ((numero < '0' || numero > '9') && numero != evt.VK_BACK_SPACE) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingrese solamente numeros", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_txtIdentidadKeyTyped
 
     private void txtTelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTelefonoKeyTyped
-         char numero = evt.getKeyChar();
-        if((numero<'0' || numero>'9') && numero != evt.VK_BACK_SPACE){
+        char numero = evt.getKeyChar();
+        if ((numero < '0' || numero > '9') && numero != evt.VK_BACK_SPACE) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingrese solamente numeros", "Warning", JOptionPane.WARNING_MESSAGE);
         }
@@ -407,12 +443,16 @@ public class FrmClientes extends javax.swing.JPanel {
 
     private void txtNacionalidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNacionalidadKeyTyped
         char letra = evt.getKeyChar();
-        
-        if(Character.isDigit(letra)){
+
+        if (Character.isDigit(letra)) {
             evt.consume();
             JOptionPane.showMessageDialog(null, "Ingrese solamente letras", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_txtNacionalidadKeyTyped
+
+    private void JTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JTablaMouseClicked
+        seleccion = 1;
+    }//GEN-LAST:event_JTablaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
