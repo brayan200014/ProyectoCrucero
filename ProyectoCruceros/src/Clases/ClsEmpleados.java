@@ -10,6 +10,7 @@ public class ClsEmpleados {
         protected static String telefono;
         protected static String correo;
         protected static String direccion;
+        protected static int codigoPuesto;
         protected static int estado;
         protected static String nacionalidad;
         protected static String Sexo;
@@ -84,6 +85,14 @@ public class ClsEmpleados {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public int getCodigoPuesto() {
+        return codigoPuesto;
+    }
+
+    public void setCodigoPuesto(int codigoPuesto) {
+        ClsEmpleados.codigoPuesto = codigoPuesto;
     }
 
     public int getEstado() {

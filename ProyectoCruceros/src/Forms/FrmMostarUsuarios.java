@@ -57,15 +57,15 @@ public class FrmMostarUsuarios extends javax.swing.JFrame {
         }
     }
     
-    public void Filtro(){  
+    public void FiltroNombre(){  
         int columnaTabla = 2;
         TRSfiltro.setRowFilter(RowFilter.regexFilter(txtnombreU.getText(),columnaTabla));
     }
     
-    public void FiltroC(){
+    public void FiltroId(){
 
-        int columNombre = 3;
-        TRSfiltro.setRowFilter(RowFilter.regexFilter(txtcontra.getText(),columNombre));
+        int columnaTabla = 1;
+        TRSfiltro.setRowFilter(RowFilter.regexFilter(txtid.getText(),columnaTabla));
     }
     
     @SuppressWarnings("unchecked")
@@ -77,7 +77,7 @@ public class FrmMostarUsuarios extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMostrarUsuarios = new javax.swing.JTable();
         txtnombreU = new javax.swing.JTextField();
-        txtcontra = new javax.swing.JTextField();
+        txtid = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -129,44 +129,47 @@ public class FrmMostarUsuarios extends javax.swing.JFrame {
             }
         });
 
-        txtcontra.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtid.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtcontraKeyTyped(evt);
+                txtidKeyTyped(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel4.setText("Contraseña:");
+        jLabel4.setText("Id Empleado:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(97, 97, 97)
-                .addComponent(jLabel3)
-                .addGap(26, 26, 26)
-                .addComponent(txtnombreU, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(142, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(217, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 528, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(168, 168, 168))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtnombreU, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(116, 116, 116)
+                .addGap(122, 122, 122)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtnombreU, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(1, 1, 1))
+                    .addComponent(txtnombreU, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(51, 51, 51)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(85, Short.MAX_VALUE))
         );
@@ -202,7 +205,7 @@ public class FrmMostarUsuarios extends javax.swing.JFrame {
             {
                 String cadena = (txtnombreU.getText());
                 txtnombreU.setText(cadena);
-                Filtro();
+                FiltroNombre();
             }
 
         });
@@ -210,20 +213,20 @@ public class FrmMostarUsuarios extends javax.swing.JFrame {
         tblMostrarUsuarios.setRowSorter(TRSfiltro);
     }//GEN-LAST:event_txtnombreUKeyTyped
 
-    private void txtcontraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraKeyTyped
-        txtcontra.addKeyListener (new KeyAdapter(){
+    private void txtidKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidKeyTyped
+        txtid.addKeyListener (new KeyAdapter(){
 
             public void keyReleased (final KeyEvent e)
             {
-                String cadena = (txtcontra.getText());
-                txtcontra.setText(cadena);
-                FiltroC();
+                String cadena = (txtid.getText());
+                txtid.setText(cadena);
+                FiltroId();
             }
 
         });
         TRSfiltro = new TableRowSorter(tblMostrarUsuarios.getModel());
-        tblMostrarUsuarios.setRowSorter(TRSfiltro);
-    }//GEN-LAST:event_txtcontraKeyTyped
+        tblMostrarUsuarios.setRowSorter(TRSfiltro);        
+    }//GEN-LAST:event_txtidKeyTyped
 
     /**
      * @param args the command line arguments
@@ -266,7 +269,7 @@ public class FrmMostarUsuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblMostrarUsuarios;
-    private javax.swing.JTextField txtcontra;
+    private javax.swing.JTextField txtid;
     private javax.swing.JTextField txtnombreU;
     // End of variables declaration//GEN-END:variables
 }

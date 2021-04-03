@@ -13,10 +13,11 @@ public class ClsUsuariosMetodos extends ClsUsuarios{
     public void Insertar(){
         try {
             ps = con.prepareStatement("INSERT INTO Usuarios "
-                    + "(nombre_usuario, contrasenia, estado) VALUES(?,?,?)");
-            ps.setString(1, nombreUsuario);
-            ps.setString(2, contrasena);
-            ps.setInt(3, estado);
+                    + "(codigo_empleado, nombre_usuario, contrasenia, estado) VALUES(?,?,?,?)");
+            ps.setInt(1, idEmpleado);
+            ps.setString(2, nombreUsuario);
+            ps.setString(3, contrasena);
+            ps.setInt(4, estado);
 
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro Agregado");

@@ -9,21 +9,20 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
-
 public class FrmMostrarEmpleados extends javax.swing.JFrame {
 
     Connection con = ClsConexion.obtenerConexion();
     PreparedStatement ps = null;
     ResultSet rs;
     ResultSetMetaData rsmd;
-    
+
     public FrmMostrarEmpleados() {
         initComponents();
         cargarTabla();
     }
 
     private TableRowSorter TRSfiltro;
-    
+
     private void cargarTabla() {
         DefaultTableModel modelotabla = (DefaultTableModel) tblMostrarEmpleados.getModel();
         modelotabla.setRowCount(0);
@@ -46,18 +45,18 @@ public class FrmMostrarEmpleados extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Error Carga de Datos" + ex);
         }
     }
-    
-    public void Filtro(){  
+
+    public void Filtro() {
         int columnaTabla = 4;
-        TRSfiltro.setRowFilter(RowFilter.regexFilter(txtbuscarident.getText(),columnaTabla));
+        TRSfiltro.setRowFilter(RowFilter.regexFilter(txtbuscarident.getText(), columnaTabla));
     }
-    
-    public void FiltroN(){
+
+    public void FiltroN() {
 
         int columNombre = 1;
-        TRSfiltro.setRowFilter(RowFilter.regexFilter(txtbuscarnombre.getText(),columNombre));
+        TRSfiltro.setRowFilter(RowFilter.regexFilter(txtbuscarnombre.getText(), columNombre));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -186,37 +185,46 @@ public class FrmMostrarEmpleados extends javax.swing.JFrame {
     }//GEN-LAST:event_txtbuscaridentActionPerformed
 
     private void txtbuscaridentKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscaridentKeyTyped
-       txtbuscarident.addKeyListener (new KeyAdapter(){
-           
-           public void keyReleased (final KeyEvent e)
-           {
-               String cadena = (txtbuscarident.getText());
-               txtbuscarident.setText(cadena);
-               Filtro();
-           }
-           
-         });
-       TRSfiltro = new TableRowSorter(tblMostrarEmpleados.getModel());
-       tblMostrarEmpleados.setRowSorter(TRSfiltro);
+        char numero = evt.getKeyChar();
+        if ((numero < '0' || numero > '9') && numero != evt.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar numeros", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+
+        txtbuscarident.addKeyListener(new KeyAdapter() {
+
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (txtbuscarident.getText());
+                txtbuscarident.setText(cadena);
+                Filtro();
+            }
+
+        });
+        TRSfiltro = new TableRowSorter(tblMostrarEmpleados.getModel());
+        tblMostrarEmpleados.setRowSorter(TRSfiltro);
     }//GEN-LAST:event_txtbuscaridentKeyTyped
 
     private void txtbuscarnombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbuscarnombreKeyTyped
-        txtbuscarnombre.addKeyListener (new KeyAdapter(){
-           
-           public void keyReleased (final KeyEvent e)
-           {
-               String cadena = (txtbuscarnombre.getText());
-               txtbuscarnombre.setText(cadena);
-               FiltroN();
-           }
-           
-         });
-       TRSfiltro = new TableRowSorter(tblMostrarEmpleados.getModel());
-       tblMostrarEmpleados.setRowSorter(TRSfiltro);
+        char letra = evt.getKeyChar();
+
+        if (Character.isDigit(letra)) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar letras", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        txtbuscarnombre.addKeyListener(new KeyAdapter() {
+
+            public void keyReleased(final KeyEvent e) {
+                String cadena = (txtbuscarnombre.getText());
+                txtbuscarnombre.setText(cadena);
+                FiltroN();
+            }
+
+        });
+        TRSfiltro = new TableRowSorter(tblMostrarEmpleados.getModel());
+        tblMostrarEmpleados.setRowSorter(TRSfiltro);
     }//GEN-LAST:event_txtbuscarnombreKeyTyped
 
-    
-    
     /**
      * @param args the command line arguments
      */

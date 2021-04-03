@@ -15,10 +15,13 @@ public class FrmUsuarios extends javax.swing.JPanel {
     PreparedStatement ps;
     ResultSet rs;
     ResultSetMetaData rsmd;
-    
+    int seleccion;
+
     public FrmUsuarios() {
         initComponents();
         cargarTabla();
+        btnActualizar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }
 
     private void cargarTabla() {
@@ -43,12 +46,13 @@ public class FrmUsuarios extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Error Carga de Datos" + ex);
         }
     }
-    
-    private void limpiar(){
+
+    private void limpiar() {
         txtnombreUsuario.setText(null);
+        txtidemp.setText(null);
         txtcontra.setText(null);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -59,12 +63,15 @@ public class FrmUsuarios extends javax.swing.JPanel {
         btnEliminar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
-        txtcontra = new javax.swing.JTextField();
+        txtidemp = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtnombreUsuario = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtcontra = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(96, 203, 249));
+        setLayout(null);
 
         btnAgregar.setBackground(new java.awt.Color(12, 69, 104));
         btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -77,6 +84,8 @@ public class FrmUsuarios extends javax.swing.JPanel {
                 btnAgregarActionPerformed(evt);
             }
         });
+        add(btnAgregar);
+        btnAgregar.setBounds(139, 393, 170, 40);
 
         btnEditar.setBackground(new java.awt.Color(12, 69, 104));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -88,6 +97,8 @@ public class FrmUsuarios extends javax.swing.JPanel {
                 btnEditarActionPerformed(evt);
             }
         });
+        add(btnEditar);
+        btnEditar.setBounds(331, 393, 140, 40);
 
         btnActualizar.setBackground(new java.awt.Color(12, 69, 104));
         btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -99,6 +110,8 @@ public class FrmUsuarios extends javax.swing.JPanel {
                 btnActualizarActionPerformed(evt);
             }
         });
+        add(btnActualizar);
+        btnActualizar.setBounds(489, 393, 160, 40);
 
         btnEliminar.setBackground(new java.awt.Color(12, 69, 104));
         btnEliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -110,6 +123,8 @@ public class FrmUsuarios extends javax.swing.JPanel {
                 btnEliminarActionPerformed(evt);
             }
         });
+        add(btnEliminar);
+        btnEliminar.setBounds(679, 393, 160, 40);
 
         tblUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,6 +156,47 @@ public class FrmUsuarios extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblUsuarios);
 
+        add(jScrollPane1);
+        jScrollPane1.setBounds(458, 107, 419, 195);
+
+        txtidemp.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtidemp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtidempActionPerformed(evt);
+            }
+        });
+        txtidemp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtidempKeyTyped(evt);
+            }
+        });
+        add(txtidemp);
+        txtidemp.setBounds(210, 185, 190, 30);
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel3.setText("Nombre Usuario:");
+        add(jLabel3);
+        jLabel3.setBounds(42, 130, 160, 20);
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel1.setText("Id Empleado:");
+        add(jLabel1);
+        jLabel1.setBounds(42, 187, 135, 20);
+
+        txtnombreUsuario.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtnombreUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtnombreUsuarioKeyTyped(evt);
+            }
+        });
+        add(txtnombreUsuario);
+        txtnombreUsuario.setBounds(210, 128, 190, 30);
+
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel2.setText("Contraseña:");
+        add(jLabel2);
+        jLabel2.setBounds(42, 241, 120, 20);
+
         txtcontra.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtcontra.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -152,148 +208,137 @@ public class FrmUsuarios extends javax.swing.JPanel {
                 txtcontraKeyTyped(evt);
             }
         });
-
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel3.setText("Nombre Usuario:");
-
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel1.setText("Contraseña:");
-
-        txtnombreUsuario.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        txtnombreUsuario.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtnombreUsuarioKeyTyped(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(0, 42, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtnombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(58, 58, 58)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(61, 61, 61))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtnombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(58, 58, 58)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtcontra, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(107, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(91, 91, 91)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
-        );
+        add(txtcontra);
+        txtcontra.setBounds(210, 239, 190, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        int estado =1;
-        usu.setNombreUsuario(txtnombreUsuario.getText());
-        usu.setContrasena(txtcontra.getText());
-        usu.setEstado(estado);
+        if (txtnombreUsuario.getText().equals("") || txtidemp.getText().equals("") || txtcontra.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+        } else {
+            int estado = 1;
+            usu.setIdEmpleado(Integer.parseInt(txtidemp.getText()));
+            usu.setNombreUsuario(txtnombreUsuario.getText());
+            usu.setContrasena(txtidemp.getText());
+            usu.setEstado(estado);
 
-        usumet.Insertar();
-        limpiar();
-        cargarTabla();
+            usumet.Insertar();
+            limpiar();
+            cargarTabla();
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        try {
+        if (seleccion == 1) {
+            btnActualizar.setEnabled(true);
+            btnEditar.setEnabled(false);
+            btnAgregar.setEnabled(false);
+            btnEliminar.setEnabled(true);
 
-            int fila = tblUsuarios.getSelectedRow();
-            int id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
+            try {
 
-            ps = con.prepareStatement("SELECT nombre_usuario, contrasenia FROM Usuarios WHERE codigo_usuario=?");
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
+                int fila = tblUsuarios.getSelectedRow();
+                int id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
 
-            while (rs.next()) {
-                txtnombreUsuario.setText(rs.getString("nombre_usuario"));
-                txtcontra.setText(rs.getString("contrasenia"));
+                ps = con.prepareStatement("SELECT codigo_empleado, nombre_usuario, contrasenia FROM Usuarios WHERE codigo_usuario=?");
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
+
+                while (rs.next()) {
+                    txtnombreUsuario.setText(rs.getString("nombre_usuario"));
+                    txtcontra.setText(rs.getString("contrasenia"));
+                    txtidemp.setText(rs.getString("codigo_empleado"));
+                }
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un Registro de la Tabla",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
-        int fila = tblUsuarios.getSelectedRow();
-        int id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
+        if (txtnombreUsuario.getText().equals("") || txtidemp.getText().equals("") || txtcontra.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+            seleccion = 0;
+        } else {
+            int fila = tblUsuarios.getSelectedRow();
+            int id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
 
-        usu.setId(id);
-        usu.setNombreUsuario(txtnombreUsuario.getText());
-        usu.setContrasena(txtcontra.getText());
+            usu.setId(id);
+            usu.setNombreUsuario(txtnombreUsuario.getText());
+            usu.setContrasena(txtidemp.getText());
 
-        usumet.Actualizar();
-        limpiar();
-        cargarTabla();
+            usumet.Actualizar();
+            limpiar();
+            cargarTabla();
+
+            btnActualizar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            btnEliminar.setEnabled(false);
+            seleccion = 0;
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblUsuarios.getSelectedRow();
-        int id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
-        usu.setId(id);
+        if (txtnombreUsuario.getText().equals("") || txtidemp.getText().equals("") || txtcontra.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Deben estar los campos llenos, vuelva a seleccionar el registro",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
 
-        usumet.Eliminar();
-        limpiar();
-        cargarTabla();
+            btnActualizar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(false);
+            limpiar();
 
+        } else {
+            int fila = tblUsuarios.getSelectedRow();
+            int id = Integer.parseInt(tblUsuarios.getValueAt(fila, 0).toString());
+            usu.setId(id);
+
+            usumet.Eliminar();
+            limpiar();
+            cargarTabla();
+
+            btnActualizar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            btnEliminar.setEnabled(false);
+            seleccion = 0;
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
-
+        seleccion = 1;
     }//GEN-LAST:event_tblUsuariosMouseClicked
+
+    private void txtidempActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidempActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtidempActionPerformed
+
+    private void txtidempKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtidempKeyTyped
+        char numero = evt.getKeyChar();
+        if ((numero < '0' || numero > '9') && numero != evt.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar numeros", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtidempKeyTyped
+
+    private void txtnombreUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreUsuarioKeyTyped
+
+    }//GEN-LAST:event_txtnombreUsuarioKeyTyped
 
     private void txtcontraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcontraActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtcontraActionPerformed
 
     private void txtcontraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcontraKeyTyped
-       
+        // TODO add your handling code here:
     }//GEN-LAST:event_txtcontraKeyTyped
-
-    private void txtnombreUsuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnombreUsuarioKeyTyped
-       
-    }//GEN-LAST:event_txtnombreUsuarioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -302,10 +347,12 @@ public class FrmUsuarios extends javax.swing.JPanel {
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblUsuarios;
     private javax.swing.JTextField txtcontra;
+    private javax.swing.JTextField txtidemp;
     private javax.swing.JTextField txtnombreUsuario;
     // End of variables declaration//GEN-END:variables
 }

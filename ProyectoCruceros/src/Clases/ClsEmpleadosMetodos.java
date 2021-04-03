@@ -15,7 +15,7 @@ public class ClsEmpleadosMetodos extends ClsEmpleados{
         try {
             ps = con.prepareStatement("INSERT INTO Empleados "
                     + "(nombre, apellido, fecha_nacimiento, identidad, sexo, telefono, correo_electronico, "
-                    + "direccion, estado, nacionalidad) VALUES(?,?,?,?,?,?,?,?,?,?)");
+                    + "direccion, codigo_puesto, estado, nacionalidad) VALUES(?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, nombre);
             ps.setString(2, apellido);
             ps.setString(3, nacimiento);
@@ -24,8 +24,9 @@ public class ClsEmpleadosMetodos extends ClsEmpleados{
             ps.setString(6, telefono);
             ps.setString(7, correo);
             ps.setString(8, direccion);
-            ps.setInt(9, 1);
-            ps.setString(10, nacionalidad);
+            ps.setInt(9, codigoPuesto);
+            ps.setInt(10, 1);
+            ps.setString(11, nacionalidad);
 
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro Agregado");
@@ -39,7 +40,7 @@ public class ClsEmpleadosMetodos extends ClsEmpleados{
         try {       
             ps = con.prepareStatement("UPDATE Empleados SET nombre=?, "
                     + "apellido=?, fecha_nacimiento=?, identidad=?, sexo=?, telefono=?, "
-                    + "correo_electronico=?,direccion=?,nacionalidad=? WHERE codigo_empleado=?");
+                    + "correo_electronico=?,direccion=?, codigo_puesto=?, nacionalidad=? WHERE codigo_empleado=?");
             ps.setString(1, nombre);
             ps.setString(2, apellido);
             ps.setString(3, nacimiento);
@@ -48,8 +49,9 @@ public class ClsEmpleadosMetodos extends ClsEmpleados{
             ps.setString(6, telefono);
             ps.setString(7, correo);
             ps.setString(8, direccion);
-            ps.setString(9, nacionalidad);
-            ps.setInt(10, id);
+            ps.setInt(9, codigoPuesto);
+            ps.setString(10, nacionalidad);
+            ps.setInt(11, id);
             
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Registro Actualizado");

@@ -10,10 +10,12 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 public class FrmEmpleados extends javax.swing.JPanel {
-    
+
     Connection con = ClsConexion.obtenerConexion();
     ClsEmpleados emp = new ClsEmpleados();
     ClsEmpleadosMetodos empmetodos = new ClsEmpleadosMetodos();
+    SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yy");
+    int seleccion;
 
     PreparedStatement ps;
     ResultSet rs;
@@ -22,6 +24,8 @@ public class FrmEmpleados extends javax.swing.JPanel {
     public FrmEmpleados() {
         initComponents();
         cargarTabla();
+        btnActualizar.setEnabled(false);
+        btnEliminar.setEnabled(false);
     }
 
     private void cargarTabla() {
@@ -56,6 +60,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
         txttelefono.setText(null);
         txtcorreo.setText(null);
         txtdireccion.setText(null);
+        txtcodpuesto.setText(null);
         txtnacionalidad.setText(null);
     }
 
@@ -89,6 +94,8 @@ public class FrmEmpleados extends javax.swing.JPanel {
         btnActualizar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
         jcnacimiento = new com.toedter.calendar.JDateChooser();
+        jLabel10 = new javax.swing.JLabel();
+        txtcodpuesto = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(96, 203, 249));
         setLayout(null);
@@ -158,12 +165,12 @@ public class FrmEmpleados extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel6.setText("Direccion:");
         add(jLabel6);
-        jLabel6.setBounds(420, 50, 130, 20);
+        jLabel6.setBounds(470, 50, 130, 20);
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setText("Correo:");
         add(jLabel7);
-        jLabel7.setBounds(420, 10, 120, 20);
+        jLabel7.setBounds(470, 10, 120, 20);
 
         txttelefono.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txttelefono.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -181,7 +188,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
             }
         });
         add(txtdireccion);
-        txtdireccion.setBounds(580, 60, 240, 30);
+        txtdireccion.setBounds(630, 60, 240, 30);
 
         txtcorreo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtcorreo.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -190,12 +197,12 @@ public class FrmEmpleados extends javax.swing.JPanel {
             }
         });
         add(txtcorreo);
-        txtcorreo.setBounds(580, 10, 240, 30);
+        txtcorreo.setBounds(630, 10, 240, 30);
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel8.setText("Fecha Nacimiento:");
         add(jLabel8);
-        jLabel8.setBounds(420, 100, 180, 20);
+        jLabel8.setBounds(470, 100, 180, 20);
 
         btngroup.add(rbf);
         rbf.setText("Femenino");
@@ -247,12 +254,12 @@ public class FrmEmpleados extends javax.swing.JPanel {
         }
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(40, 240, 800, 150);
+        jScrollPane1.setBounds(20, 240, 870, 150);
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        jLabel9.setText("Nacionalidad:");
+        jLabel9.setText("Codigo Puesto:");
         add(jLabel9);
-        jLabel9.setBounds(420, 150, 140, 20);
+        jLabel9.setBounds(470, 150, 140, 20);
 
         txtnacionalidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         txtnacionalidad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -261,7 +268,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
             }
         });
         add(txtnacionalidad);
-        txtnacionalidad.setBounds(590, 150, 230, 30);
+        txtnacionalidad.setBounds(640, 190, 230, 30);
 
         btnAgregar.setBackground(new java.awt.Color(12, 69, 104));
         btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -316,10 +323,24 @@ public class FrmEmpleados extends javax.swing.JPanel {
         add(btnEliminar);
         btnEliminar.setBounds(650, 400, 160, 40);
 
-        jcnacimiento.setMaxSelectableDate(new java.util.Date(1041404481000L));
+        jcnacimiento.setMaxSelectableDate(new java.util.Date(1262329281000L));
         jcnacimiento.setMinSelectableDate(new java.util.Date(-631126705000L));
         add(jcnacimiento);
-        jcnacimiento.setBounds(610, 100, 210, 30);
+        jcnacimiento.setBounds(660, 100, 210, 30);
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel10.setText("Nacionalidad:");
+        add(jLabel10);
+        jLabel10.setBounds(470, 190, 140, 20);
+
+        txtcodpuesto.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtcodpuesto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtcodpuestoKeyTyped(evt);
+            }
+        });
+        add(txtcodpuesto);
+        txtcodpuesto.setBounds(640, 150, 230, 30);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtidentidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtidentidadActionPerformed
@@ -328,114 +349,161 @@ public class FrmEmpleados extends javax.swing.JPanel {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
 
-        SimpleDateFormat dFormat = new SimpleDateFormat("yy-MM-dd");
-        String nacimiento = dFormat.format(jcnacimiento.getDate());
-        String sexo = "";
-        if (rbm.isSelected() == true) {
-            sexo = "Masculino";
-        } else if (rbf.isSelected() == true) {
-            sexo = "Femenino";
+        if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
+                || txttelefono.getText().equals("") || txtcorreo.getText().equals("") || txtdireccion.getText().equals("")
+                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || rbm.isSelected() == false
+                || rbm.isSelected() == false || jcnacimiento.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String nacimiento = dFormat.format(jcnacimiento.getDate());
+            String sexo = "";
+            if (rbm.isSelected() == true) {
+                sexo = "Masculino";
+            } else if (rbf.isSelected() == true) {
+                sexo = "Femenino";
+            }
+            int estado = 1;
+
+            emp.setNombre(txtnombre.getText());
+            emp.setApellido(txtapellido.getText());
+            emp.setIdentidad(txtidentidad.getText());
+            emp.setNacimiento(nacimiento);
+            emp.setSexo(sexo);
+            emp.setTelefono(txttelefono.getText());
+            emp.setCorreo(txtcorreo.getText());
+            emp.setDireccion(txtdireccion.getText());
+            emp.setCodigoPuesto(Integer.parseInt(txtcodpuesto.getText()));
+            emp.setEstado(estado);
+            emp.setNacionalidad(txtnacionalidad.getText());
+
+            empmetodos.Insertar();
+            limpiar();
+            cargarTabla();
         }
-        int estado =1;
-
-        emp.setNombre(txtnombre.getText());
-        emp.setApellido(txtapellido.getText());
-        emp.setIdentidad(txtidentidad.getText());
-        emp.setNacimiento(nacimiento);
-        emp.setSexo(sexo);
-        emp.setTelefono(txttelefono.getText());
-        emp.setCorreo(txtcorreo.getText());
-        emp.setDireccion(txtdireccion.getText());
-        emp.setEstado(estado);
-        emp.setNacionalidad(txtnacionalidad.getText());
-
-        empmetodos.Insertar();
-        limpiar();
-        cargarTabla();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void tblEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmpleadosMouseClicked
-
+        seleccion = 1;
 
     }//GEN-LAST:event_tblEmpleadosMouseClicked
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        try {
-            //jcnacimiento.getCalendarButton().setEnabled(false);
-            
-            int fila = tblEmpleados.getSelectedRow();
-            int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
+        if (seleccion == 1) {
+            btnActualizar.setEnabled(true);
+            btnEditar.setEnabled(false);
+            btnAgregar.setEnabled(false);
+            btnEliminar.setEnabled(true);
+            try {
+                int fila = tblEmpleados.getSelectedRow();
+                int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
 
-            ps = con.prepareStatement("SELECT nombre, apellido,"
-                    + "fecha_nacimiento, identidad, sexo, telefono, correo_electronico, "
-                    + "direccion, codigo_puesto, estado,"
-                    + "nacionalidad FROM Empleados WHERE codigo_empleado=?");
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
+                ps = con.prepareStatement("SELECT nombre, apellido,"
+                        + "fecha_nacimiento, identidad, sexo, telefono, correo_electronico, "
+                        + "direccion, codigo_puesto, estado,"
+                        + "nacionalidad FROM Empleados WHERE codigo_empleado=?");
+                ps.setInt(1, id);
+                rs = ps.executeQuery();
 
-            while (rs.next()) {
-                txtnombre.setText(rs.getString("nombre"));
-                txtapellido.setText(rs.getString("apellido"));
-                jcnacimiento.setDate(rs.getDate("fecha_nacimiento"));
-                txtidentidad.setText(rs.getString("identidad"));
-                if (rs.getString("sexo").equals("Masculino")) {
-                    rbm.setSelected(true);
-                } else if (rs.getString("sexo").equals("Femenino")) {
-                    rbf.setSelected(true);
+                while (rs.next()) {
+                    txtnombre.setText(rs.getString("nombre"));
+                    txtapellido.setText(rs.getString("apellido"));
+                    jcnacimiento.setDate(rs.getDate("fecha_nacimiento"));
+                    txtidentidad.setText(rs.getString("identidad"));
+                    if (rs.getString("sexo").equals("Masculino")) {
+                        rbm.setSelected(true);
+                    } else if (rs.getString("sexo").equals("Femenino")) {
+                        rbf.setSelected(true);
+                    }
+                    txttelefono.setText(rs.getString("telefono"));
+                    txtcorreo.setText(rs.getString("correo_electronico"));
+                    txtdireccion.setText(rs.getString("direccion"));
+                    txtcodpuesto.setText(rs.getString("codigo_puesto"));
+                    txtnacionalidad.setText(rs.getString("nacionalidad"));
                 }
-                txttelefono.setText(rs.getString("telefono"));
-                txtcorreo.setText(rs.getString("correo_electronico"));
-                txtdireccion.setText(rs.getString("direccion"));
-                txtnacionalidad.setText(rs.getString("nacionalidad"));
-
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex);
             }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, ex);
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione un Registro de la Tabla",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
         }
-
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
 
-        SimpleDateFormat dFormat = new SimpleDateFormat("yy-MM-dd");
-        String nacimiento = dFormat.format(jcnacimiento.getDate());
-        String sexo = "";
-        if (rbm.isSelected() == true) {
-            sexo = "Masculino";
-        } else if (rbf.isSelected() == true) {
-            sexo = "Femenino";
+        if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
+                || txttelefono.getText().equals("") || txtcorreo.getText().equals("") || txtdireccion.getText().equals("")
+                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || rbm.isSelected() == false
+                || rbm.isSelected() == false || jcnacimiento.getDate() == null) {
+            JOptionPane.showMessageDialog(null, "Debe llenar todos los Campos",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+        } else {
+            String nacimiento = dFormat.format(jcnacimiento.getDate());
+            String sexo = "";
+            if (rbm.isSelected() == true) {
+                sexo = "Masculino";
+            } else if (rbf.isSelected() == true) {
+                sexo = "Femenino";
+            }
+            int estado = 1;
+            int fila = tblEmpleados.getSelectedRow();
+            int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
+
+            emp.setId(id);
+            emp.setNombre(txtnombre.getText());
+            emp.setApellido(txtapellido.getText());
+            emp.setIdentidad(txtidentidad.getText());
+            emp.setNacimiento(nacimiento);
+            emp.setSexo(sexo);
+            emp.setTelefono(txttelefono.getText());
+            emp.setCorreo(txtcorreo.getText());
+            emp.setDireccion(txtdireccion.getText());
+            emp.setEstado(estado);
+            emp.setNacionalidad(txtnacionalidad.getText());
+            emp.setCodigoPuesto(Integer.parseInt(txtcodpuesto.getText()));
+
+            empmetodos.Actualizar();
+            limpiar();
+            cargarTabla();
+
+            btnActualizar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            btnEliminar.setEnabled(false);
+            seleccion = 0;
+
         }
-        int estado = 1;
-        int fila = tblEmpleados.getSelectedRow();
-        int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
-
-        emp.setId(id);
-        emp.setNombre(txtnombre.getText());
-        emp.setApellido(txtapellido.getText());
-        emp.setIdentidad(txtidentidad.getText());
-        emp.setNacimiento(nacimiento);
-        emp.setSexo(sexo);
-        emp.setTelefono(txttelefono.getText());
-        emp.setCorreo(txtcorreo.getText());
-        emp.setDireccion(txtdireccion.getText());
-        emp.setEstado(estado);
-        emp.setNacionalidad(txtnacionalidad.getText());
-
-        empmetodos.Actualizar();
-        limpiar();
-        cargarTabla();
 
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        int fila = tblEmpleados.getSelectedRow();
-        int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
-        emp.setId(id);
-      
-        empmetodos.Eliminar();
-        limpiar();
-        cargarTabla();
-        
+        if (txtidentidad.getText().equals("") || txtnombre.getText().equals("") || txtapellido.getText().equals("")
+                || txttelefono.getText().equals("") || txtcorreo.getText().equals("") || txtdireccion.getText().equals("")
+                || txtcodpuesto.getText().equals("") || txtnacionalidad.getText().equals("") || rbm.isSelected() == false
+                || rbm.isSelected() == false) {
+            JOptionPane.showMessageDialog(null, "Deben estar los campos llenos, vuelva a seleccionar el registro",
+                    "WARNING", JOptionPane.WARNING_MESSAGE);
+            btnActualizar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnEliminar.setEnabled(false);
+            limpiar();
+        } else {
+            int fila = tblEmpleados.getSelectedRow();
+            int id = Integer.parseInt(tblEmpleados.getValueAt(fila, 0).toString());
+            emp.setId(id);
+
+            empmetodos.Eliminar();
+            limpiar();
+            cargarTabla();
+
+            btnActualizar.setEnabled(false);
+            btnEditar.setEnabled(true);
+            btnAgregar.setEnabled(true);
+            btnEliminar.setEnabled(false);
+            seleccion = 0;
+        }
+
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void txttelefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txttelefonoKeyTyped
@@ -473,11 +541,11 @@ public class FrmEmpleados extends javax.swing.JPanel {
     }//GEN-LAST:event_txtapellidoKeyTyped
 
     private void txtcorreoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcorreoKeyTyped
-     
+
     }//GEN-LAST:event_txtcorreoKeyTyped
 
     private void txtdireccionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtdireccionKeyTyped
-        
+
     }//GEN-LAST:event_txtdireccionKeyTyped
 
     private void txtnacionalidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtnacionalidadKeyTyped
@@ -489,6 +557,14 @@ public class FrmEmpleados extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtnacionalidadKeyTyped
 
+    private void txtcodpuestoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtcodpuestoKeyTyped
+        char numero = evt.getKeyChar();
+        if ((numero < '0' || numero > '9') && numero != evt.VK_BACK_SPACE) {
+            evt.consume();
+            JOptionPane.showMessageDialog(null, "Solo puede ingresar numeros", "WARNING", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_txtcodpuestoKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -497,6 +573,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminar;
     private javax.swing.ButtonGroup btngroup;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -511,6 +588,7 @@ public class FrmEmpleados extends javax.swing.JPanel {
     private javax.swing.JRadioButton rbm;
     private javax.swing.JTable tblEmpleados;
     private javax.swing.JTextField txtapellido;
+    private javax.swing.JTextField txtcodpuesto;
     private javax.swing.JTextField txtcorreo;
     private javax.swing.JTextField txtdireccion;
     private javax.swing.JTextField txtidentidad;
