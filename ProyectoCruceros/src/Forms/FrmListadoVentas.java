@@ -27,7 +27,7 @@ public class FrmListadoVentas extends javax.swing.JPanel {
   
 
     private TableRowSorter TRSFfilter;
-     ClsConexion conexion= new ClsConexion();
+    
      PreparedStatement ps= null;
      ResultSet rs; 
      ResultSetMetaData rsmd;
@@ -50,7 +50,7 @@ public class FrmListadoVentas extends javax.swing.JPanel {
       modelo.setRowCount(0);
         try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
             ps=con.prepareStatement("execute cargarDatosVentas");
              rs=ps.executeQuery();
              rsmd= rs.getMetaData();

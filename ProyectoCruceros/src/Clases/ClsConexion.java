@@ -19,7 +19,7 @@ public class ClsConexion {
     //metodos
 
     public static Connection obtenerConexion() {
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=AgenciaDeViajes";
+        String url = "jdbc:sqlserver://LAPTOP-7EL3UTD8:1433;databaseName=AgenciaDeViajes";
 
 
         try {
