@@ -35,23 +35,15 @@ public class ClsConexion {
         
         try
         {
-<<<<<<< HEAD
 
-<<<<<<< HEAD
 
-           conn = DriverManager.getConnection(url, "sa", "123456");
-          
 
-=======
             conn = DriverManager.getConnection(url, "sa", "123456");
            
 
            
 
-=======
-            conn = DriverManager.getConnection(url, "sa", "123456");
->>>>>>> origin/viajesAlejandro
->>>>>>> parent of c526d95 (Cambios Alejandro)
+
         }
         catch(Exception ex)
         {
