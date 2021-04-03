@@ -25,7 +25,7 @@ public class FrmBuques extends javax.swing.JPanel {
     DefaultTableModel dm;
     private TableRowSorter TRSFiltro;
 
-    ClsConexion conn = new ClsConexion();
+   /* ClsConexion conn = new ClsConexion();*/
 
     FrmCamarotes frmcama = new FrmCamarotes();
     ClsHelper hp = new ClsHelper();
@@ -294,7 +294,7 @@ public class FrmBuques extends javax.swing.JPanel {
         }
 
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
             ps = cn.prepareStatement("select b.codigo_buque, \n"
                     + "b.descripcion, \n"
                     + "b.cantidad_camarotes, \n"
@@ -355,7 +355,7 @@ public class FrmBuques extends javax.swing.JPanel {
             int id = Integer.parseInt(tbBuque.getValueAt(fila, 0).toString());
 
             try {
-                Connection cn = conn.obtenerConexion();
+                Connection cn = ClsConexion.obtenerConexion();
 
                 btnAgregar.setVisible(false);
                 btnEditar.setVisible(false);

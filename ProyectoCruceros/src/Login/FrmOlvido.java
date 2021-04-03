@@ -192,7 +192,7 @@ public class FrmOlvido extends javax.swing.JFrame {
         PreparedStatement ps;
         ResultSet rs;
         
-        String query="select * from Olvido_Contrasenia where usuario=? and contrasenia=? ";
+        String query="select * from Usuarios where nombre_usuario=? and contrasenia=? ";
         try{
             Connection conn = ClsConexion.obtenerConexion();
             ps=conn.prepareStatement(query);

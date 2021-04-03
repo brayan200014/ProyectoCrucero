@@ -138,8 +138,8 @@ public class FrmCodigo extends javax.swing.JFrame {
         Random rand = new Random();
         randomCode= rand.nextInt(999999);
         String host="smtp.gmail.com";
-        String user="davidsalgado849@gmail.com";
-        String pass="";
+        String user="crucerohn504@gmail.com";
+        String pass="crucero12";
         String to = txtCorreo.getText();
         String asunto="Codigo para reseteo de contrasenia";
         String mensaje="¡Hola! Le saluda CruceroHn, esperamos se encuentre bien. \n El motivo de este mensaje es para informarle que usted está en el proceso de cambio de contraseña. \n A continuación su codigo de verificación para hacer posible el cambio del mismo, su codigo de verifación es : "+randomCode;

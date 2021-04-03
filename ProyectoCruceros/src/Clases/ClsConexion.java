@@ -14,16 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class ClsConexion {
     
-    static Connection conn = null;
+   static Connection conn = null;
 
     //metodos
-<<<<<<< HEAD
-    public Connection obtenerConexion() {
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=AgenciaDeViajes";
-=======
+
     public static Connection obtenerConexion() {
-        String url = "jdbc:sqlserver://DESKTOP-4O10KLU:1433;databaseName=AgenciaDeViajes";
->>>>>>> origin/ClientesDavid
+        String url = "jdbc:sqlserver://localhost:1433;databaseName=AgenciaDeViajes";
+
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -38,13 +35,12 @@ public class ClsConexion {
         
         try
         {
-<<<<<<< HEAD
+
             conn = DriverManager.getConnection(url, "sa", "123456");
              //JOptionPane.showMessageDialog(null,"Conexion con exito");
-=======
-            conn = DriverManager.getConnection(url, "sa", "12345");
+
             //JOptionPane.showMessageDialog(null,"Conexion con exito");
->>>>>>> origin/ClientesDavid
+
         }
         catch(Exception ex)
         {

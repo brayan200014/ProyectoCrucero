@@ -16,7 +16,7 @@ public class ClsHelper extends ClsConexion{
         
         try
         {
-            Connection cn = this.obtenerConexion();
+            Connection cn = obtenerConexion();
             
             String sql = "select [descripcion] from [dbo].[Tipo_Buque]";
             Statement st = cn.createStatement();
@@ -43,7 +43,7 @@ public class ClsHelper extends ClsConexion{
         
         try
         {
-            Connection cn = this.obtenerConexion();
+            Connection cn = obtenerConexion();
             
             String sql = "select descripcion from Buques where estado = 1";
             Statement st = cn.createStatement();
@@ -70,7 +70,7 @@ public class ClsHelper extends ClsConexion{
         
         try
         {
-            Connection cn = this.obtenerConexion();
+            Connection cn = obtenerConexion();
             
             String sql = "select descripcion from Tipo_Camarote";
             Statement st = cn.createStatement();

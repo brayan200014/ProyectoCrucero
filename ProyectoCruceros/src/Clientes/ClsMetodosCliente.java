@@ -6,19 +6,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-
+import java.sql.*;
 
 public class ClsMetodosCliente extends ClsClientes {
-    
+
+
     @Override
     public void Insertar(){
         try{
-  
+        
+
            Connection conn = ClsConexion.obtenerConexion();
-           PreparedStatement ps =conn.prepareStatement("INSERT INTO Clientes (nombre,apellido,fecha_nacimiento,identidad,sexo,telefono,correo_electronico,direccion,nacionalidad)VALUES(?,?,?,?,?,?,?,?,?)");
+           PreparedStatement ps =conn.prepareStatement("INSERT INTO Clientes (nombre,apellido,fecha_nacimiento,identidad,sexo,telefono,correo_electronico,direccion,nacionalidad)VALUES(?,?, TRY_CONVERT(DATE, ?),?,?,?,?,?,?)");
            ps.setString(1,nombre);
            ps.setString(2,apellido);
-           ps.setString(3, fecha_nacimiento);
+           ps.setString(3,fecha_nacimiento);
            ps.setString(4,identidad);
            ps.setString(5,sexo);
            ps.setString(6,telefono);
@@ -40,7 +42,7 @@ public class ClsMetodosCliente extends ClsClientes {
         try{
   
            Connection conn = ClsConexion.obtenerConexion();
-           PreparedStatement ps =conn.prepareStatement("UPDATE Clientes SET nombre=?,apellido=?,fecha_nacimiento=?,identidad=?,sexo=?,telefono=?,correo_electronico=?,direccion=?,nacionalidad=? where codigo_cliente=?");
+           PreparedStatement ps =conn.prepareStatement("UPDATE Clientes SET nombre=?,apellido=?,fecha_nacimiento=TRY_CONVERT(DATE, ?),identidad=?,sexo=?,telefono=?,correo_electronico=?,direccion=?,nacionalidad=? where codigo_cliente=?");
            ps.setString(1,nombre);
            ps.setString(2,apellido);
            ps.setString(3, fecha_nacimiento);

@@ -6,13 +6,13 @@ import javax.swing.JOptionPane;
 
 public class ClsMetodosCamarote extends ClsCamarote {
 
-    ClsConexion conn = new ClsConexion();
+   /* ClsConexion conn = new ClsConexion();*/
     ClsCamarote cama = new ClsCamarote();
 
     @Override
     public void insertarEditarCamarote() {
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
 
             PreparedStatement ps = cn.prepareStatement("insert into Camarote (codigo_tipo_camarote, codigo_buque, nivel, estado) values (?,?,?,?)");
 
@@ -32,7 +32,7 @@ public class ClsMetodosCamarote extends ClsCamarote {
 
     public void insertarEditarCamarote(int codigo) {
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
 
             PreparedStatement ps = cn.prepareStatement("update Camarote set codigo_tipo_camarote = ?, codigo_buque = ?, nivel = ? where codigo_camarote = ?");
 
@@ -55,7 +55,7 @@ public class ClsMetodosCamarote extends ClsCamarote {
     @Override
     public void eliminar() {
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
 
             PreparedStatement ps = cn.prepareStatement("update Camarote set estado = 0 where codigo_camarote = ?");
 

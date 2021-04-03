@@ -278,6 +278,7 @@ public class FrmClientes extends javax.swing.JPanel {
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 150, -1));
 
+        jDateNacimiento.setDateFormatString("yyyy/MM/dd");
         jDateNacimiento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jDateNacimiento.setMaxSelectableDate(new java.util.Date(1262329262000L));
         jDateNacimiento.setMinSelectableDate(new java.util.Date(-631126738000L));
@@ -287,14 +288,20 @@ public class FrmClientes extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("")
+ if (rbMasculino.isSelected() == false && rbFemenino.isSelected() == false )
+        {
+              JOptionPane.showMessageDialog(null, "Favor llenar todos los campos que se le pide");
+        }
+        else if (txtNombre.getText().equals("") || txtApellido.getText().equals("")
                 || txtIdentidad.getText().equals("") || txtTelefono.getText().equals("") || txtNacionalidad.getText().equals("")
-                || rbMasculino.isSelected() == false || rbFemenino.isSelected() == false || jDateNacimiento.getDate() == null || txtDireccion.getText().equals("") || txtCorreo.getText().equals("")) {
+                ||  jDateNacimiento.getDate() == null || txtDireccion.getText().equals("") || txtCorreo.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Favor llenar todos los campos que se le pide");
         } else {
-            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yy");
+            
+            
+            SimpleDateFormat dFormat = new SimpleDateFormat("yyyy/MM/dd");
             String fecha_nacimiento = dFormat.format(jDateNacimiento.getDate());
+            JOptionPane.showMessageDialog(null, fecha_nacimiento);
             String sexo = " ";
             if (rbMasculino.isSelected() == true) {
                 sexo = "Masculino";
@@ -308,9 +315,9 @@ public class FrmClientes extends javax.swing.JPanel {
             cli.setNacionalidad(txtNacionalidad.getText());
             cli.setDireccion(txtDireccion.getText());
             cli.setCorreo_electronico(txtCorreo.getText());
-            cli.setFecha_nacimiento(fecha_nacimiento);
+            cli.setFecha_nacimiento(""+fecha_nacimiento);
             cli.setSexo(sexo);
-
+             JOptionPane.showMessageDialog(null, cli.getFecha_nacimiento());
             meCli.Insertar();
             cargarTabla();
             LimpiarRegistro();
@@ -364,14 +371,21 @@ public class FrmClientes extends javax.swing.JPanel {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        if (txtNombre.getText().equals("") || txtApellido.getText().equals("")
+        if (rbMasculino.isSelected() == false && rbFemenino.isSelected() == false )
+        {
+              JOptionPane.showMessageDialog(null, "Favor llenar todos los campos que se le pide");
+        }
+        
+        else if (txtNombre.getText().equals("") || txtApellido.getText().equals("")
                 || txtIdentidad.getText().equals("") || txtTelefono.getText().equals("") || txtNacionalidad.getText().equals("")
-                || rbMasculino.isSelected() == false || rbFemenino.isSelected() == false || jDateNacimiento.getDate() == null 
+                || jDateNacimiento.getDate() == null 
                 || txtDireccion.getText().equals("") || txtCorreo.getText().equals("")) {
             JOptionPane.showMessageDialog(null, "Favor llenar todos los campos que se le pide");
         } else {
-            SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yy");
-            String fecha_nacimiento = dFormat.format(jDateNacimiento.getDate());
+            
+           SimpleDateFormat dFormat = new SimpleDateFormat("yyyy/MM/dd");
+           String fecha_nacimiento = dFormat.format(jDateNacimiento.getDate());
+           
             String sexo = " ";
             if (rbMasculino.isSelected() == true) {
                 sexo = "Masculino";
@@ -390,7 +404,7 @@ public class FrmClientes extends javax.swing.JPanel {
             cli.setNacionalidad(txtNacionalidad.getText());
             cli.setDireccion(txtDireccion.getText());
             cli.setCorreo_electronico(txtCorreo.getText());
-            cli.setFecha_nacimiento(fecha_nacimiento);
+            cli.setFecha_nacimiento(""+fecha_nacimiento);
             cli.setSexo(sexo);
 
             meCli.Actualizar();

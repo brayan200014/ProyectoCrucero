@@ -1,6 +1,8 @@
 
 package Clientes;
 
+import java.util.Date;
+
 
 public class ClsClientes {
     protected static int id;
@@ -21,6 +23,17 @@ public class ClsClientes {
     protected static String nacionalidad;
     protected static String correo_electronico;
     protected static String fecha_nacimiento;
+    
+    
+    public String getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    public void setFecha_nacimiento(String fecha_nacimiento) {
+        ClsClientes.fecha_nacimiento = fecha_nacimiento;
+    }
+   
+   
 
     public String getNombre() {
         return nombre;
@@ -86,13 +99,8 @@ public class ClsClientes {
         ClsClientes.correo_electronico = correo_electronico;
     }
 
-    public String getFecha_nacimiento() {
-        return fecha_nacimiento;
-    }
-
-    public void setFecha_nacimiento(String fecha_nacimiento) {
-        ClsClientes.fecha_nacimiento = fecha_nacimiento;
-    }
+   
+   
     
     
     

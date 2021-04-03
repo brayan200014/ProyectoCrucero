@@ -23,7 +23,7 @@ import javax.swing.table.*;
  */
 public class FrmCamarotes extends javax.swing.JPanel {
 
-    private ClsConexion conn = new ClsConexion();
+  /*  private ClsConexion conn = new ClsConexion();*/
     ClsHelper hp = new ClsHelper();
     ClsCamarote cama = new ClsCamarote();
     ClsMetodosCamarote metcama = new ClsMetodosCamarote();
@@ -256,7 +256,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
             tbCamarote.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
             ps = cn.prepareStatement("select c.codigo_camarote,\n"
                     + "tc.descripcion,\n"
                     + "tc.precio_unitario,\n"
@@ -291,7 +291,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
         ResultSet rs;
 
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
 
             PreparedStatement ps = cn.prepareStatement("select precio_unitario from Tipo_Camarote where descripcion = ?");
 
@@ -317,7 +317,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         ResultSet rs;
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
 
             PreparedStatement ps = cn.prepareStatement("select cantidad_niveles from Buques where descripcion = ?");
 
@@ -344,7 +344,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
 
         ResultSet rs;
         try {
-            Connection cn = conn.obtenerConexion();
+            Connection cn = ClsConexion.obtenerConexion();
 
             PreparedStatement ps = cn.prepareStatement("select codigo_buque from [dbo].[Buques] where descripcion = ? and estado = 1");
 
@@ -409,7 +409,7 @@ public class FrmCamarotes extends javax.swing.JPanel {
             int id = Integer.parseInt(tbCamarote.getValueAt(fila, 0).toString());
 
             try {
-                Connection cn = conn.obtenerConexion();
+                Connection cn = ClsConexion.obtenerConexion();
 
                 btnAgregar1.setVisible(false);
                 btnEditar.setVisible(false);

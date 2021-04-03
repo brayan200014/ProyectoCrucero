@@ -131,7 +131,7 @@ public class FrmReset extends javax.swing.JFrame {
                 //String updateQuery="UPDATE Olvido_Contrasenia SET contrasenia=? where usuario="+user+"";
                 //JOptionPane.showMessageDialog(null, user);
                 Connection conn = ClsConexion.obtenerConexion();
-                ps=conn.prepareStatement("UPDATE Olvido_Contrasenia SET contrasenia=? where usuario=?");
+                ps=conn.prepareStatement("UPDATE Usuarios SET contrasenia=? where nombre_usuario=?");
                 ps.setString(1, txtVerificarContra.getText());
                 ps.setString(2,user);
                 ps.executeUpdate();
