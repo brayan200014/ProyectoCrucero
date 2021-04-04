@@ -112,19 +112,25 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="11" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel2" pref="0" max="32767" attributes="0"/>
-                          <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnUsuarios" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnEmpleados" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnBuques" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnCamarotes" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnViajes" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnDisponiblesViajes" alignment="0" pref="165" max="32767" attributes="0"/>
-                          <Component id="btnVentas" alignment="0" max="32767" attributes="0"/>
-                          <Component id="btnDestinos" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel2" pref="0" max="32767" attributes="0"/>
+                                  <Component id="btnCliente" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnUsuarios" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnEmpleados" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnBuques" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnCamarotes" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnViajes" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnDisponiblesViajes" alignment="0" pref="165" max="32767" attributes="0"/>
+                                  <Component id="btnVentas" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="btnDestinos" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="btnListados" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -153,7 +159,9 @@
                       <Component id="btnVentas" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnDestinos" min="-2" pref="36" max="-2" attributes="0"/>
-                      <EmptySpace pref="143" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnListados" min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace pref="101" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -319,6 +327,23 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Img/Proyecto 1 (2).png"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnListados">
+              <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="f6" green="c8" red="a0" type="rgb"/>
+                </Property>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Century Gothic" size="11" style="0"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Listados"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="null"/>
+                </Property>
+                <Property name="borderPainted" type="boolean" value="false"/>
+                <Property name="contentAreaFilled" type="boolean" value="false"/>
+                <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
           </SubComponents>

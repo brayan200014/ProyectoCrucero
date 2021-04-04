@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package Forms;
-
 import Clases.ClsConexion;
 import Ventas.ClsVentas;
 import java.awt.Dialog;
@@ -15,7 +14,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author BRAYAN HERNADEZ
@@ -26,12 +24,10 @@ public class FrmVentas extends javax.swing.JPanel {
      * Creates new form FrmVentas
      */
     ClsConexion conexion = new ClsConexion();
-    ClsVentas ventas = new ClsVentas();
+    ClsVentas ventas = new ClsVentas(); 
     DefaultTableModel modelo;
-   
-/*Comentario hola*/
-    float subtotal;
-
+     float subtotal;
+     
     public FrmVentas() {
         initComponents();
         comboboxTipo.setModel(ventas.getValues());
@@ -42,9 +38,6 @@ public class FrmVentas extends javax.swing.JPanel {
         btnConfirmar.setEnabled(false);
         btnAgregarCam.setEnabled(false);
         btnEliminarCam.setEnabled(false);
-
-        // camarotes= new DefaultListModel();
-        // listSelectCam.setModel(camarotes);
     }
 
     /**
@@ -56,11 +49,12 @@ public class FrmVentas extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtIdentidad = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtCodigoViaje = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         spinCantidadCam = new javax.swing.JSpinner();
         spinCantidadPer = new javax.swing.JSpinner();
@@ -73,7 +67,7 @@ public class FrmVentas extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableDetalle = new javax.swing.JTable();
         jTabbedPane2 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -98,16 +92,16 @@ public class FrmVentas extends javax.swing.JPanel {
         lblRegreso = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         btnVerificarDisponibilidad = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
+        btnBuscar1 = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(96, 203, 249));
-        setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.setBackground(new java.awt.Color(96, 203, 249));
+        jPanel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Identidad:");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 27, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 27, -1, -1));
 
         txtIdentidad.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtIdentidad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -115,11 +109,11 @@ public class FrmVentas extends javax.swing.JPanel {
                 txtIdentidadKeyTyped(evt);
             }
         });
-        add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 24, 280, -1));
+        jPanel1.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 24, 280, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel2.setText("Codigo Viaje:");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 27, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 27, -1, -1));
 
         txtCodigoViaje.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtCodigoViaje.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -127,38 +121,38 @@ public class FrmVentas extends javax.swing.JPanel {
                 txtCodigoViajeKeyTyped(evt);
             }
         });
-        add(txtCodigoViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 24, 280, -1));
+        jPanel1.add(txtCodigoViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 24, 280, -1));
 
-        jPanel1.setBackground(new java.awt.Color(38, 151, 186));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel2.setBackground(new java.awt.Color(38, 151, 186));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel4.setText("Cantidad de Camarotes:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 11, -1, -1));
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 11, -1, -1));
 
         spinCantidadCam.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spinCantidadCam.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
-        jPanel1.add(spinCantidadCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 45, 284, 27));
+        jPanel2.add(spinCantidadCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 45, 284, 27));
 
         spinCantidadPer.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         spinCantidadPer.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 4));
-        jPanel1.add(spinCantidadPer, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 123, 284, 27));
+        jPanel2.add(spinCantidadPer, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 123, 284, 27));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel5.setText("Cantidad de Personas:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 94, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(21, 94, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel6.setText("Tipo de Camarote:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 11, -1, -1));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 11, -1, -1));
 
         comboboxTipo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         comboboxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(comboboxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 47, 223, -1));
+        jPanel2.add(comboboxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 47, 223, -1));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel7.setText("Camarotes Seleccionados:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 81, -1, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 81, -1, -1));
 
         btnAgregarCam.setBackground(new java.awt.Color(12, 69, 104));
         btnAgregarCam.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
@@ -170,7 +164,7 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnAgregarCamActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(656, 49, -1, -1));
+        jPanel2.add(btnAgregarCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(656, 49, -1, -1));
 
         btnEliminarCam.setBackground(new java.awt.Color(12, 69, 104));
         btnEliminarCam.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
@@ -182,7 +176,7 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnEliminarCamActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminarCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 49, -1, -1));
+        jPanel2.add(btnEliminarCam, new org.netbeans.lib.awtextra.AbsoluteConstraints(749, 49, -1, -1));
 
         tableDetalle.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -210,107 +204,107 @@ public class FrmVentas extends javax.swing.JPanel {
         tableDetalle.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(tableDetalle);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 110, 420, 90));
-        jPanel1.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, -1, -1));
+        jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 110, 420, 90));
+        jPanel2.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, -1, -1));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 870, 210));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 870, 210));
 
-        jPanel2.setBackground(new java.awt.Color(38, 151, 186));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.setBackground(new java.awt.Color(38, 151, 186));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel8.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel8.setText("Descuento:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 40, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel9.setText("Impuesto Portuario:");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel10.setText("Subtotal:");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, -1));
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 0, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel11.setText("Total:");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, -1, -1));
+        jPanel3.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 190, -1, -1));
 
         lblPuerto.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblPuerto.setText("-");
-        jPanel2.add(lblPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 190, -1));
+        jPanel3.add(lblPuerto, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 190, -1));
 
         lblSubtotal.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblSubtotal.setText("0.00");
-        jPanel2.add(lblSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, -1, -1));
+        jPanel3.add(lblSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 0, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel14.setText("Puerto Salida:");
-        jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        jPanel3.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel15.setText("Impuesto Venta:");
-        jPanel2.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
+        jPanel3.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel16.setText("Nombre Cliente:");
-        jPanel2.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 0, -1, -1));
+        jPanel3.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 0, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel17.setText("Nombre Empleado:");
-        jPanel2.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 41, -1, -1));
+        jPanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(82, 41, -1, -1));
 
         jLabel18.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel18.setText("Fecha Salida:");
-        jPanel2.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
+        jPanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 80, -1, -1));
 
         jLabel19.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel19.setText("Fecha Regreso:");
-        jPanel2.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
+        jPanel3.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 120, -1, -1));
 
         lblSalida.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblSalida.setText("-");
-        jPanel2.add(lblSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 200, -1));
+        jPanel3.add(lblSalida, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 200, -1));
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblNombre.setText("-");
-        jPanel2.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 0, 240, -1));
+        jPanel3.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 0, 240, -1));
 
         lblDescuento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblDescuento.setText("0.00");
-        jPanel2.add(lblDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, -1, -1));
+        jPanel3.add(lblDescuento, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, -1, -1));
 
         lblPortuario.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblPortuario.setText("0.00");
-        jPanel2.add(lblPortuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
+        jPanel3.add(lblPortuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, -1, -1));
 
         lblisv.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblisv.setText("0.00");
-        jPanel2.add(lblisv, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, -1, -1));
+        jPanel3.add(lblisv, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 120, -1, -1));
 
         lblTotal.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblTotal.setText("0.00");
-        jPanel2.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
+        jPanel3.add(lblTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
 
         lblEmpleado.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblEmpleado.setText("-");
-        jPanel2.add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 41, 250, -1));
+        jPanel3.add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(271, 41, 250, -1));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel12.setText("Propina:");
-        jPanel2.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, -1, -1));
+        jPanel3.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, -1, -1));
 
         lblPropina.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblPropina.setText("0.00");
-        jPanel2.add(lblPropina, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 160, -1, -1));
+        jPanel3.add(lblPropina, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 160, -1, -1));
 
         lblRegreso.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         lblRegreso.setText("-");
-        jPanel2.add(lblRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 200, -1));
+        jPanel3.add(lblRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 200, -1));
 
-        add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 868, 220));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 868, 220));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel3.setText("Factura a Realizar");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 268, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 268, -1, -1));
 
         btnVerificarDisponibilidad.setBackground(new java.awt.Color(12, 69, 104));
         btnVerificarDisponibilidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -322,17 +316,7 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnVerificarDisponibilidadActionPerformed(evt);
             }
         });
-        add(btnVerificarDisponibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, -1, -1));
-
-        btnBuscar.setBackground(new java.awt.Color(96, 203, 249));
-        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Vector (1).png"))); // NOI18N
-        btnBuscar.setBorderPainted(false);
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
-        add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(873, 24, 30, 29));
+        jPanel1.add(btnVerificarDisponibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, -1, -1));
 
         btnConfirmar.setBackground(new java.awt.Color(12, 69, 104));
         btnConfirmar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -344,111 +328,28 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnConfirmarActionPerformed(evt);
             }
         });
-        add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, -1, -1));
+        jPanel1.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, -1, -1));
+
+        btnBuscar1.setBackground(new java.awt.Color(96, 203, 249));
+        btnBuscar1.setBorderPainted(false);
+        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(873, 24, 30, 29));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
     }// </editor-fold>//GEN-END:initComponents
-
-
-    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
-        String identidad = txtIdentidad.getText();
-        String codigo = txtCodigoViaje.getText();
-        int cod= Integer.parseInt(txtCodigoViaje.getText());
-        ventas.setIdentidad(identidad);
-        ventas.setCodigo_viaje(cod);
-        if (identidad.isEmpty() || codigo.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Faltan Datos Por Ingresar"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else if (identidad.length() < 13 || identidad.length() > 13) {
-            JOptionPane.showMessageDialog(null, "La identidad debe contener 13 caracteres"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else if(ventas.nombreCliente()== null)
-        {
-             JOptionPane.showMessageDialog(null, "El cliente no existe en la base de datos"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        }
-        else if(ventas.infoViaje()==0)
-        { JOptionPane.showMessageDialog(null, "Codigo de viaje ingresado es incorrecto"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        else {
-            ventas.setIdentidad(txtIdentidad.getText());
-            ventas.setCodigo_viaje(Integer.parseInt(txtCodigoViaje.getText()));
-            ventas.infoViaje();
-            lblNombre.setText(ventas.nombreCliente());
-            lblPuerto.setText(ventas.getPuerto_salida());
-            lblRegreso.setText(ventas.getFecha_regreso().toString());
-            lblSalida.setText(ventas.getFecha_salida().toString());
-            lblEmpleado.setText(ventas.nombreEmpleado(2));
-            btnVerificarDisponibilidad.setEnabled(true);
-            btnConfirmar.setEnabled(false);
-            btnAgregarCam.setEnabled(true);
-            btnEliminarCam.setEnabled(true);
-        }
-    }//GEN-LAST:event_btnBuscarActionPerformed
-
-    private void btnAgregarCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCamActionPerformed
-        // TODO add your handling code here:
-
-        if (Integer.parseInt(spinCantidadCam.getValue().toString()) == 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un valor en Cantidad de camarotes"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else if (Integer.parseInt(spinCantidadPer.getValue().toString()) == 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar un valor en Cantidad de Personas"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else if (comboboxTipo.getSelectedIndex() == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione un valor en el combo box de tipo camarote"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else {
-            ventas.setCantidad_camarotes((int) spinCantidadCam.getValue());
-            ventas.setCantidad_personas((int) spinCantidadPer.getValue());
-            ventas.setTipo_camarote(comboboxTipo.getSelectedItem().toString());
-
-            modelo = (DefaultTableModel) tableDetalle.getModel();
-            modelo.addRow(new Object[]{String.valueOf(ventas.getCantidad_personas()),
-                String.valueOf(ventas.getCantidad_camarotes()), ventas.getTipo_camarote()});
-
-            subtotal = subtotal + ventas.precioExtraer();
-            ventas.setSubtotal(subtotal);
-            lblSubtotal.setText(String.valueOf(subtotal));
-            lblDescuento.setText(String.valueOf(ventas.calculoDescuento()));
-            lblisv.setText(String.valueOf(ventas.calculoIsv()));
-            lblPortuario.setText(String.valueOf(ventas.calculoImpuestoPortuario()));
-            lblPropina.setText(String.valueOf(ventas.calculoPropina()));
-            lblTotal.setText(String.valueOf(ventas.calculoTotal()));
-
-            spinCantidadCam.setValue(0);
-            spinCantidadPer.setValue(0);
-            comboboxTipo.setSelectedIndex(-1);
-        }
-    }//GEN-LAST:event_btnAgregarCamActionPerformed
-
-    private void btnEliminarCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCamActionPerformed
-
-        int fila = tableDetalle.getSelectedRow();
-        if (fila == -1) {
-            JOptionPane.showMessageDialog(null, "Seleccione una fila a eliminar"
-                    + "", "Warning", JOptionPane.ERROR_MESSAGE);
-        } else {
-            ventas.setCantidad_camarotes(Integer.parseInt(tableDetalle.getValueAt(fila, 1).toString()));
-            ventas.setCantidad_personas(Integer.parseInt(tableDetalle.getValueAt(fila, 0).toString()));
-            ventas.setTipo_camarote(String.valueOf(tableDetalle.getValueAt(fila, 2)));
-            subtotal = subtotal - ventas.precioExtraer();
-            ventas.setSubtotal(subtotal);
-            lblSubtotal.setText(String.valueOf(ventas.getSubtotal()));
-            lblDescuento.setText(String.valueOf(ventas.calculoDescuento()));
-            lblisv.setText(String.valueOf(ventas.calculoIsv()));
-            lblPortuario.setText(String.valueOf(ventas.calculoImpuestoPortuario()));
-            lblPropina.setText(String.valueOf(ventas.calculoPropina()));
-            lblTotal.setText(String.valueOf(ventas.calculoTotal()));
-
-            modelo = (DefaultTableModel) tableDetalle.getModel();
-            modelo.removeRow(fila);
-
-        }
-
-    }//GEN-LAST:event_btnEliminarCamActionPerformed
-
 
     private void txtIdentidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdentidadKeyTyped
         // TODO add your handling code here:
@@ -469,6 +370,67 @@ public class FrmVentas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_txtCodigoViajeKeyTyped
 
+    private void btnAgregarCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarCamActionPerformed
+        // TODO add your handling code here:
+
+        if (Integer.parseInt(spinCantidadCam.getValue().toString()) == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un valor en Cantidad de camarotes"
+                + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else if (Integer.parseInt(spinCantidadPer.getValue().toString()) == 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un valor en Cantidad de Personas"
+                + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else if (comboboxTipo.getSelectedIndex() == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione un valor en el combo box de tipo camarote"
+                + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ventas.setCantidad_camarotes((int) spinCantidadCam.getValue());
+            ventas.setCantidad_personas((int) spinCantidadPer.getValue());
+            ventas.setTipo_camarote(comboboxTipo.getSelectedItem().toString());
+
+            modelo = (DefaultTableModel) tableDetalle.getModel();
+            modelo.addRow(new Object[]{String.valueOf(ventas.getCantidad_personas()),
+                String.valueOf(ventas.getCantidad_camarotes()), ventas.getTipo_camarote()});
+
+        subtotal = subtotal + ventas.precioExtraer();
+        ventas.setSubtotal(subtotal);
+        lblSubtotal.setText(String.valueOf(subtotal));
+        lblDescuento.setText(String.valueOf(ventas.calculoDescuento()));
+        lblisv.setText(String.valueOf(ventas.calculoIsv()));
+        lblPortuario.setText(String.valueOf(ventas.calculoImpuestoPortuario()));
+        lblPropina.setText(String.valueOf(ventas.calculoPropina()));
+        lblTotal.setText(String.valueOf(ventas.calculoTotal()));
+
+        spinCantidadCam.setValue(0);
+        spinCantidadPer.setValue(0);
+        comboboxTipo.setSelectedIndex(-1);
+        }
+    }//GEN-LAST:event_btnAgregarCamActionPerformed
+
+    private void btnEliminarCamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCamActionPerformed
+
+        int fila = tableDetalle.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Seleccione una fila a eliminar"
+                + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else {
+            ventas.setCantidad_camarotes(Integer.parseInt(tableDetalle.getValueAt(fila, 1).toString()));
+            ventas.setCantidad_personas(Integer.parseInt(tableDetalle.getValueAt(fila, 0).toString()));
+            ventas.setTipo_camarote(String.valueOf(tableDetalle.getValueAt(fila, 2)));
+            subtotal = subtotal - ventas.precioExtraer();
+            ventas.setSubtotal(subtotal);
+            lblSubtotal.setText(String.valueOf(ventas.getSubtotal()));
+            lblDescuento.setText(String.valueOf(ventas.calculoDescuento()));
+            lblisv.setText(String.valueOf(ventas.calculoIsv()));
+            lblPortuario.setText(String.valueOf(ventas.calculoImpuestoPortuario()));
+            lblPropina.setText(String.valueOf(ventas.calculoPropina()));
+            lblTotal.setText(String.valueOf(ventas.calculoTotal()));
+
+            modelo = (DefaultTableModel) tableDetalle.getModel();
+            modelo.removeRow(fila);
+
+        }
+    }//GEN-LAST:event_btnEliminarCamActionPerformed
+
     private void btnVerificarDisponibilidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarDisponibilidadActionPerformed
         // TODO add your handling code here:
         ArrayList<Integer> camarotes = new ArrayList<Integer>();
@@ -482,22 +444,18 @@ public class FrmVentas extends javax.swing.JPanel {
 
                 if (camarotes.size() < Integer.parseInt(tableDetalle.getValueAt(i, 1).toString())) {
                     JOptionPane.showMessageDialog(null, "No hay Suficientes camarotes para  " + ventas.getTipo_camarote()+"  Eliminar de la lista");
-                   
+
                 }
 
                 camarotes.clear();
             }
             btnConfirmar.setEnabled(true);
         }
-        
     }//GEN-LAST:event_btnVerificarDisponibilidadActionPerformed
 
-    
-    
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         // TODO add your handling code here:
-       
-        
+
         ArrayList<Integer> camarotes = new ArrayList<Integer>();
         int cantidad;
         if (tableDetalle.getRowCount() == 0) {
@@ -510,29 +468,27 @@ public class FrmVentas extends javax.swing.JPanel {
             ventas.setPropina(Float.parseFloat(lblPropina.getText()));
             ventas.insertarVenta(2);
             int codigo_venta= ventas.extraerCodigoVenta();
-            
+
             for (int i = 0; i < tableDetalle.getRowCount(); i++) {
-            
+
                 ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
                 camarotes.addAll(ventas.codigosCamarotes(Integer.parseInt(tableDetalle.getValueAt(i, 1).toString())));
 
                 for (int j = 0; j < Integer.parseInt(tableDetalle.getValueAt(i, 1).toString()); j++) {
-                  
-                       
-                        do
+
+                    do
+                    {
+                        cantidad=Integer.parseInt(JOptionPane.showInputDialog(null, "Distribucion para la "+i+" Habitacion"));
+                        ventas.setCantidad_personas(cantidad);
+                        if(cantidad<=0 || cantidad>4)
                         {
-                            cantidad=Integer.parseInt(JOptionPane.showInputDialog(null, "Distribucion para la "+i+" Habitacion"));
-                            ventas.setCantidad_personas(cantidad);
-                            if(cantidad<=0 || cantidad>4)
-                            {
-                                JOptionPane.showMessageDialog(null, "Minimo y maximo de personas por habitacion 4, por lo tanto ingrese un valor entre 1 y 4");
-                            }
-                        }while(cantidad<=0 || cantidad>4);
-                        
-                          
-                        ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
-                        JOptionPane.showMessageDialog(null, camarotes.get(j));
-                        ventas.insertarDetalle(codigo_venta, camarotes.get(j));
+                            JOptionPane.showMessageDialog(null, "Minimo y maximo de personas por habitacion 4, por lo tanto ingrese un valor entre 1 y 4");
+                        }
+                    }while(cantidad<=0 || cantidad>4);
+
+                    ventas.setTipo_camarote(tableDetalle.getValueAt(i, 2).toString());
+                    JOptionPane.showMessageDialog(null, camarotes.get(j));
+                    ventas.insertarDetalle(codigo_venta, camarotes.get(j));
 
                 }
 
@@ -540,14 +496,13 @@ public class FrmVentas extends javax.swing.JPanel {
             }
 
         }
-       
-         FrmFactura factura= new FrmFactura(lblNombre.getText(), lblEmpleado.getText());
-         factura.setVisible(true);
-         limpiarControles();
-        
-        
+
+        FrmFactura factura= new FrmFactura(lblNombre.getText(), lblEmpleado.getText());
+        factura.setVisible(true);
+        limpiarControles();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    
     private void limpiarControles()
     {
         lblSubtotal.setText("0.00");
@@ -575,10 +530,50 @@ public class FrmVentas extends javax.swing.JPanel {
         }
         
     }
+    
+    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        // TODO add your handling code here:
+        String identidad = txtIdentidad.getText();
+        String codigo = txtCodigoViaje.getText();
+        int cod= Integer.parseInt(txtCodigoViaje.getText());
+        ventas.setIdentidad(identidad);
+        ventas.setCodigo_viaje(cod);
+        if (identidad.isEmpty() || codigo.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Faltan Datos Por Ingresar"
+                + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else if (identidad.length() < 13 || identidad.length() > 13) {
+            JOptionPane.showMessageDialog(null, "La identidad debe contener 13 caracteres"
+                + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else if(ventas.nombreCliente()== null)
+        {
+            JOptionPane.showMessageDialog(null, "El cliente no existe en la base de datos"
+                + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        }
+        else if(ventas.infoViaje()==0)
+        { JOptionPane.showMessageDialog(null, "Codigo de viaje ingresado es incorrecto"
+            + "", "Warning", JOptionPane.ERROR_MESSAGE);
+        }
+
+        else {
+            ventas.setIdentidad(txtIdentidad.getText());
+            ventas.setCodigo_viaje(Integer.parseInt(txtCodigoViaje.getText()));
+            ventas.infoViaje();
+            lblNombre.setText(ventas.nombreCliente());
+            lblPuerto.setText(ventas.getPuerto_salida());
+            lblRegreso.setText(ventas.getFecha_regreso().toString());
+            lblSalida.setText(ventas.getFecha_salida().toString());
+            lblEmpleado.setText(ventas.nombreEmpleado(2));
+            btnVerificarDisponibilidad.setEnabled(true);
+            btnConfirmar.setEnabled(false);
+            btnAgregarCam.setEnabled(true);
+            btnEliminarCam.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnBuscar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarCam;
-    private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnConfirmar;
     private javax.swing.JButton btnEliminarCam;
     private javax.swing.JButton btnVerificarDisponibilidad;
@@ -603,6 +598,7 @@ public class FrmVentas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblDescuento;
