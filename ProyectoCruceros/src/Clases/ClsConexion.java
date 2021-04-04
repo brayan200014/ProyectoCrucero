@@ -9,16 +9,18 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 
 /**
- *
+ *e
  * @author BRAYAN HERNADEZ
  */
 public class ClsConexion {
     
-    static Connection conn = null;
+   static Connection conn = null;
 
     //metodos
+
     public static Connection obtenerConexion() {
         String url = "jdbc:sqlserver://localhost:1433;databaseName=AgenciaDeViajes";
+
 
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -33,14 +35,12 @@ public class ClsConexion {
         
         try
         {
-
             conn = DriverManager.getConnection(url, "sa", "123456");
            
-
         }
         catch(Exception ex)
         {
-             JOptionPane.showMessageDialog(null,"Error de conexion");
+             JOptionPane.showMessageDialog(null,"Error de conexion"+ex);
         }
         
         return conn;

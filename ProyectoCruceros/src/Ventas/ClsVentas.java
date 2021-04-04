@@ -191,16 +191,9 @@ public class ClsVentas extends ClsVentasMetodos{
     }
 
 
-    public ClsConexion getConexion() {
-        return conexion;
-    }
-
-    public void setConexion(ClsConexion conexion) {
-        this.conexion = conexion;
-    }
+   
      
-     
-     ClsConexion conexion= new ClsConexion();
+    /* ClsConexion conexion= new ClsConexion();*/
      PreparedStatement ps= null;
      ResultSet rs; 
      ResultSetMetaData rsmd;
@@ -211,7 +204,7 @@ public class ClsVentas extends ClsVentasMetodos{
         codigo= 2;
      
         try {
-            Connection con= conexion.obtenerConexion();
+            Connection con= ClsConexion.obtenerConexion();
             ps= con.prepareStatement("execute infoEmpleado ?");
             ps.setInt(1,codigo);
             rs= ps.executeQuery();
@@ -235,7 +228,7 @@ public class ClsVentas extends ClsVentasMetodos{
         String nombre= null;
      
         try {
-            Connection con= conexion.obtenerConexion();
+            Connection con= ClsConexion.obtenerConexion();
             ps= con.prepareStatement("execute infoCliente ?");
             ps.setString(1,identidad);
             rs= ps.executeQuery();
@@ -261,7 +254,7 @@ public class ClsVentas extends ClsVentasMetodos{
     { 
         int codigo=0;
         try {
-            Connection con= conexion.obtenerConexion();
+            Connection con= ClsConexion.obtenerConexion();
             ps= con.prepareStatement("execute datosViajesVenta ?");
             ps.setInt(1,codigo_viaje);
             rs= ps.executeQuery();
@@ -288,7 +281,7 @@ public class ClsVentas extends ClsVentasMetodos{
         String nombre= null;
      
         try {
-            Connection con= conexion.obtenerConexion();
+            Connection con= ClsConexion.obtenerConexion();
             ps= con.prepareStatement("  SELECT descripcion FROM [dbo].[Buques] where codigo_buque= ?");
             ps.setInt(1,codigo_buque);
             rs= ps.executeQuery();
@@ -309,7 +302,7 @@ public class ClsVentas extends ClsVentasMetodos{
          DefaultComboBoxModel modelo= new DefaultComboBoxModel();
          try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
              ps=con.prepareStatement("select descripcion from [dbo].[Tipo_Camarote]");
              rs= ps.executeQuery();
              while(rs.next())
@@ -333,7 +326,7 @@ public class ClsVentas extends ClsVentasMetodos{
        
          try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
              ps=con.prepareStatement("select precio_unitario from [dbo].[Tipo_Camarote] where descripcion= ?");
              ps.setString(1, tipo_camarote);
              rs= ps.executeQuery();
@@ -359,7 +352,7 @@ public class ClsVentas extends ClsVentasMetodos{
          codigo=2;
          try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
              ps= con.prepareStatement("execute insertarVenta ?,?,?,?,?,?,?,?");
              ps.setInt(1, codigo_cliente);
              ps.setInt(2,codigo_viaje);
@@ -385,7 +378,7 @@ public class ClsVentas extends ClsVentasMetodos{
          int codigoVenta=0;
          try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
              ps= con.prepareStatement("SELECT IDENT_CURRENT('Ventas')CodigoVenta");
              rs=ps.executeQuery();
              while(rs.next())
@@ -408,7 +401,7 @@ public class ClsVentas extends ClsVentasMetodos{
         
            try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
              ps= con.prepareStatement("execute extraerCodigoCamarotes ?,?,?,?");
              ps.setInt(1, codigo_viaje);
              ps.setInt(2, codigo_buque);
@@ -444,7 +437,7 @@ public class ClsVentas extends ClsVentasMetodos{
      {
          try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
               ps=con.prepareStatement("execute insertarDetalleVenta ?,?,?,?,?");
               ps.setInt(1, codigo_viaje);
               ps.setInt(2, codigoVenta);
@@ -505,7 +498,7 @@ public class ClsVentas extends ClsVentasMetodos{
      {
          try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
               ps=con.prepareStatement("DELETE FROM Ventas WHERE "
                       + "codigo_viaje=(SELECT IDENT_CURRENT('Ventas'))");
               ps.executeUpdate();

@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
 public class FrmDetalleVentas extends javax.swing.JFrame {
 
     
-     ClsConexion conexion= new ClsConexion();
+    
      PreparedStatement ps= null;
      ResultSet rs; 
      ResultSetMetaData rsmd;
@@ -51,7 +51,7 @@ public class FrmDetalleVentas extends javax.swing.JFrame {
       modelo.setRowCount(0);
         try 
          {
-             Connection con= conexion.obtenerConexion();
+             Connection con= ClsConexion.obtenerConexion();
             ps=con.prepareStatement("execute cargarDatosVentasDetalle ?");
             ps.setInt(1, codigo);
              rs=ps.executeQuery();
@@ -78,7 +78,7 @@ public class FrmDetalleVentas extends javax.swing.JFrame {
         String nombre= null;
      
         try {
-            Connection con= conexion.obtenerConexion();
+            Connection con= ClsConexion.obtenerConexion();
             ps= con.prepareStatement("execute infoCliente ?");
             ps.setString(1,identidad);
             rs= ps.executeQuery();
