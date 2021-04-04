@@ -26,7 +26,7 @@ import javax.swing.table.TableRowSorter;
 public class FrmListadoVentas extends javax.swing.JPanel {
   
 
-    private TableRowSorter TRSFfilter;
+    private TableRowSorter TRSFiltro;
     
      PreparedStatement ps= null;
      ResultSet rs; 
@@ -39,11 +39,11 @@ public class FrmListadoVentas extends javax.swing.JPanel {
      */
     public FrmListadoVentas() {
         initComponents();
-       cargardatos();
+       cargardatosVentas();
      
     }
 
-    private void cargardatos()
+    private void cargardatosVentas()
     {
        int columnas;
       DefaultTableModel modelo= (DefaultTableModel) tableVentas.getModel();
@@ -72,10 +72,10 @@ public class FrmListadoVentas extends javax.swing.JPanel {
         
     }
     
-    public void Filtro()
+    public void FiltroListadoVentas()
     {
         int columnas= 2;
-                TRSFfilter.setRowFilter(RowFilter.regexFilter(txtBuscar.getText(),columnas));
+                TRSFiltro.setRowFilter(RowFilter.regexFilter(txtBuscarVentas.getText(),columnas));
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -89,7 +89,7 @@ public class FrmListadoVentas extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableVentas = new javax.swing.JTable();
-        txtBuscar = new javax.swing.JTextField();
+        txtBuscarVentas = new javax.swing.JTextField();
         btnVerDetalle = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(96, 203, 249));
@@ -136,10 +136,10 @@ public class FrmListadoVentas extends javax.swing.JPanel {
             tableVentas.getColumnModel().getColumn(10).setResizable(false);
         }
 
-        txtBuscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtBuscarVentas.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        txtBuscarVentas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtBuscarKeyTyped(evt);
+                txtBuscarVentasKeyTyped(evt);
             }
         });
 
@@ -165,7 +165,7 @@ public class FrmListadoVentas extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtBuscarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 773, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -177,7 +177,7 @@ public class FrmListadoVentas extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBuscarVentas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,20 +187,20 @@ public class FrmListadoVentas extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyTyped
+    private void txtBuscarVentasKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarVentasKeyTyped
         // TODO add your handling code here:
-        txtBuscar.addKeyListener(new KeyAdapter()
+        txtBuscarVentas.addKeyListener(new KeyAdapter()
         {
             @Override
             public void keyReleased(final KeyEvent e) {
-                    String cadena = (txtBuscar.getText());
-                    txtBuscar.setText(cadena);
-                    Filtro(); 
+                    String cadena = (txtBuscarVentas.getText());
+                    txtBuscarVentas.setText(cadena);
+                    FiltroListadoVentas(); 
         }
         });    
-        TRSFfilter= new TableRowSorter(tableVentas.getModel());
-        tableVentas.setRowSorter(TRSFfilter);
-    }//GEN-LAST:event_txtBuscarKeyTyped
+        TRSFiltro= new TableRowSorter(tableVentas.getModel());
+        tableVentas.setRowSorter(TRSFiltro);
+    }//GEN-LAST:event_txtBuscarVentasKeyTyped
 
     private void btnVerDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerDetalleActionPerformed
         // TODO add your handling code here:
@@ -224,6 +224,6 @@ public class FrmListadoVentas extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableVentas;
-    private javax.swing.JTextField txtBuscar;
+    private javax.swing.JTextField txtBuscarVentas;
     // End of variables declaration//GEN-END:variables
 }

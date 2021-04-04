@@ -30,6 +30,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     FrmViajes viajes= new FrmViajes();
     FrmDestinos destinos= new FrmDestinos();
     FrmListadoVentas listadoVentas= new FrmListadoVentas();
+    FrmListados listados= new FrmListados();
     
     public Principal() {
         initComponents();
@@ -46,6 +47,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnVentas.addActionListener(this);
         btnViajes.addActionListener(this);
         btnDestinos.addActionListener(this);
+        btnListados.addActionListener(this);
     }
 
     /**
@@ -71,6 +73,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnVentas = new javax.swing.JButton();
         btnDestinos = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        btnListados = new javax.swing.JButton();
         PanelPrincipal1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -180,23 +183,35 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Proyecto 1 (2).png"))); // NOI18N
 
+        btnListados.setBackground(new java.awt.Color(160, 200, 246));
+        btnListados.setFont(new java.awt.Font("Century Gothic", 0, 11)); // NOI18N
+        btnListados.setText("Listados");
+        btnListados.setBorder(null);
+        btnListados.setBorderPainted(false);
+        btnListados.setContentAreaFilled(false);
+        btnListados.setOpaque(true);
+
         javax.swing.GroupLayout PanelMenuLayout = new javax.swing.GroupLayout(PanelMenu);
         PanelMenu.setLayout(PanelMenuLayout);
         PanelMenuLayout.setHorizontalGroup(
             PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenuLayout.createSequentialGroup()
-                .addContainerGap(11, Short.MAX_VALUE)
-                .addGroup(PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnBuques, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCamarotes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnViajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDisponiblesViajes, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDestinos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(PanelMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PanelMenuLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(PanelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(btnCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEmpleados, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBuques, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCamarotes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnViajes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDisponiblesViajes, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                            .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnDestinos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnListados, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PanelMenuLayout.setVerticalGroup(
@@ -222,7 +237,9 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
                 .addComponent(btnVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnDestinos, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnListados, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(101, Short.MAX_VALUE))
         );
 
         PanelPrincipal.add(PanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-188, 0, -1, 610));
@@ -312,6 +329,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JButton btnDestinos;
     private javax.swing.JButton btnDisponiblesViajes;
     private javax.swing.JButton btnEmpleados;
+    private javax.swing.JButton btnListados;
     private javax.swing.JButton btnMenu;
     private javax.swing.JButton btnUsuarios;
     private javax.swing.JButton btnVentas;
@@ -338,6 +356,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             ventas.setVisible(false);
             viajes.setVisible(false);
             destinos.setVisible(false);
+              listados.setVisible(false);
             Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /* Animacion.Animacion.mover_izquierda(211, 5, 2, 2, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -356,6 +375,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
            ventas.setVisible(false);
             viajes.setVisible(false);
             destinos.setVisible(false);
+              listados.setVisible(false);
             Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
           /* Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -374,6 +394,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             ventas.setVisible(false);
             viajes.setVisible(false);
             destinos.setVisible(false);
+              listados.setVisible(false);
              Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -392,6 +413,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
          ventas.setVisible(false);
             viajes.setVisible(false);
             destinos.setVisible(false);
+              listados.setVisible(false);
              Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -410,6 +432,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
            ventas.setVisible(false);
             viajes.setVisible(false);
             destinos.setVisible(false);
+              listados.setVisible(false);
               Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -428,6 +451,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
           ventas.setVisible(false);
             viajes.setVisible(false);
             destinos.setVisible(false);
+              listados.setVisible(false);
              Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -443,13 +467,14 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             empleados.setVisible(false);
             buques.setVisible(false);
             camarotes.setVisible(false);
+              listados.setVisible(false);
           ventas.setVisible(true);
             viajes.setVisible(false);
             destinos.setVisible(false);
               Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
-//         PanelPrincipal1.add(ventas);
+         PanelPrincipal1.add(ventas);
             PanelPrincipal1.validate();
         }
         else if(evt.equals(btnViajes))
@@ -463,6 +488,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
            ventas.setVisible(false);
             viajes.setVisible(true);
+              listados.setVisible(false);
             destinos.setVisible(false);
                Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
@@ -482,12 +508,32 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             ventas.setVisible(false);
             viajes.setVisible(false);
             destinos.setVisible(true);
+            listados.setVisible(false);
               Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
             PanelPrincipal1.add(destinos);
             PanelPrincipal1.validate();
         }
+         else if(evt.equals(btnListados))
+         {
+             lblTitulo.setText("LISTADOS");
+            cliente.setVisible(false);
+            user.setVisible(false);
+            viajesDis.setVisible(false);
+            empleados.setVisible(false);
+            buques.setVisible(false);
+            camarotes.setVisible(false);
+            ventas.setVisible(false);
+            viajes.setVisible(false);
+            destinos.setVisible(false);
+            listados.setVisible(true);
+              Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
+           /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
+            Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
+            PanelPrincipal1.add(listados);
+            PanelPrincipal1.validate();
+         }
         
         
     }

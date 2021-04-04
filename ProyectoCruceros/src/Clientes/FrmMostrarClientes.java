@@ -28,10 +28,10 @@ public class FrmMostrarClientes extends javax.swing.JFrame {
    
     public FrmMostrarClientes() {
         initComponents();
-        cargarTabla();
+        cargarTablaClientes();
     }
 
-   private void cargarTabla() {
+   private void cargarTablaClientes() {
         DefaultTableModel modelotabla = (DefaultTableModel) tblMostrarCliente.getModel();
         modelotabla.setRowCount(0);
 
@@ -61,7 +61,7 @@ public class FrmMostrarClientes extends javax.swing.JFrame {
         } 
     }
     
-    public void Filtro(){  
+    public void FiltroClientes(){  
         int columnaTabla = 1;
         TRSfiltro.setRowFilter(RowFilter.regexFilter(txtBusqueda.getText(),columnaTabla));
     }
@@ -158,11 +158,14 @@ public class FrmMostrarClientes extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 712, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(70, 70, 70)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(70, 70, 70)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 720, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(70, 70, 70))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +174,7 @@ public class FrmMostrarClientes extends javax.swing.JFrame {
                 .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(50, 50, 50)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -182,7 +185,7 @@ public class FrmMostrarClientes extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -211,7 +214,7 @@ public class FrmMostrarClientes extends javax.swing.JFrame {
            {
                String cadena = (txtBusqueda.getText());
                txtBusqueda.setText(cadena);
-               Filtro();
+               FiltroClientes();
            }
            
          });

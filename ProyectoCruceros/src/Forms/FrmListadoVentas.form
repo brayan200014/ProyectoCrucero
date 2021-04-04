@@ -28,7 +28,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txtBuscar" min="-2" pref="773" max="-2" attributes="0"/>
+                      <Component id="txtBuscarVentas" min="-2" pref="773" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="29" max="32767" attributes="0"/>
@@ -45,7 +45,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtBuscarVentas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -157,14 +157,14 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JTextField" name="txtBuscar">
+    <Component class="javax.swing.JTextField" name="txtBuscarVentas">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Century Gothic" size="18" style="0"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBuscarKeyTyped"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtBuscarVentasKeyTyped"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVerDetalle">
