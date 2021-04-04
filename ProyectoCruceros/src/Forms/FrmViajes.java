@@ -50,6 +50,7 @@ public class FrmViajes extends javax.swing.JPanel {
     private void initComponents() {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         jLabel1 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -82,6 +83,10 @@ public class FrmViajes extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
 
 >>>>>>> origin/UnionAvance1
+=======
+        jLabel1 = new javax.swing.JLabel();
+
+>>>>>>> parent of e46bb1b (limpieza)
         setBackground(new java.awt.Color(96, 203, 249));
         setPreferredSize(new java.awt.Dimension(920, 460));
 
@@ -226,6 +231,7 @@ public class FrmViajes extends javax.swing.JPanel {
                 return types [columnIndex];
             }
 
+<<<<<<< HEAD
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
@@ -294,10 +300,15 @@ public class FrmViajes extends javax.swing.JPanel {
         );
 
 >>>>>>> origin/UnionAvance1
+=======
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Proyecto 1 (2).png"))); // NOI18N
+
+>>>>>>> parent of e46bb1b (limpieza)
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+<<<<<<< HEAD
 <<<<<<< HEAD
             .addGap(0, 870, Short.MAX_VALUE)
         );
@@ -376,6 +387,19 @@ public class FrmViajes extends javax.swing.JPanel {
                     .addComponent(btnLimpiar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 >>>>>>> origin/UnionAvance1
+=======
+            .addGroup(layout.createSequentialGroup()
+                .addGap(267, 267, 267)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(445, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(95, 95, 95)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(216, Short.MAX_VALUE))
+>>>>>>> parent of e46bb1b (limpieza)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -669,6 +693,7 @@ public class FrmViajes extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnAgregar;
@@ -700,5 +725,8 @@ public class FrmViajes extends javax.swing.JPanel {
     private javax.swing.JTable tblViajes;
     private javax.swing.JTextField txtNombre;
 >>>>>>> origin/UnionAvance1
+=======
+    private javax.swing.JLabel jLabel1;
+>>>>>>> parent of e46bb1b (limpieza)
     // End of variables declaration//GEN-END:variables
 }
