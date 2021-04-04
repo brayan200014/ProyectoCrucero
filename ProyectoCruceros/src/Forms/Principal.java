@@ -46,7 +46,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
         btnCamarotes.addActionListener(this);
         btnVentas.addActionListener(this);
         btnViajes.addActionListener(this);
+<<<<<<< HEAD
         //btnDestinos.addActionListener(this);
+=======
+        btnDestinos.addActionListener(this);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
         btnListados.addActionListener(this);
     }
 
@@ -355,8 +359,13 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(false);
             listados.setVisible(false);
+=======
+            destinos.setVisible(false);
+              listados.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
             Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /* Animacion.Animacion.mover_izquierda(211, 5, 2, 2, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -374,7 +383,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(false);
+=======
+            destinos.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
               listados.setVisible(false);
             Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
           /* Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
@@ -393,7 +406,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(false);
+=======
+            destinos.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
               listados.setVisible(false);
              Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
@@ -412,7 +429,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(false);
+=======
+            destinos.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
               listados.setVisible(false);
              Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
@@ -431,7 +452,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(false);
+=======
+            destinos.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
               listados.setVisible(false);
               Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
@@ -450,7 +475,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(true);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(false);
+=======
+            destinos.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
               listados.setVisible(false);
              Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
@@ -467,8 +496,13 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             empleados.setVisible(false);
             buques.setVisible(false);
             camarotes.setVisible(false);
+<<<<<<< HEAD
             listados.setVisible(false);
             ventas.setVisible(true);
+=======
+              listados.setVisible(false);
+          ventas.setVisible(true);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
             viajes.setVisible(false);
             //destinos.setVisible(false);
               Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
@@ -488,8 +522,13 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(true);
+<<<<<<< HEAD
             listados.setVisible(false);
             //destinos.setVisible(false);
+=======
+              listados.setVisible(false);
+            destinos.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
                Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
@@ -507,7 +546,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(true);
+=======
+            destinos.setVisible(true);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
             listados.setVisible(false);
               Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
@@ -526,7 +569,11 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             camarotes.setVisible(false);
             ventas.setVisible(false);
             viajes.setVisible(false);
+<<<<<<< HEAD
             //destinos.setVisible(false);
+=======
+            destinos.setVisible(false);
+>>>>>>> 36929e964d2cfce0b9806983a8889a64ec113211
             listados.setVisible(true);
               Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
