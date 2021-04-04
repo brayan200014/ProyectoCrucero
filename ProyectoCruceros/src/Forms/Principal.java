@@ -516,7 +516,7 @@ public class Principal extends javax.swing.JFrame implements ActionListener {
             Animacion.Animacion.mover_izquierda(211, 1, 2, 2, btnMenu);
            /*Animacion.Animacion.mover_izquierda(211, 5, 1, 1, PanelPrincipal1);*/
             Animacion.Animacion.mover_izquierda(1, -200, 2, 2, PanelMenu);
-            //PanelPrincipal1.add(destinos);
+           PanelPrincipal1.add(destinos);
             PanelPrincipal1.validate();
         }
          else if(evt.equals(btnListados))

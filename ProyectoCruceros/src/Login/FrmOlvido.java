@@ -6,6 +6,7 @@
 package Login;
 
 import Clases.ClsConexion;
+import Forms.Principal;
 import java.awt.Cursor;
 import java.sql.*;
 import javax.swing.JOptionPane;
@@ -201,6 +202,9 @@ public class FrmOlvido extends javax.swing.JFrame {
             rs=ps.executeQuery();
             if(rs.next()){
                 JOptionPane.showMessageDialog(null, "Ingreso Exitoso");
+                Principal principal= new Principal();
+                principal.setVisible(true);
+                this.setVisible(false);
             }else{
                 JOptionPane.showMessageDialog(null, "Usuario o Contrasenia no concuerdan");
             }
@@ -215,7 +219,7 @@ public class FrmOlvido extends javax.swing.JFrame {
     }//GEN-LAST:event_lblOlvidoContraseniaMouseMoved
 
     private void lblOlvidoContraseniaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlvidoContraseniaMousePressed
-        FrmCodigo cod=new FrmCodigo();
+        FrmCodigo cod=new FrmCodigo(txtUsuario.getText());
         this.setVisible(false);
         cod.setVisible(true);
     }//GEN-LAST:event_lblOlvidoContraseniaMousePressed

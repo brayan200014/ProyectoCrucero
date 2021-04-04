@@ -21,9 +21,11 @@ import javax.swing.JOptionPane;
 public class FrmCodigo extends javax.swing.JFrame {
     
     int randomCode;
+    String user;
     
-    public FrmCodigo() {
+    public FrmCodigo(String username) {
         initComponents();
+        this.user= username;
     }
 
     /**
@@ -175,7 +177,7 @@ public class FrmCodigo extends javax.swing.JFrame {
 
     private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
         if(Integer.valueOf(txtCodigo.getText())==randomCode){
-            FrmReset rs= new FrmReset(txtCorreo.getText());
+            FrmReset rs= new FrmReset(user);
             rs.setVisible(true);
             this.setVisible(false);
         }else{
@@ -213,7 +215,7 @@ public class FrmCodigo extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmCodigo().setVisible(true);
+             /*   new FrmCodigo().setVisible(true);*/
             }
         });
     }

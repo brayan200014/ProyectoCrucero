@@ -136,12 +136,16 @@ public class FrmReset extends javax.swing.JFrame {
                 ps.setString(2,user);
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Cambio de contraseña exitoso!");
-            }catch(Exception ex){
+                 FrmOlvido login = new FrmOlvido();
+                login.setVisible(true);
+                this.setVisible(false);
+            }catch(SQLException ex){
                 JOptionPane.showMessageDialog(null, "Error de cambio de contraseña"+ex);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Las contraseñas no coinciden");
         }
+        
     }//GEN-LAST:event_btnCambiarActionPerformed
 
     /**
