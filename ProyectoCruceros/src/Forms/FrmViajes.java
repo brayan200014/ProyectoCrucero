@@ -128,7 +128,12 @@ public class FrmViajes extends javax.swing.JPanel {
         cbPuerto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         cbPuerto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnAgregar.setBackground(new java.awt.Color(12, 69, 104));
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/agregar.png"))); // NOI18N
         btnAgregar.setText("Agregar");
+        btnAgregar.setBorderPainted(false);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -138,7 +143,12 @@ public class FrmViajes extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         jLabel5.setText("Buque:");
 
+        btnConsultar.setBackground(new java.awt.Color(12, 69, 104));
+        btnConsultar.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Icono Editar.png"))); // NOI18N
         btnConsultar.setText("Consultar");
+        btnConsultar.setBorderPainted(false);
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConsultarActionPerformed(evt);
@@ -148,14 +158,24 @@ public class FrmViajes extends javax.swing.JPanel {
         cbBuque.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         cbBuque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        btnActualizar.setBackground(new java.awt.Color(12, 69, 104));
+        btnActualizar.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/actualizar.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
+        btnActualizar.setBorderPainted(false);
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
 
+        btnLimpiar.setBackground(new java.awt.Color(12, 69, 104));
+        btnLimpiar.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        btnLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        btnLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Img/Basurero.png"))); // NOI18N
         btnLimpiar.setText("Limpiar");
+        btnLimpiar.setBorderPainted(false);
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
@@ -293,9 +313,9 @@ public class FrmViajes extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(120, 120, 120)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,19 +332,17 @@ public class FrmViajes extends javax.swing.JPanel {
                                     .addComponent(cbBuque, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(63, 63, 63)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 690, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(257, 257, 257)
+                        .addGap(10, 10, 10)
                         .addComponent(btnAgregar)
-                        .addGap(35, 35, 35)
+                        .addGap(54, 54, 54)
                         .addComponent(btnConsultar)
-                        .addGap(34, 34, 34)
+                        .addGap(53, 53, 53)
                         .addComponent(btnActualizar)
-                        .addGap(42, 42, 42)
+                        .addGap(45, 45, 45)
                         .addComponent(btnLimpiar)))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,15 +371,15 @@ public class FrmViajes extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(cbBuque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                .addGap(5, 5, 5)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregar)
-                    .addComponent(btnConsultar)
+                .addGap(9, 9, 9)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnActualizar)
-                    .addComponent(btnLimpiar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnLimpiar)
+                    .addComponent(btnConsultar)
+                    .addComponent(btnAgregar))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -466,6 +484,8 @@ public class FrmViajes extends javax.swing.JPanel {
             jdcFechaRegreso.setDate(Date.valueOf(viaje.getFechaRegreso()));
             cbBuque.setSelectedItem(viaje.getDescripBuque());
             cbPuerto.setSelectedItem(viaje.getDescripPuerto());
+            
+            btnAgregar.setEnabled(false);
         }
         
     }//GEN-LAST:event_btnConsultarActionPerformed
@@ -503,6 +523,7 @@ public class FrmViajes extends javax.swing.JPanel {
                             limpiar();
                             viaje.setCodigoViaje(0);
                             cargarTablaViajes();
+                            btnAgregar.setEnabled(true);
                         }
                     }
                 }
@@ -522,6 +543,7 @@ public class FrmViajes extends javax.swing.JPanel {
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         limpiar();
         viaje.setCodigoViaje(0);
+        btnAgregar.setEnabled(true);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     //Llena la tabla de viajes con los viajes existentes
@@ -535,7 +557,7 @@ public class FrmViajes extends javax.swing.JPanel {
         ResultSetMetaData rsmd;
         int columnas;
         
-        int[] anchos = {10, 75, 75, 75, 75,75};
+        int[] anchos = {10, 75, 75, 75, 80,80};
         for (int i = 0; i < tblViajes.getColumnCount(); i++) {
             tblViajes.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
