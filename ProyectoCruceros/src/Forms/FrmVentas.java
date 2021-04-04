@@ -97,11 +97,9 @@ public class FrmVentas extends javax.swing.JPanel {
 
         jPanel1.setBackground(new java.awt.Color(96, 203, 249));
         jPanel1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel1.setText("Identidad:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 27, -1, -1));
 
         txtIdentidad.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtIdentidad.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -109,11 +107,9 @@ public class FrmVentas extends javax.swing.JPanel {
                 txtIdentidadKeyTyped(evt);
             }
         });
-        jPanel1.add(txtIdentidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 24, 280, -1));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel2.setText("Codigo Viaje:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 27, -1, -1));
 
         txtCodigoViaje.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         txtCodigoViaje.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -121,7 +117,6 @@ public class FrmVentas extends javax.swing.JPanel {
                 txtCodigoViajeKeyTyped(evt);
             }
         });
-        jPanel1.add(txtCodigoViaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(587, 24, 280, -1));
 
         jPanel2.setBackground(new java.awt.Color(38, 151, 186));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -206,8 +201,6 @@ public class FrmVentas extends javax.swing.JPanel {
 
         jPanel2.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(402, 110, 420, 90));
         jPanel2.add(jTabbedPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -20, -1, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 59, 870, 210));
 
         jPanel3.setBackground(new java.awt.Color(38, 151, 186));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -300,11 +293,8 @@ public class FrmVentas extends javax.swing.JPanel {
         lblRegreso.setText("-");
         jPanel3.add(lblRegreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 120, 200, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 300, 868, 220));
-
         jLabel3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         jLabel3.setText("Factura a Realizar");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(373, 268, -1, -1));
 
         btnVerificarDisponibilidad.setBackground(new java.awt.Color(12, 69, 104));
         btnVerificarDisponibilidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -316,7 +306,6 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnVerificarDisponibilidadActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVerificarDisponibilidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 530, -1, -1));
 
         btnConfirmar.setBackground(new java.awt.Color(12, 69, 104));
         btnConfirmar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -328,7 +317,6 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnConfirmarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 530, -1, -1));
 
         btnBuscar1.setBackground(new java.awt.Color(96, 203, 249));
         btnBuscar1.setBorderPainted(false);
@@ -337,7 +325,64 @@ public class FrmVentas extends javax.swing.JPanel {
                 btnBuscar1ActionPerformed(evt);
             }
         });
-        jPanel1.add(btnBuscar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(873, 24, 30, 29));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(txtIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel2)
+                .addGap(4, 4, 4)
+                .addComponent(txtCodigoViaje, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 860, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(338, 338, 338)
+                        .addComponent(jLabel3))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 868, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(360, 360, 360)
+                .addComponent(btnVerificarDisponibilidad)
+                .addGap(83, 83, 83)
+                .addComponent(btnConfirmar))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCodigoViaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))))
+                .addGap(6, 6, 6)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(209, 209, 209)
+                        .addComponent(jLabel3)))
+                .addGap(9, 9, 9)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnVerificarDisponibilidad)
+                    .addComponent(btnConfirmar)))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -347,7 +392,9 @@ public class FrmVentas extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
