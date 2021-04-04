@@ -252,7 +252,7 @@ public class FrmClientes extends javax.swing.JPanel {
                 btnAgregarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 420, 150, -1));
+        jPanel1.add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 150, -1));
 
         btnEditar.setBackground(new java.awt.Color(12, 69, 104));
         btnEditar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -264,7 +264,7 @@ public class FrmClientes extends javax.swing.JPanel {
                 btnEditarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, 140, -1));
+        jPanel1.add(btnEditar, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, 140, -1));
 
         jButton3.setBackground(new java.awt.Color(12, 69, 104));
         jButton3.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -276,7 +276,7 @@ public class FrmClientes extends javax.swing.JPanel {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 150, -1));
+        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 470, 150, -1));
 
         jDateNacimiento.setDateFormatString("yyyy/MM/dd");
         jDateNacimiento.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
